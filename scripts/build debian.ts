@@ -279,7 +279,6 @@ async function getListPackages(): string[] {
   }))
   
   packages.sort()
-  pemSHA256File.sort()
   
   Object.keys(pemSHA256File).forEach(item => {
     if (!files.find(i => basename(i) === item)) {
