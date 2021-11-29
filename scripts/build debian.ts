@@ -5,6 +5,7 @@ import child_process from "child_process";
 import md5file from "md5-file";
 import semver from "semver";
 import fg from "fast-glob"
+import prompts from "prompts"
 
 const PATH_ROOT = resolve(__dirname, "..")
 const PATH_BUILD_PACKAGES = join(PATH_ROOT, ".build-packages");
@@ -64,7 +65,7 @@ async function main() {
   }
 
   // auto fix packages
-  const controlPackages = autoFixDebians(
+  const controlPackages = await autoFixDebians(
     await getListPackages()
   );
 
@@ -120,7 +121,7 @@ function uniqueListPackages(
       packages
         .get(controlFile.control.Package)!
         .findIndex(({ control: { Version } }) =>
-          semver.gt(Version, controlFile.control.Version)
+          semver.gt(Version.split(), controlFile.control.Version)
         ) || packages.get(controlFile.control.Package)!.length;
 
     packages
@@ -220,7 +221,7 @@ function packDebianFromTmp(filepath: string): void {
 async function getListPackages(): string[] {
   return await fg(`${PATH_DEBIAN}/*.deb`)
 }
-function autoFixDebians(
+async function autoFixDebians(
   debians: string[]
 ): ControlJSONFile[] {
   return debians.map((srcDebian) => {
@@ -238,6 +239,15 @@ function autoFixDebians(
     control.Maintainer = "tachibana-shin<tachib.shin@gmail.com>";
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
+    
+    while (!semver.valid(control.Version)) {
+      control.Version = (await prompts({
+        type: "string",
+        name: "version",
+        message `package ${control.Package} has an invalid version number (${control.Version}):`,
+        validate: v => semver.valid(v) || "Invalid version"
+      })).version
+    }
 
     if (uniqueControl !== JSON.stringify(control)) {
       writeFileControlToTmp(control);
