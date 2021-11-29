@@ -4,6 +4,7 @@ import { join, dirname, basename, resolve } from "path";
 import child_process from "child_process";
 import md5file from "md5-file";
 import semver from "semver";
+import fg from "fast-glob"
 
 const PATH_ROOT = resolve(__dirname, "..")
 const PATH_BUILD_PACKAGES = join(PATH_ROOT, ".build-packages");
@@ -63,7 +64,7 @@ async function main() {
   }
 
   // auto fix packages
-  const controlPackages = autoFixPermissionAndControlPackage(
+  const controlPackages = autoFixDebians(
     await getListPackages()
   );
 
@@ -130,42 +131,55 @@ function uniqueListPackages(
   return packages;
 }
 
-async function getListPackages(): Promise<ControlJSONFile[]> {
-  return fs
-    .readdirSync(PATH_DEBIAN)
-    .map((filename) => {
-      const pathToPackage = join(PATH_DEBIAN, filename);
-
-      if (fs.lstatSync(pathToPackage).isFile() === false) {
-        return;
-      }
-
-      // read debian/control
-      return {
-        filepath: pathToPackage,
-        control: parseControl(
-          child_process.execSync(`dpkg -f "${pathToPackage}"`).toString()
-        ),
-      };
-
-      // edit properties: Package: git.shin.???
-      // 					Homepage: https://tachibana-shin.github.io/
-      // 					Maintainer: tachibana-shin<tachib.shin@gmail.com>
-      //					Sponsor: tachibana-shin<https://tachibana-shin.github.io>
-      //					Depiction: https://tachibana-shin.github.io/repo/package/${package} or /description.html?id=${package} or /description/${package}
-      // https://tachibana-shin.github.io/repo/description?id=${package}
-    })
-    .filter(Boolean);
+function unpackDebianToTmp(src: string): void {
+  try {
+    fs.rmSync(`${PATH_TMP_UNPACK_DEBIAN}`, {
+      recursive: true,
+    }); // rm .tmp why?
+  } catch {}
+  
+  child_process.execSync(
+    `dpkg-deb -R "${src}" "${PATH_TMP_UNPACK_DEBIAN}"`
+  );
+}
+function readFileControlFromTmp(): string {
+  return fs.readFileSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control"), "utf8")
+}
+function writeFileControlToTmp(control: ControlJSON): void {
+  fs.writeFileSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control"), stringifyControl(control));
+}
+function packDebianFromTmp(filepath: string): void {
+  const pathTmpControl = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
+  
+  if (fs.statSync(pathTmpControl).mode < 644) {
+    fs.chmodSync(pathTmpControl, "0644");
+  }
+  
+  fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN"))
+  .forEach((filename) => {
+    if (filename !== "control") {
+      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), "0755");
+    }
+  });
+  
+  
+  child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
+  
+  console.log(`pack debian ${control.Package}`);
 }
 
-function autoFixPermissionAndControlPackage(
-  controlPackages: ControlJSONFile[]
+async function getListPackages(): string[] {
+  return await fg(`${PATH_DEBIAN}/*.deb`)
+}
+function autoFixDebians(
+  debians: string[]
 ): ControlJSONFile[] {
-  return controlPackages.map((controlFile) => {
-    const { control, filepath } = controlFile;
+  return debians.map((srcDebian) => {
+    unpackDebianToTmp(srcDebian)
+    
+    const control = parseControl(readFileControlFromTmp())
+    
     const uniqueControl = JSON.stringify(control);
-
-    // check file is not change by MD5 break code.
 
     if (control.Package.startsWith("git.shin") === false) {
       control.Package = `git.shin.${control.Package}`;
@@ -176,55 +190,37 @@ function autoFixPermissionAndControlPackage(
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
 
     if (uniqueControl !== JSON.stringify(control)) {
-      updatePackage(filepath, control);
+      writeFileControlToTmp(control);
+      
+      if (
+        isValidFilename(
+          basename(srcDebian),
+          control
+        )
+      ) {
+        packDebianFromTmp(join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`))
+        fs.unlinkSync(srcDebian)
+      } else {
+        fs.renameSync(
+          join(
+            dirname(srcDebian),
+            `${control.Package}@${control.Version}.deb`
+          ),
+          srcDebian
+        );
+      }
     }
 
-    return controlFile;
+    return {
+      filepath: srcDebian,
+      control
+    };
   });
 }
-function autoFixFilenamePackage(controlPackages: ControlJSONFile[]): void {
-  controlPackages.forEach((controlFile) => {
-    if (
-      basename(controlFile.filepath) !==
-      `${controlFile.control.Package}@${controlFile.control.Version}.deb`
-    ) {
-      // rename
-      fs.renameSync(
-        join(
-          dirname(controlFile.filepath),
-          `${controlFile.control.Package}@${controlFile.control.Version}.deb`
-        ),
-        controlFile.filepath
-      );
-    }
-  });
-}
 
-function updatePackage(filepath: string, control: ControlJSON): void {
-  try {
-    fs.rmSync(`${PATH_TMP_UNPACK_DEBIAN}`, {
-      recursive: true,
-    }); // rm .tmp why?
-  } catch {}
-  child_process.execSync(
-    `dpkg-deb -R "${filepath}" "${PATH_TMP_UNPACK_DEBIAN}"`
-  );
-
-  const pathTmpControl = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
-  if (fs.statSync(pathTmpControl).mode < 644) {
-    fs.chmodSync(pathTmpControl, "0644");
-  }
-  fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN")).forEach((filename) => {
-    if (filename !== "control") {
-      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), "0755");
-    }
-  });
-
-  fs.writeFileSync(pathTmpControl, stringifyControl(control));
-
-  child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
-
-  console.log(`register ${control.Package}`);
+function isValidFilename(filename: string, control: ControlJSON): boolean {
+  return basename(filepath) !==
+    `${control.Package}@${control.Version}.deb`
 }
 
 function createFilePackages(): void {
