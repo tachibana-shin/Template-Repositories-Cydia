@@ -93,9 +93,11 @@ async function createDepictionPackages(packages: Map<string, ControlJSONFile[]>)
   await Promise.all(Array.from(packages.values()).map(async (versions) => {
     const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
     
+    if (!fs.existsSync(pathToDirDepiction)) {
     fs.mkdirSync(pathToDirDepiction, {
       recursive: true,
     });
+    }
 
     if (
       !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
