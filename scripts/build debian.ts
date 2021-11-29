@@ -259,8 +259,8 @@ function packDebianFromTmp(filepath: string): void {
 }
 
 async function getListPackages(): string[] {
-  const path = join(PATH_DEBIAN, "pem-debian.json")
-  const pemSHA256File = JSON.parse(fs.readFileSync(path))
+  const path = join(PATH_ROOT, "pem-debian.json")
+  const pemSHA256File = JSON.parse(await fs.promises.readFile(path).catch(() => "{}"))
   const uniqueContent = sha256(JSON.stringify(pemSHA256File))
   
   const packages = []
