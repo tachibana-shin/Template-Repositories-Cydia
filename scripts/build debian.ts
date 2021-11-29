@@ -151,7 +151,7 @@ function readFileControlFromTmp(): string {
     }
   })
   
-  return fs.readFileSync(path, "utf8")
+  return fs.readFileSync(filepath, "utf8")
 }
 function writeFileControlToTmp(control: ControlJSON): void {
   const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control")
