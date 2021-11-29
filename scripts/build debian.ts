@@ -69,7 +69,7 @@ async function main() {
   );
 
   // get list packages merged version
-  createDepictionPackages(controlPackages);
+  await createDepictionPackages(controlPackages);
 
   // all package ready, create Packages, Packages.bz2
   createFilePackages();
@@ -78,32 +78,50 @@ async function main() {
   createFileRelease();
 }
 main();
-function createDepictionPackages(controls: ControlJSONFile[]): void {
+async function createDepictionPackages(controls: ControlJSONFile[]): Promise<void> {
   const packages = uniqueListPackages(controls);
 
-  fs.mkdirSync(join(PATH_ROOT, "pages/package"), {
-    recursive: true,
-  });
+  await Promise.all(packages.map(async (versions) => {
+    const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
+    
+    fs.mkdirSync(pathToDirDepiction, {
+      recursive: true,
+    });
 
-  packages.forEach((versions) => {
+    if (
+      !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
+      !fs.existsSync(join(pathToDirDepiction, "index.vue"))
+    ) {
+      fs.writeFileSync(join(pathToDirDepiction, "index.md"), item.control.Description || `Description for package ${item.control.Package}`)
+    }
     // write JSON to depiction
     fs.writeFileSync(
-      join(PATH_ROOT, "pages/package", versions[0].control.Package, "control.json"),
+      join(pathToDirDepiction, "control.json"),
       JSON.stringify(
-        versions.map((item) => {
-          const { size, birthtimeMs, uid } = fs.lstatSync(item.filepath);
-
-          return {
-            ...item.control,
-            MD5sum: md5file.sync(item.filepath),
-            size,
-            birthtimeMs,
-            uid,
-          };
-        })
+        await Promise.all(
+          versions.map(async (item) => {
+            const [
+              { size, birthtimeMs, uid },
+              MD5sum
+            ] = await Promise.all([
+              fs.promises.lstat(item.filepath),
+              md5file(item.filepath)
+            ])
+  
+            return {
+              control: item.control,
+              MD5sum,
+              size,
+              birthtimeMs,
+              uid,
+            };
+          })
+        ),
+        (i, e) => e,
+        3
       )
     );
-  });
+  }));
 }
 
 function fixVersion(v: string): string {
