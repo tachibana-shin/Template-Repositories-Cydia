@@ -3,6 +3,9 @@ import fs from "fs";
 import { join, dirname, basename, resolve } from "path";
 import child_process from "child_process";
 import md5file from "md5-file";
+import sha256file from "sha256-file"
+import sha256 from "sha256"
+import { pathToSHA512 as sha512file } from "file-to-sha512"
 import semver from "semver";
 import fg from "fast-glob"
 
@@ -69,9 +72,13 @@ async function main() {
   const controlPackages = await autoFixDebians(
     await getListPackages()
   );
-
+  
+  const packagesUnique = uniqueListPackages(controlPackages)
   // get list packages merged version
-  await createDepictionPackages(controlPackages);
+  await createDepictionPackages(packagesUnique);
+  
+  // clean depction old
+  await cleanDepctionPackageOld(packagesUnique)
 
   // all package ready, create Packages, Packages.bz2
   createFilePackages();
@@ -82,9 +89,7 @@ async function main() {
   console.log(chalk.green(`Complete ${performance.now() - start}ms`))
 }
 main();
-async function createDepictionPackages(controls: ControlJSONFile[]): Promise<void> {
-  const packages = uniqueListPackages(controls);
-
+async function createDepictionPackages(packages: Map<string, ControlJSONFile[]>): Promise<void> {
   await Promise.all(Array.from(packages.values()).map(async (versions) => {
     const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
     
@@ -106,15 +111,21 @@ async function createDepictionPackages(controls: ControlJSONFile[]): Promise<voi
           versions.map(async (item) => {
             const [
               { size, birthtimeMs, uid },
-              MD5sum
+              MD5sum,
+              SHA256sum,
+              SHA512sum
             ] = await Promise.all([
               fs.promises.lstat(item.filepath),
-              md5file(item.filepath)
+              md5file(item.filepath),
+              sha256file(item.filepath),
+              sha512file(item.filepath)
             ])
   
             return {
               control: item.control,
               MD5sum,
+              SHA256sum,
+              SHA512sum,
               size,
               birthtimeMs,
               uid,
@@ -248,7 +259,50 @@ function packDebianFromTmp(filepath: string): void {
 }
 
 async function getListPackages(): string[] {
-  return await fg(`${PATH_DEBIAN}/*.deb`)
+  const path = join(PATH_DEBIAN, "pem-debian.json")
+  const pemSHA256File = JSON.parse(fs.readFileSync(path))
+  const uniqueContent = sha256(JSON.stringify(pemSHA256File))
+  
+  const packages = []
+  
+  const files = await fg(`${PATH_DEBIAN}/*.deb`)
+  
+  await Promise.all(
+    files
+  .map(async item => {
+    const sha512 = await sha512file(item)
+    
+    if (pemSHA256File[basename(item)] !== sha512) {
+      packages.push(item)
+      pemSHA256File[ basename(item)] = sha512
+    }
+  }))
+  
+  packages.sort()
+  pemSHA256File.sort()
+  
+  Object.keys(pemSHA256File).forEach(item => {
+    if (!files.find(i => basename(i) === item)) {
+      delete pemSHA256File[item]
+    }
+  })
+  
+  if (sha256(JSON.stringify(pemSHA256File)) !== uniqueContent) {
+    fs.writeFileSync(path, JSON.stringify(pemSHA256File, (i, e) => e, 2))
+  }
+  
+  return packages
+}
+async function cleanDepctionPackageOld(packages: Map<string, ControlJSONFile[]>): void {
+  const packagesID = Array.from(packages.keys())
+  
+  await Promise.all(fs.readdirSync(join(PATH_ROOT, "pages/package")).map(async filename => {
+    if (!packagesID.includes(filename)) {
+      fs.promises.rmdir(join(PATH_ROOT, "pages/package", filename), {
+        recursive: true
+      })
+    }
+  }))
 }
 async function autoFixDebians(
   debians: string[]
@@ -258,13 +312,13 @@ async function autoFixDebians(
   for (let i = 0, len = debians.length; i < len; i++ ) {
     const srcDebian = debians[i]
     
-    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length * 100)}% (${i + 1} / ${debians.length})`))
+    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length * 100)}% (${i + 1}/${debians.length})`))
     
     unpackDebianToTmp(srcDebian)
     
     const control = parseControl(readFileControlFromTmp())
     
-    const uniqueControl = JSON.stringify(control);
+    const uniqueControl = sha256(JSON.stringify(control));
 
     if (control.Package.startsWith("git.shin") === false) {
       control.Package = `git.shin.${control.Package}`;
@@ -274,7 +328,7 @@ async function autoFixDebians(
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
 
-    if (uniqueControl !== JSON.stringify(control)) {
+    if (uniqueControl !== sha256(JSON.stringify(control))) {
       writeFileControlToTmp(control);
       
       if (
