@@ -288,7 +288,7 @@ function isValidFilename(filepath: string, control: ControlJSON): boolean {
 }
 
 function createFilePackages(): void {
-  child_process.execSync(`sh ./ftparchive-build.sh`);
+  child_process.execSync(`sh "${join(PATH_ROOT, "ftparchive-build.sh")}"`);
 }
 
 function createFileRelease(): void {
