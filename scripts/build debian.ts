@@ -223,8 +223,10 @@ async function getListPackages(): string[] {
 }
 async function autoFixDebians(
   debians: string[]
-): ControlJSONFile[] {
-  return debians.map((srcDebian) => {
+): Promise<ControlJSONFile[]> {
+  const controlJSONFiles = []
+  
+  for ( const srcDebian of debians ) {
     unpackDebianToTmp(srcDebian)
     
     console.log(`reading control ${srcDebian}`)
@@ -273,11 +275,13 @@ async function autoFixDebians(
       }
     }
 
-    return {
+    controlJSONFiles.push({
       filepath: srcDebian,
       control
-    };
-  });
+    })
+  }
+  
+  return controlJSONFiles
 }
 
 function isValidFilename(filepath: string, control: ControlJSON): boolean {
