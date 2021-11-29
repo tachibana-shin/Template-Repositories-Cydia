@@ -56,6 +56,8 @@ function stringifyControl(obj: ControlJSON): string {
 }
 
 async function main() {
+  const start = performance.now()
+  
   if (
     fs.existsSync(PATH_DEBIAN) === false ||
     fs.lstatSync(PATH_DEBIAN).isDirectory() === false
@@ -76,6 +78,8 @@ async function main() {
 
   // create Release
   createFileRelease();
+  
+  console.log(`Complete ${performance.now() - start}ms`)
 }
 main();
 async function createDepictionPackages(controls: ControlJSONFile[]): Promise<void> {
