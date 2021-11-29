@@ -244,7 +244,7 @@ async function autoFixDebians(
     
     while (!semver.valid(control.Version)) {
       control.Version = (await prompts({
-        type: "string",
+        type: "text",
         name: "version",
         message: `package ${control.Package} has an invalid version number (${control.Version}):`,
         validate: v => semver.valid(v) || "Invalid version"
