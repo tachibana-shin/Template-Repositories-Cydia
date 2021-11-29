@@ -164,8 +164,6 @@ function packDebianFromTmp(filepath: string): void {
   
   
   child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
-  
-  console.log(`pack debian ${control.Package}`);
 }
 
 async function getListPackages(): string[] {
@@ -199,6 +197,8 @@ function autoFixDebians(
         )
       ) {
         packDebianFromTmp(join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`))
+        console.log(`pack debian ${control.Package}`)
+        
         fs.unlinkSync(srcDebian)
       } else {
         fs.renameSync(
