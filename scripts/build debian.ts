@@ -32,7 +32,7 @@ type ControlJSONFile = {
 // load split file or chunks
 
 console.clear();
-console.log(chalk.grey("reading packages..."));
+console.log(chalk.grey("starting build..."));
 
 function parseControl(control: string): ControlJSON {
   const obj = {} as any;
@@ -252,9 +252,10 @@ async function autoFixDebians(
   const controlJSONFiles = []
   
   for await ( const srcDebian of debians ) {
+    console.log(chalk.grey(`unpack ${basename(srcDebian)}`))
+    
     unpackDebianToTmp(srcDebian)
     
-    console.log(`reading control ${srcDebian}`)
     const control = parseControl(readFileControlFromTmp())
     
     const uniqueControl = JSON.stringify(control);
@@ -277,7 +278,7 @@ async function autoFixDebians(
         )
       ) {
         packDebianFromTmp(join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`))
-        console.log(`pack debian ${control.Package}`)
+        console.log(chalk.green(`pack ${control.Package}`))
         
         fs.unlinkSync(srcDebian)
       } else {
@@ -288,6 +289,7 @@ async function autoFixDebians(
           ),
           srcDebian
         );
+        console.log(chalk.green(`fix name ${control.Package}`))
       }
     }
 
