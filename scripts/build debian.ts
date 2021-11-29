@@ -167,8 +167,8 @@ function writeFileControlToTmp(control: ControlJSON): void {
 function packDebianFromTmp(filepath: string): void {
   const pathTmpControl = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
   
-  if (fs.statSync(pathTmpControl).mode < 644) {
-    fs.chmodSync(pathTmpControl, "0644");
+  if ((fs.statSync(pathTmpControl).mode & parseInt("777", 8)).toString(8) !== "644") {
+    fs.chmodSync(pathTmpControl, 0o644);
   }
   
   fs.access(pathTmpControl, fs.R_OK, err => {
@@ -185,10 +185,9 @@ function packDebianFromTmp(filepath: string): void {
   fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN"))
   .forEach((filename) => {
     if (filename !== "control") {
-      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), "0755");
+      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), 0o655);
     }
   });
-  
   
   child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
 }
