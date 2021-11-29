@@ -88,7 +88,7 @@ function createDepictionPackages(controls: ControlJSONFile[]): void {
   packages.forEach((versions) => {
     // write JSON to depiction
     fs.writeFileSync(
-      join(PATH_ROOT, "pages/package", versions[0].control.Package),
+      join(PATH_ROOT, "pages/package", versions[0].control.Package, "control.json"),
       JSON.stringify(
         versions.map((item) => {
           const { size, birthtimeMs, uid } = fs.lstatSync(item.filepath);
