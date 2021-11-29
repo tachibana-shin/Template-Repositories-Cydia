@@ -218,7 +218,7 @@ function autoFixDebians(
   });
 }
 
-function isValidFilename(filename: string, control: ControlJSON): boolean {
+function isValidFilename(filepath: string, control: ControlJSON): boolean {
   return basename(filepath) !==
     `${control.Package}@${control.Version}.deb`
 }
