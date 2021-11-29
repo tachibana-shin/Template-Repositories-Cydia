@@ -246,7 +246,7 @@ async function autoFixDebians(
       control.Version = (await prompts({
         type: "string",
         name: "version",
-        message `package ${control.Package} has an invalid version number (${control.Version}):`,
+        message: `package ${control.Package} has an invalid version number (${control.Version}):`,
         validate: v => semver.valid(v) || "Invalid version"
       })).version
     }
