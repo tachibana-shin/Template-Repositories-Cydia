@@ -258,7 +258,7 @@ async function autoFixDebians(
   for ( const i in debians ) {
     const srcDebian = debians[i]
     
-    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debiand.length)}% (${i + 1}/${debians.length})`))
+    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length)}% (${i + 1}/${debians.length})`))
     
     unpackDebianToTmp(srcDebian)
     
