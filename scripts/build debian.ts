@@ -93,11 +93,9 @@ async function createDepictionPackages(packages: Map<string, ControlJSONFile[]>)
   await Promise.all(Array.from(packages.values()).map(async (versions) => {
     const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
     
-    if (!fs.existsSync(pathToDirDepiction)) {
     fs.mkdirSync(pathToDirDepiction, {
       recursive: true,
     });
-    }
 
     if (
       !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
@@ -261,38 +259,7 @@ function packDebianFromTmp(filepath: string): void {
 }
 
 async function getListPackages(): string[] {
-  const path = join(PATH_ROOT, "pem-debian.json")
-  const pemSHA256File = JSON.parse(await fs.promises.readFile(path).catch(() => "{}"))
-  const uniqueContent = sha256(JSON.stringify(pemSHA256File))
-  
-  const packages = []
-  
-  const files = await fg(`${PATH_DEBIAN}/*.deb`)
-  
-  await Promise.all(
-    files
-  .map(async item => {
-    const sha512 = await sha512file(item)
-    
-    if (pemSHA256File[basename(item)] !== sha512) {
-      packages.push(item)
-      pemSHA256File[ basename(item)] = sha512
-    }
-  }))
-  
-  packages.sort()
-  
-  Object.keys(pemSHA256File).forEach(item => {
-    if (!files.find(i => basename(i) === item)) {
-      delete pemSHA256File[item]
-    }
-  })
-  
-  if (sha256(JSON.stringify(pemSHA256File)) !== uniqueContent) {
-    fs.writeFileSync(path, JSON.stringify(pemSHA256File, (i, e) => e, 2))
-  }
-  
-  return packages
+  return await fg(`${PATH_DEBIAN}/*.deb`)
 }
 async function cleanDepctionPackageOld(packages: Map<string, ControlJSONFile[]>): void {
   const packagesID = Array.from(packages.keys())
