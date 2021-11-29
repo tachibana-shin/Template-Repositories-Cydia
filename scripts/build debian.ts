@@ -1,16 +1,17 @@
 import chalk from "chalk";
 import fs from "fs";
-import { join, dirname, basename } from "path";
+import { join, dirname, basename, resolve } from "path";
 import child_process from "child_process";
 import md5file from "md5-file";
 import semver from "semver";
 
-const PATH_BUILD_PACKAGES = join(__dirname, ".build-packages");
-const PATH_PACKAGES = join(__dirname, "packages");
-const PATH_FILE_PACKAGES = join(__dirname, "Packages");
+const PATH_ROOT = resolve(__dirname, "..")
+const PATH_BUILD_PACKAGES = join(PATH_ROOT, ".build-packages");
+const PATH_DEBIAN = join(PATH_ROOT, "debian");
+const PATH_FILE_PACKAGES = join(PATH_ROOT, "Packages");
 const ORIGIN = "https://tachibana-shin.github.io";
 const HOMEPAGE = "https://tachibana-shin.github.io/repo";
-const PATH_TMP_UNPACK_DEBIAN = join(__dirname, ".tmp");
+const PATH_TMP_UNPACK_DEBIAN = join(PATH_ROOT, ".tmp");
 
 type ControlJSON = {
   [key: string]: string;
@@ -55,10 +56,10 @@ function stringifyControl(obj: ControlJSON): string {
 
 async function main() {
   if (
-    fs.existsSync(PATH_PACKAGES) === false ||
-    fs.lstatSync(PATH_PACKAGES).isDirectory() === false
+    fs.existsSync(PATH_DEBIAN) === false ||
+    fs.lstatSync(PATH_DEBIAN).isDirectory() === false
   ) {
-    throw new Error(`${join(__dirname, "packages")} is not directory`);
+    throw new Error(`${PATH_DEBIAN} is not directory`);
   }
 
   // auto fix packages
@@ -79,14 +80,14 @@ main();
 function createDepictionPackages(controls: ControlJSONFile[]): void {
   const packages = uniqueListPackages(controls);
 
-  fs.mkdirSync(join(__dirname, "controls"), {
+  fs.mkdirSync(join(PATH_ROOT, "pages/package"), {
     recursive: true,
   });
 
   packages.forEach((versions) => {
     // write JSON to depiction
     fs.writeFileSync(
-      join(__dirname, "controls", versions[0].control.Package),
+      join(PATH_ROOT, "pages/package", versions[0].control.Package),
       JSON.stringify(
         versions.map((item) => {
           const { size, birthtimeMs, uid } = fs.lstatSync(item.filepath);
@@ -131,9 +132,9 @@ function uniqueListPackages(
 
 async function getListPackages(): Promise<ControlJSONFile[]> {
   return fs
-    .readdirSync(PATH_PACKAGES)
+    .readdirSync(PATH_DEBIAN)
     .map((filename) => {
-      const pathToPackage = join(PATH_PACKAGES, filename);
+      const pathToPackage = join(PATH_DEBIAN, filename);
 
       if (fs.lstatSync(pathToPackage).isFile() === false) {
         return;
