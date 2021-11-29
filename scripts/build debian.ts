@@ -79,7 +79,7 @@ async function main() {
   // create Release
   createFileRelease();
   
-  console.log(`Complete ${performance.now() - start}ms`)
+  console.log(chalk.green(`Complete ${performance.now() - start}ms`))
 }
 main();
 async function createDepictionPackages(controls: ControlJSONFile[]): Promise<void> {
@@ -255,8 +255,10 @@ async function autoFixDebians(
 ): Promise<ControlJSONFile[]> {
   const controlJSONFiles = []
   
-  for await ( const srcDebian of debians ) {
-    console.log(chalk.grey(`unpack ${basename(srcDebian)}`))
+  for ( const i in debians ) {
+    const srcDebian = debians[i]
+    
+    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debiand.length)}% (${i + 1}/${debians.length})`))
     
     unpackDebianToTmp(srcDebian)
     
