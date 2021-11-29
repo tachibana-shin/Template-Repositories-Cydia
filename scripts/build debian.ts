@@ -297,7 +297,7 @@ async function cleanDepctionPackageOld(packages: Map<string, ControlJSONFile[]>)
   
   await Promise.all(fs.readdirSync(join(PATH_ROOT, "pages/package")).map(async filename => {
     if (!packagesID.includes(filename)) {
-      fs.promises.rmdir(join(PATH_ROOT, "pages/package", filename), {
+      fs.promises.rm(join(PATH_ROOT, "pages/package", filename), {
         recursive: true
       })
     }
