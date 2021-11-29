@@ -92,7 +92,7 @@ async function createDepictionPackages(controls: ControlJSONFile[]): Promise<voi
       !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
       !fs.existsSync(join(pathToDirDepiction, "index.vue"))
     ) {
-      fs.writeFileSync(join(pathToDirDepiction, "index.md"), item.control.Description || `Description for package ${item.control.Package}`)
+      fs.writeFileSync(join(pathToDirDepiction, "index.md"), versions[0].control.Description || `Description for package ${versions[0].control.Package}`)
     }
     // write JSON to depiction
     fs.writeFileSync(
