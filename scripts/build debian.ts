@@ -164,11 +164,39 @@ function writeFileControlToTmp(control: ControlJSON): void {
   
   fs.writeFileSync(filepath, stringifyControl(control));
 }
+function getStat(filepath: string): [number, number, number] {
+  return (fs.statSync(filepath).mode & parseInt("777", 8)).toString(8).split("").map(Number)
+}
+function isR(p: number): boolean {
+  return p <= 7 && p >= 4
+}
+function isW(p: number): boolean {
+  return p === 2 || p === 3 || p === 7
+}
+function isX(p: number): boolean {
+  return p % 2 === 1
+}
+
+function addX(p: number): number {
+  if (isX(p)) {
+    return p
+  }
+  
+  if (isR(p)) {
+    return 5
+  }
+  if (isW(p)) {
+    return 3
+  }
+  
+  return 7
+}
+
 function packDebianFromTmp(filepath: string): void {
   const pathTmpControl = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
   
-  if ((fs.statSync(pathTmpControl).mode & parseInt("777", 8)).toString(8) < "644") {
-    fs.chmodSync(pathTmpControl, 0o644);
+  if (!isR(getStat(pathTmpControl)[0])) {
+    fs.chmodSync(pathTmpControl, 0o400)
   }
   
     try {
@@ -180,7 +208,9 @@ function packDebianFromTmp(filepath: string): void {
   fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN"))
   .forEach((filename) => {
     if (filename !== "control") {
-      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), 0o655);
+      const [p, o, w] = getStat(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename))
+      
+      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), eval(`0o${addX(p)}${addX(o)}${addX(w)}`));
     }
   });
   
