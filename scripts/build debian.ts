@@ -81,7 +81,7 @@ main();
 async function createDepictionPackages(controls: ControlJSONFile[]): Promise<void> {
   const packages = uniqueListPackages(controls);
 
-  await Promise.all(packages.map(async (versions) => {
+  await Promise.all(packages.values().map(async (versions) => {
     const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
     
     fs.mkdirSync(pathToDirDepiction, {
