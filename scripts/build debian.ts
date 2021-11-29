@@ -255,10 +255,10 @@ async function autoFixDebians(
 ): Promise<ControlJSONFile[]> {
   const controlJSONFiles = []
   
-  for ( const i in debians ) {
+  for (let i = 0, len = debians.length; i < len; i++ ) {
     const srcDebian = debians[i]
     
-    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length)}% (${i + 1}/${debians.length})`))
+    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length * 100)}% (${i + 1} / ${debians.length})`))
     
     unpackDebianToTmp(srcDebian)
     
