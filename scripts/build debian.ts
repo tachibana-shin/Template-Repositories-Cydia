@@ -145,22 +145,19 @@ function unpackDebianToTmp(src: string): void {
 function readFileControlFromTmp(): string {
   const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control")
   
-  fs.access(filepath, fs.R_OK, err => {
-    if (err) {
+   
+    if (fs.accessSync(filepath, fs.R_OK)) {
       child_process.execSync(`chmod +r "${filepath}"`)
     }
-  })
   
   return fs.readFileSync(filepath, "utf8")
 }
 function writeFileControlToTmp(control: ControlJSON): void {
   const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control")
   
-  fs.access(filepath, fs.W_OK, err => {
-    if (err) {
+    if (fs.accessSync(filepath, fs.W_OK)) {
       child_process.execSync(`chmod +w "${filepath}"`)
     }
-  })
   
   fs.writeFileSync(filepath, stringifyControl(control));
 }
@@ -171,16 +168,13 @@ function packDebianFromTmp(filepath: string): void {
     fs.chmodSync(pathTmpControl, 0o644);
   }
   
-  fs.access(pathTmpControl, fs.R_OK, err => {
-    if (!err) {
+    if (!fs.access(filepath, fs.R_OK)) {
       child_process.execSync(`chmod -r "${pathTmpControl}"`)
     }
-  })
-  fs.access(pathTmpControl, fs.W_OK, err => {
-    if (!err) {
+    if (!fs.accessSync(filepath, fs.W_OK)) {
       child_process.execSync(`chmod -w "${pathTmpControl}"`)
     }
-  })
+  
   
   fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN"))
   .forEach((filename) => {
