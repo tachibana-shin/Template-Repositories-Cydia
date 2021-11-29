@@ -175,6 +175,7 @@ function autoFixDebians(
   return debians.map((srcDebian) => {
     unpackDebianToTmp(srcDebian)
     
+    console.log(`reading control ${srcDebian}`)
     const control = parseControl(readFileControlFromTmp())
     
     const uniqueControl = JSON.stringify(control);
