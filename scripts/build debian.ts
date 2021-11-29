@@ -133,7 +133,7 @@ async function createDepictionPackages(packages: Map<string, ControlJSONFile[]>)
           })
         ),
         (i, e) => e,
-        3
+        2
       )
     );
   }));
