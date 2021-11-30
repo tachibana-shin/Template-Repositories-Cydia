@@ -1,52 +1,23 @@
 <template>
-  <div id="app" :theme="darkmode ? 'dark' : 'light'">
-    <div class="container-fluid">
-      <router-view />
-    </div>
+  <div class="container-fluid py-4" :theme="darkmode ? 'dark' : 'light'">
+    <router-view />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useLocalStorage } from "src/uses/localStorage"
+import { useLocalStorage } from "./uses/localStorage";
 
-const localStorage = useLocalStorage()
+const localStorage = useLocalStorage();
 
-const darkmode = computed<boolean>({
-  get() {
-    return Boolean(Number(localStorage["darkmode"])) ?? false;
-  },
-  set(v) {
-    localStorage["darkmode"] = Number(v);
-  },
+const darkmode = computed<boolean>(() => {
+  return localStorage.darkmode ?? false;
 });
 </script>
 
 <style lang="scss">
-body,
 html {
-  position: relative;
-  display: block;
-}
-
-#app {
-  position: absolute;
-  width: 100%;
-  min-height: 100%;
-  background-color: #f5f5fa;
-  font: 14px -apple-system-font, ".Helvetica NeueUI", "Helvetica Neue",
-    sans-serif;
-  padding: 20px 0 35px;
-
   .bg-white {
     background-color: #fff;
-  }
-
-  .text-black {
-    color: #000;
-  }
-
-  .text-blue {
-    color: rgb(102, 128, 249);
   }
 
   .hover__bg-grey {
@@ -60,20 +31,31 @@ html {
       background-color: #c8c7cc;
     }
   }
+  .title {
+    color: rgb(109, 109, 114);
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
 
-  &[theme="dark"] {
-    background-color: #161616;
+  .border-custom {
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  background-color: #f5f5fa;
+  font: 16px -apple-system-font, ".Helvetica NeueUI", "Helvetica Neue",
+    sans-serif;
+
+  &.dark {
+    body {
+      background-color: #161616;
+      color: #fff;
+    }
 
     .bg-white {
       background-color: #000 !important;
-    }
-
-    .text-black {
-      color: #fff !important;
-    }
-
-    .text-blue {
-      color: #eee !important;
     }
 
     .hover__bg-grey {
@@ -90,37 +72,6 @@ html {
 
     .border-custom {
       border-color: rgba(255, 255, 255, 0.2) !important;
-    }
-  }
-
-  .title {
-    color: rgb(109, 109, 114);
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-
-  .border-custom {
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .mt-2rem {
-    margin-top: 2rem;
-  }
-
-  .py-12px {
-    padding: {
-      top: 12px;
-      bottom: 12px;
-    }
-  }
-
-  .px-15px {
-    padding: {
-      left: 15px;
-      right: 15px;
     }
   }
 }

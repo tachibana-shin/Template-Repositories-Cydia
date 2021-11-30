@@ -78,6 +78,11 @@ async function main() {
 
   // clean depiction old
   await cleanDepictionPackageOld(packagesUnique);
+  
+  // remove .tmp unpack debian
+  await fs.promises.rm(PATH_TMP_UNPACK_DEBIAN, {
+	  recursive: true,
+  }).catch(() => {});
 
   // all package ready, create Packages, Packages.bz2
   createFilePackages();

@@ -9,8 +9,11 @@
   "dependencies": {
     "@vueuse/core": "^6.9.2",
     "@vueuse/head": "^0.7.2",
+    "bootstrap": "^4.6.1",
     "dayjs": "^1.10.7",
+    "filesize": "^8.0.6",
     "nprogress": "^0.2.0",
+    "timeago.js": "^4.0.2",
     "vue": "^3.2.22",
     "vue-router": "^4.0.12"
   },

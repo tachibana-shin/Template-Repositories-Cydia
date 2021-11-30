@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve, join, dirname, relative } from "path";
 import { UserConfig } from "vite";
 import fs from "fs-extra";
 import Pages from "vite-plugin-pages";
@@ -37,15 +37,25 @@ const config: UserConfig = {
       pagesDir: "pages",
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1));
-        
-        if (path.startsWith("pages/package/") && path.endsWith("/index.md")) {
-          const dir = dirname(path)
-          
+
+        if (
+          route.component.startsWith("/pages/package/") &&
+          !route.component.endsWith("/package/index.md")
+        ) {
+          const dir = dirname(path);
+
           route.meta = {
-            ...route.meta || {},
-            screenshots: fs.readdirSync(join(dir, "screenshots")),
-            changelog: fs.readFileSync(join(dir, "changelog.md"))
-          }
+            ...(route.meta || {}),
+            screenshots: fs.existsSync(join(dir, "screenshots"))
+              ? fs.readdirSync(join(dir, "screenshots"))
+              : [],
+            changelog: fs.existsSync(join(dir, "changelog.md"))
+              ? fs.readFileSync(join(dir, "changelog.md"))
+              : null,
+            packageInfo: JSON.parse(
+              fs.readFileSync(join(dir, "control.json"), "utf8")
+            ),
+          };
         }
 
         return route;
@@ -53,7 +63,7 @@ const config: UserConfig = {
     }),
 
     Markdown({
-      wrapperComponent: "post",
+      wrapperComponent: "depiction",
       wrapperClasses: "prose m-auto",
       headEnabled: true,
       markdownItOptions: {

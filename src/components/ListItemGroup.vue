@@ -1,14 +1,17 @@
 <template>
-  <div class="mt-2rem">
-    <h6 class="title">{{ name }}</h6>
+  <h6 class="title" v-if="name">{{ name }}</h6>
 
-    <ul class="list-item bg-white text-black border-custom">
-      <li v-for="(item, index) in items" :key="index">
-        <router-link
-          :is="item.to ? `router-link` : `span`"
-          :to="item.to"
-          class="item__child text-blue hover__bg-grey before__bg-secondary"
-        >
+  <ul class="list-item bg-white border-custom">
+    <li v-for="(item, index) in items" :key="index">
+      <component
+        :is="item.to ? (item.to.includes(`://`) ? `a` : `router-link`) : `span`"
+        :to="!item.to?.includes(`://`) && item.to"
+        :href="item.to"
+        :target="item.to?.includes(`://`) && `_blank`"
+        class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
+        @click="item.onclick"
+      >
+        <div class="d-flex align-items-center">
           <span
             :style="{
               'background-image': `url(${item.icon})`,
@@ -20,25 +23,32 @@
             {{ item.name }}
             <small v-if="item.version">{{ item.version }}</small>
           </p>
-        </router-link>
-      </li>
-    </ul>
-  </div>
+        </div>
+        <span class="text-secondary mr-4" v-if="item.after">{{
+          item.after
+        }}</span>
+      </component>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  name: string;
+  name?: string;
   items: {
     name: string;
     icon?: string;
     to?: string;
     version?: string;
+    after?: string;
+    onclick?: () => void;
   }[];
 }>();
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
+
 %logo-cydia {
   width: 2em;
   height: 2em;
@@ -53,8 +63,7 @@ defineProps<{
 }
 
 .list-item {
-  margin: 5px 0;
-  padding: 6px 0;
+  padding: 0;
   list-style: none;
 
   li {
@@ -63,13 +72,14 @@ defineProps<{
 
     & > .item__child {
       text-decoration: none;
+      color: inherit;
     }
 
     & > * {
       //margin-left: 15px;
       //padding: 12px 15px;
       padding: 6px 15px;
-      min-height: (40rem / 16);
+      min-height: math.div(40rem, 16);
       box-sizing: border-box;
       position: relative;
 
@@ -109,7 +119,7 @@ defineProps<{
         height: 1px;
         width: 100%;
         bottom: 0;
-        left: (2em + 30 / 16);
+        left: (2em + math.div(30, 16));
       }
 
       .icon {
