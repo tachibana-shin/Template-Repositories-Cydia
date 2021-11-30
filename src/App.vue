@@ -7,12 +7,16 @@
 </template>
 
 <script lang="ts" setup>
+import { useLocalStorage } from "src/uses/localStorage"
+
+const localStorage = useLocalStorage()
+
 const darkmode = computed<boolean>({
   get() {
-    return Boolean(Number(localStorage.get("darkmode"))) ?? false;
+    return Boolean(Number(localStorage["darkmode"])) ?? false;
   },
   set(v) {
-    localStorage.set("darkmode", Number(v));
+    localStorage["darkmode"] = Number(v);
   },
 });
 </script>

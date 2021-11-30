@@ -3,13 +3,17 @@
 </template>
 
 <script lang="ts" setup>
+import { useLocalStorage } from "src/uses/localStorage"
+
+const localStorage = useLocalStorage()
+
 const items = [
   {
     name: "Change Theme",
     onclick() {
-      const oldVal = Boolean(Number(localStorage.getItem("darkmode")));
+      const oldVal = Boolean(Number(localStorage[darkmode]));
 
-      localStorage.setItem("darkmode", !oldVal + "");
+      localStorage["darkmode"] = !oldVal + "");
     },
   },
 ];
