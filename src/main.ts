@@ -2,7 +2,6 @@ import "bootstrap/scss/bootstrap.scss"
 import "./styles/main.scss";
 import "./styles/prose.scss";
 import "./styles/markdown.scss";
-import "uno.css";
 
 import autoRoutes from "pages-generated";
 import NProgress from "nprogress";
