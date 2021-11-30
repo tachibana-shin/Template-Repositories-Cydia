@@ -1,12 +1,23 @@
 <template>
-   <list-item-group title="Social" :items="$options.social" />
+  <ListItemGroup name="Social" :items="items" />
 </template>
-<script>
-   import ListItemGroup from "@/components/ListItemGroup.vue"
-   import config from "@/config"
-   
-   export default {
-      components: { ListItemGroup },
-      social: config.Social
-   }
+
+<script lang="ts" setup>
+const items = [
+  {
+    icon: "src/assets/icons/github.png",
+    name: "Github",
+    to: "#",
+  },
+  {
+    icon: "src/assets/icons/reddit.png",
+    name: "Reddit",
+    to: "#",
+  },
+  {
+    icon: "src/assets/icons/twitter.png",
+    name: "Follow Tachibana Shin",
+    to: "#",
+  },
+];
 </script>

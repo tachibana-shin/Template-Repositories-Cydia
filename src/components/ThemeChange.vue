@@ -1,9 +1,16 @@
 <template>
-   <list-item-group title="Theme" :items="[ { NoIcon: true, Name: 'Change Theme' }]" class-ul="py-0" @click-item="$store.commit('toggleDarkMode')" />
+  <ListItemGroup name="Theme" :items="items" />
 </template>
-<script>
-   import ListItemGroup from "@/components/ListItemGroup.vue"
-   export default {
-      components: { ListItemGroup }
-   }
+
+<script lang="ts" setup>
+const items = [
+  {
+    name: "Change Theme",
+    onclick() {
+      const oldVal = Boolean(Number(localStorage.getItem("darkmode")));
+
+      localStorage.setItem("darkmode", !oldVal + "");
+    },
+  },
+];
 </script>

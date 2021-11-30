@@ -3,7 +3,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production vite-ssg build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:debian": "esno './scripts/build debian.ts'"
   },
   "dependencies": {
     "@vueuse/core": "^6.9.2",
@@ -22,6 +23,9 @@
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-link-attributes": "^3.0.1",
     "@types/nprogress": "^0.2.0",
+    "@types/semver": "^7.3.9",
+    "@types/sha256": "^0.2.0",
+    "@types/sha256-file": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@unocss/preset-icons": "^0.12.2",
     "@unocss/reset": "^0.12.2",
@@ -34,6 +38,7 @@
     "esno": "^0.12.1",
     "fast-glob": "^3.2.7",
     "feed": "^4.2.2",
+    "file-to-sha512": "^0.0.1",
     "fs-extra": "^10.0.0",
     "gray-matter": "^4.0.3",
     "jsdom": "^18.1.1",
@@ -44,7 +49,9 @@
     "markdown-it-table-of-contents": "^0.6.0",
     "md5-file": "^5.0.0",
     "pnpm": "^6.22.2",
-    "sass": "^1.43.4",
+    "sass": "^1.44.0",
+    "sha256": "^0.2.0",
+    "sha256-file": "^1.0.0",
     "sitemap": "^7.0.0",
     "typescript": "^4.5.2",
     "unplugin-auto-import": "^0.4.14",

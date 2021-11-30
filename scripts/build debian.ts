@@ -3,17 +3,18 @@ import fs from "fs";
 import { join, dirname, basename, resolve } from "path";
 import child_process from "child_process";
 import md5file from "md5-file";
-import sha256file from "sha256-file"
-import sha256 from "sha256"
-import { pathToSHA512 as sha512file } from "file-to-sha512"
+import sha256file from "sha256-file";
+import sha256 from "sha256";
+import { pathToSHA512 as sha512file } from "file-to-sha512";
 import semver from "semver";
-import fg from "fast-glob"
+import fg from "fast-glob";
 
-const PATH_ROOT = resolve(__dirname, "..")
-const PATH_BUILD_PACKAGES = join(PATH_ROOT, ".build-packages");
+const R_OK = 4;
+const W_OK = 2;
+
+const PATH_ROOT = resolve(__dirname, "..");
 const PATH_DEBIAN = join(PATH_ROOT, "debian");
 const PATH_FILE_PACKAGES = join(PATH_ROOT, "Packages");
-const ORIGIN = "https://tachibana-shin.github.io";
 const HOMEPAGE = "https://tachibana-shin.github.io/repo";
 const PATH_TMP_UNPACK_DEBIAN = join(PATH_ROOT, ".tmp");
 
@@ -59,8 +60,8 @@ function stringifyControl(obj: ControlJSON): string {
 }
 
 async function main() {
-  const start = performance.now()
-  
+  const start = performance.now();
+
   if (
     fs.existsSync(PATH_DEBIAN) === false ||
     fs.lstatSync(PATH_DEBIAN).isDirectory() === false
@@ -69,82 +70,88 @@ async function main() {
   }
 
   // auto fix packages
-  const controlPackages = await autoFixDebians(
-    await getListPackages()
-  );
-  
-  const packagesUnique = uniqueListPackages(controlPackages)
+  const controlPackages = await autoFixDebian(await getListPackages());
+
+  const packagesUnique = uniqueListPackages(controlPackages);
   // get list packages merged version
   await createDepictionPackages(packagesUnique);
-  
-  // clean depction old
-  await cleanDepctionPackageOld(packagesUnique)
+
+  // clean depiction old
+  await cleanDepictionPackageOld(packagesUnique);
 
   // all package ready, create Packages, Packages.bz2
   createFilePackages();
 
   // create Release
   createFileRelease();
-  
-  console.log(chalk.green(`Complete ${performance.now() - start}ms`))
+
+  console.log(chalk.green(`Complete ${performance.now() - start}ms`));
 }
 main();
-async function createDepictionPackages(packages: Map<string, ControlJSONFile[]>): Promise<void> {
-  await Promise.all(Array.from(packages.values()).map(async (versions) => {
-    const pathToDirDepiction = join(PATH_ROOT, "pages/package", versions[0].control.Package)
-    
-    fs.mkdirSync(pathToDirDepiction, {
-      recursive: true,
-    });
+async function createDepictionPackages(
+  packages: Map<string, ControlJSONFile[]>
+): Promise<void> {
+  await Promise.all(
+    Array.from(packages.values()).map(async (versions) => {
+      const pathToDirDepiction = join(
+        PATH_ROOT,
+        "pages/package",
+        versions[0].control.Package
+      );
 
-    if (
-      !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
-      !fs.existsSync(join(pathToDirDepiction, "index.vue"))
-    ) {
-      fs.writeFileSync(join(pathToDirDepiction, "index.md"), versions[0].control.Description || `Description for package ${versions[0].control.Package}`)
-    }
-    // write JSON to depiction
-    fs.writeFileSync(
-      join(pathToDirDepiction, "control.json"),
-      JSON.stringify(
-        await Promise.all(
-          versions.map(async (item) => {
-            const [
-              { size, birthtimeMs, uid },
-              MD5sum,
-              SHA256sum,
-              SHA512sum
-            ] = await Promise.all([
-              fs.promises.lstat(item.filepath),
-              md5file(item.filepath),
-              sha256file(item.filepath),
-              sha512file(item.filepath)
-            ])
-  
-            return {
-              control: item.control,
-              MD5sum,
-              SHA256sum,
-              SHA512sum,
-              size,
-              birthtimeMs,
-              uid,
-            };
-          })
-        ),
-        (i, e) => e,
-        2
-      )
-    );
-  }));
+      fs.mkdirSync(pathToDirDepiction, {
+        recursive: true,
+      });
+
+      if (
+        !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
+        !fs.existsSync(join(pathToDirDepiction, "index.vue"))
+      ) {
+        fs.writeFileSync(
+          join(pathToDirDepiction, "index.md"),
+          versions[0].control.Description ||
+            `Description for package ${versions[0].control.Package}`
+        );
+      }
+      // write JSON to depiction
+      fs.writeFileSync(
+        join(pathToDirDepiction, "control.json"),
+        JSON.stringify(
+          await Promise.all(
+            versions.map(async (item) => {
+              const [{ size, birthtimeMs, uid }, MD5sum, SHA256sum, SHA512sum] =
+                await Promise.all([
+                  fs.promises.lstat(item.filepath),
+                  md5file(item.filepath),
+                  sha256file(item.filepath),
+                  sha512file(item.filepath),
+                ]);
+
+              return {
+                control: item.control,
+                MD5sum,
+                SHA256sum,
+                SHA512sum,
+                size,
+                birthtimeMs,
+                uid,
+              };
+            })
+          ),
+          (i, e) => e,
+          2
+        )
+      );
+    })
+  );
 }
 
 function fixVersion(v: string): string {
   if (semver.valid(v)) {
-    return v
+    return v;
   }
-  
-  return semver.coerce(v)
+
+  return semver.coerce(v)?.version || "1.0.0";
 }
 
 function uniqueListPackages(
@@ -161,7 +168,10 @@ function uniqueListPackages(
       packages
         .get(controlFile.control.Package)!
         .findIndex(({ control: { Version } }) =>
-          semver.gt(fixVersion(Version), fixVersion(controlFile.control.Version))
+          semver.gt(
+            fixVersion(Version),
+            fixVersion(controlFile.control.Version)
+          )
         ) || packages.get(controlFile.control.Package)!.length;
 
     packages
@@ -178,114 +188,123 @@ function unpackDebianToTmp(src: string): void {
       recursive: true,
     }); // rm .tmp why?
   } catch {}
-  
-  child_process.execSync(
-    `dpkg-deb -R "${src}" "${PATH_TMP_UNPACK_DEBIAN}"`
-  );
+
+  child_process.execSync(`dpkg-deb -R "${src}" "${PATH_TMP_UNPACK_DEBIAN}"`);
 }
 function readFileControlFromTmp(): string {
-  const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control")
-  
-   try {
-    fs.accessSync(filepath, fs.R_OK)
-   } catch {
-      child_process.execSync(`chmod +r "${filepath}"`)
-    }
-  
-  return fs.readFileSync(filepath, "utf8")
+  const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
+
+  try {
+    fs.accessSync(filepath, R_OK);
+  } catch {
+    child_process.execSync(`chmod +r "${filepath}"`);
+  }
+
+  return fs.readFileSync(filepath, "utf8");
 }
 function writeFileControlToTmp(control: ControlJSON): void {
-  const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control")
-  
-    try {
-      fs.accessSync(filepath, fs.W_OK)
-    } catch {
-      child_process.execSync(`chmod +w "${filepath}"`)
-    }
-  
+  const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
+
+  try {
+    fs.accessSync(filepath, W_OK);
+  } catch {
+    child_process.execSync(`chmod +w "${filepath}"`);
+  }
+
   fs.writeFileSync(filepath, stringifyControl(control));
 }
 function getStat(filepath: string): [number, number, number] {
-  return (fs.statSync(filepath).mode & parseInt("777", 8)).toString(8).split("").map(Number)
+  const newLocal = (fs.statSync(filepath).mode & parseInt("777", 8))
+    .toString(8)
+    .split("")
+    .map(Number);
+
+  return newLocal as any;
 }
 function isR(p: number): boolean {
-  return p <= 7 && p >= 4
+  return p <= 7 && p >= 4;
 }
 function isW(p: number): boolean {
-  return p === 2 || p === 3 || p === 7
+  return p === 2 || p === 3 || p === 7;
 }
 function isX(p: number): boolean {
-  return p % 2 === 1
+  return p % 2 === 1;
 }
 
 function addX(p: number): number {
   if (isX(p)) {
-    return p
+    return p;
   }
-  
+
   if (isR(p)) {
-    return 5
+    return 5;
   }
   if (isW(p)) {
-    return 3
+    return 3;
   }
-  
-  return 7
+
+  return 7;
 }
 
 function packDebianFromTmp(filepath: string): void {
   const pathTmpControl = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
-  
-  if (!isR(getStat(pathTmpControl)[0])) {
-    fs.chmodSync(pathTmpControl, 0o400)
+
+  if (getStat(pathTmpControl).join("") !== "755") {
+    fs.chmodSync(pathTmpControl, 0o755);
   }
-  
-    try {
-      fs.accessSync(pathTmpControl, fs.W_OK)
-      child_process.execSync(`chmod -w "${pathTmpControl}"`)
-    } catch {}
-  
-  
-  fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN"))
-  .forEach((filename) => {
+
+  fs.readdirSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN")).forEach((filename) => {
     if (filename !== "control") {
-      const [p, o, w] = getStat(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename))
-      
-      fs.chmodSync(join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename), eval(`0o${addX(p)}${addX(o)}${addX(w)}`));
+      const [p, o, w] = getStat(
+        join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename)
+      );
+
+      fs.chmodSync(
+        join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN", filename),
+        eval(`0o${addX(p)}${addX(o)}${addX(w)}`)
+      );
     }
   });
-  
+
   child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
 }
 
-async function getListPackages(): string[] {
-  return await fg(`${PATH_DEBIAN}/*.deb`)
+async function getListPackages(): Promise<string[]> {
+  return await fg(`${PATH_DEBIAN}/*.deb`);
 }
-async function cleanDepctionPackageOld(packages: Map<string, ControlJSONFile[]>): void {
-  const packagesID = Array.from(packages.keys())
-  
-  await Promise.all(fs.readdirSync(join(PATH_ROOT, "pages/package")).map(async filename => {
-    if (!packagesID.includes(filename)) {
-      fs.promises.rm(join(PATH_ROOT, "pages/package", filename), {
-        recursive: true
-      })
-    }
-  }))
+async function cleanDepictionPackageOld(
+  packages: Map<string, ControlJSONFile[]>
+): Promise<void> {
+  const packagesID = Array.from(packages.keys());
+
+  await Promise.all(
+    fs.readdirSync(join(PATH_ROOT, "pages/package")).map(async (filename) => {
+      if (!packagesID.includes(filename)) {
+        fs.promises.rm(join(PATH_ROOT, "pages/package", filename), {
+          recursive: true,
+        });
+      }
+    })
+  );
 }
-async function autoFixDebians(
-  debians: string[]
-): Promise<ControlJSONFile[]> {
-  const controlJSONFiles = []
-  
-  for (let i = 0, len = debians.length; i < len; i++ ) {
-    const srcDebian = debians[i]
-    
-    console.log(chalk.grey(`unpack ${basename(srcDebian)} ${Math.round((i + 1)/debians.length * 100)}% (${i + 1}/${debians.length})`))
-    
-    unpackDebianToTmp(srcDebian)
-    
-    const control = parseControl(readFileControlFromTmp())
-    
+async function autoFixDebian(debian: string[]): Promise<ControlJSONFile[]> {
+  const controlJSONFiles = [];
+
+  for (let i = 0, len = debian.length; i < len; i++) {
+    const srcDebian = debian[i];
+
+    console.log(
+      chalk.grey(
+        `unpack ${basename(srcDebian)} ${Math.round(
+          ((i + 1) / debian.length) * 100
+        )}% (${i + 1}/${debian.length})`
+      )
+    );
+
+    unpackDebianToTmp(srcDebian);
+
+    const control = parseControl(readFileControlFromTmp());
+
     const uniqueControl = sha256(JSON.stringify(control));
 
     if (control.Package.startsWith("git.shin") === false) {
@@ -298,41 +317,34 @@ async function autoFixDebians(
 
     if (uniqueControl !== sha256(JSON.stringify(control))) {
       writeFileControlToTmp(control);
-      
-      if (
-        isValidFilename(
-          basename(srcDebian),
-          control
-        )
-      ) {
-        packDebianFromTmp(join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`))
-        console.log(chalk.green(`pack ${control.Package}`))
-        
-        fs.unlinkSync(srcDebian)
+
+      if (isValidFilename(basename(srcDebian), control)) {
+        packDebianFromTmp(
+          join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`)
+        );
+        console.log(chalk.green(`pack ${control.Package}`));
+
+        fs.unlinkSync(srcDebian);
       } else {
         fs.renameSync(
-          join(
-            dirname(srcDebian),
-            `${control.Package}@${control.Version}.deb`
-          ),
+          join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`),
           srcDebian
         );
-        console.log(chalk.green(`fix name ${control.Package}`))
+        console.log(chalk.green(`fix name ${control.Package}`));
       }
     }
 
     controlJSONFiles.push({
       filepath: srcDebian,
-      control
-    })
+      control,
+    });
   }
-  
-  return controlJSONFiles
+
+  return controlJSONFiles;
 }
 
 function isValidFilename(filepath: string, control: ControlJSON): boolean {
-  return basename(filepath) !==
-    `${control.Package}@${control.Version}.deb`
+  return basename(filepath) !== `${control.Package}@${control.Version}.deb`;
 }
 
 function createFilePackages(): void {
