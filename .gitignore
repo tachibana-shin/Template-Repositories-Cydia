@@ -6,3 +6,6 @@ dist-ssr
 /pages/package/*/control.json
 *.log
 /.tmp
+.vite-ssg-temp/
+/auto-imports.d.ts
+/components.d.ts
