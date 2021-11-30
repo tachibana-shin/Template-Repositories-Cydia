@@ -37,11 +37,15 @@ const config: UserConfig = {
       pagesDir: "pages",
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1));
-
-        if (!path.includes("projects.md")) {
-          const md = fs.readFileSync(path, "utf-8");
-          const { data } = matter(md);
-          route.meta = Object.assign(route.meta || {}, { frontmatter: data });
+        
+        if (path.startsWith("pages/package/") && path.endsWith("/index.md")) {
+          const dir = dirname(path)
+          
+          route.meta = {
+            ...route.meta || {},
+            screenshots: fs.readdirSync(join(dir, "screenshots")),
+            changelog: fs.readFileSync(join(dir, "changelog.md"))
+          }
         }
 
         return route;

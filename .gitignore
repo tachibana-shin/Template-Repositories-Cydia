@@ -3,6 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-/pages/package/*/control.json
 *.log
 /.tmp
