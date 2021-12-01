@@ -4,10 +4,10 @@
   <ul class="list-item bg-white border-custom">
     <li v-for="(item, index) in items" :key="index">
       <component
-        :is="item.to ? (item.to.includes(`://`) ? `a` : `router-link`) : `span`"
-        :to="(!item.to?.includes(`://`) || !item.to?.startsWith(`mailto:`)) && `${item.to}${item.to.startsWith('mailto:') ? '' : '/'}`"
-        :href="`${item.to}/`"
-        :target="(item.to?.includes(`://`) || item.to?.startsWith(`mailto:`)) && `_blank`"
+        :is="item.to ? (item.to.includes('://') || item.to.startsWith('mailto:')) ? `a` : `router-link` : `span`"
+        :to="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === false ? (item.to + (item.to.startsWith('mailto:') ? '' : '/')) : undefined"
+        :href="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === true ? (item.to + (item.to.startsWith('mailto:') ? '' : '/')) : undefined"
+        :target="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === true ? `_blank` : undefined"
         class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
         @click="item.onclick"
       >

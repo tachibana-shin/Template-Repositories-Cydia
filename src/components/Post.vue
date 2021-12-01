@@ -1,13 +1,22 @@
 <template>
   <Depiction
-    v-if="route.path.startsWith(`/package/`)"
+    v-if="route.path.startsWith(`/package/`) && route.path.includes(`/changelog`) === false"
     :frontmatter="frontmatter"
-  />
+  >
+	<slot />
+  </Depiction>
+  <Changelog v-else-if="route.path.startsWith(`/package/`) && route.path.includes(`/changelog`)" :frontmatter="frontmatter">
+	<slot />
+  </Changelog>
   <Section
     v-else-if="route.path.startsWith(`/section/`)"
     :frontmatter="frontmatter"
-  />
-  <Unknown v-else :frontmatter="frontmatter" />
+  >
+	<slot />
+  </Section>
+  <Unknown v-else :frontmatter="frontmatter">
+	<slot />
+  </Unknown>
 </template>
 
 <script lang="ts" setup>

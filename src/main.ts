@@ -1,4 +1,3 @@
-import "bootstrap/scss/bootstrap.scss"
 import "./styles/main.scss";
 import "./styles/prose.scss";
 import "./styles/markdown.scss";

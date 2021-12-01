@@ -1,20 +1,23 @@
 <template>
-  <div class="container-fluid py-4" :theme="darkmode ? 'dark' : 'light'">
+  <div class="container-fluid py-4">
     <router-view />
   </div>
 </template>
 
-<script lang="ts" setup>
-import { useLocalStorage } from "./uses/localStorage";
-
-const localStorage = useLocalStorage();
-
-const darkmode = computed<boolean>(() => {
-  return localStorage.darkmode ?? false;
-});
-</script>
-
 <style lang="scss">
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/utilities/flex";
+@import "bootstrap/scss/utilities/spacing";
+@import "bootstrap/scss/utilities/display";
+@import "bootstrap/scss/utilities/text";
+
 html {
   .bg-white {
     background-color: #fff;
@@ -44,7 +47,9 @@ html {
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  background-color: #f5f5fa;
+  body {
+    background-color: #f5f5fa;
+  }
   font: 16px -apple-system-font, ".Helvetica NeueUI", "Helvetica Neue",
     sans-serif;
 

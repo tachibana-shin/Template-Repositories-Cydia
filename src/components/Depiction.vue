@@ -18,9 +18,7 @@
         name: `Author`,
         icon: `/src/assets/icons/email.png`,
         after: packageInfoLast.control.Author.replace(/<[^>]+?>/, ''),
-        to: `mailto:${
-          packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]
-        }`,
+        to: `mailto:${packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]}`,
       },
     ]"
     v-if="!inCydia"
@@ -31,7 +29,7 @@
       {
         name: `Changelog`,
         icon: `/src/assets/icons/changelog.png`,
-        to: `${route.path}/changelog`,
+        to: `${route.path}/changelog`.replace(/\/{2,}/g, '/'),
       },
     ]"
     v-if="existsChangelog"
@@ -66,7 +64,7 @@
   <!-- description -->
   <div>
     <h6 class="title">Description</h6>
-    <div class="bg-white border-custom">
+    <div class="bg-white border-custom px-3">
       <slot />
     </div>
   </div>
@@ -96,7 +94,7 @@
   <!-- package info -->
   <div class="mt-3">
     <h6 class="title">Package info</h6>
-    <ul class="properties bg-white">
+    <ul class="properties bg-white border-custom">
       <li
         v-for="[propName, value] in Object.entries(propertiesShow)"
         :key="propName"
@@ -110,9 +108,10 @@
   <!-- old version -->
   <div class="mt-3">
     <h6 class="title">Old version</h6>
-    <ul class="bg-white">
+    <ul class="bg-white border-custom py-3">
       <li v-for="pkg in packageInfo" :key="pkg.control.Version">
-        <strong>{{ pkg.control.Version }}</strong>
+        <strong>{{ pkg.control.Version }}</strong
+        ><br />
         <small class="text-secondary">{{ pkg.MD5sum }}</small>
       </li>
     </ul>

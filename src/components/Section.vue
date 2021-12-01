@@ -9,7 +9,7 @@
     ]"
   />
 
-  <AddRepo package-id="com.example" v-if="!inCydia" />
+  <AddRepo v-if="!inCydia" />
 
   <h6 class="title">{{ sectionInfo.name }}</h6>
 
@@ -45,6 +45,8 @@ const items = sectionInfo.packages.map((pkg) => ({
   name: pkg.name,
   icon: usePackageIcon(pkg.icon, sectionInfo.name),
   version: pkg.lastVersion,
-  to: inCydia ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}` : `/package/${pkg.packageID}`,
+  to: inCydia
+    ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}`
+    : `/package/${pkg.packageID}`,
 }));
 </script>

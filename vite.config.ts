@@ -50,9 +50,7 @@ const config: UserConfig = {
             screenshots: fs.existsSync(join(dir, "screenshots"))
               ? fs.readdirSync(join(dir, "screenshots"))
               : [],
-            changelog: fs.existsSync(join(dir, "changelog.md"))
-              ? fs.readFileSync(join(dir, "changelog.md"))
-              : null,
+            existsChangelog: fs.existsSync(join(dir, "changelog.md")),
             packageInfo: JSON.parse(
               fs.readFileSync(join(dir, "control.json"), "utf8")
             ),
