@@ -23,15 +23,21 @@ type ControlJSON = {
 } & {
   Package: string;
   Version: string;
-  Section ? : string;
-  Homepage ? : string;
-  Maintainer ? : string;
-  Sponsor ? : string;
-  Depiction ? : string;
+  Section?: string;
+  Homepage?: string;
+  Maintainer?: string;
+  Sponsor?: string;
+  Depiction?: string;
 };
 type ControlJSONFile = {
   filepath: string;
   control: ControlJSON;
+  MD5sum?: string;
+  SHA256sum?: string;
+  SHA512sum?: string;
+  size?: number;
+  birthtimeMs?: number;
+  uid?: number;
 };
 
 // load split file or chunks
@@ -84,9 +90,11 @@ async function main() {
   await cleanDepictionPackageOld(packagesUnique);
 
   // remove .tmp unpack debian
-  await fs.promises.rm(PATH_TMP_UNPACK_DEBIAN, {
-    recursive: true,
-  }).catch(() => {});
+  await fs.promises
+    .rm(PATH_TMP_UNPACK_DEBIAN, {
+      recursive: true,
+    })
+    .catch(() => {});
 
   // all package ready, create Packages, Packages.bz2
   createFilePackages();
@@ -97,44 +105,72 @@ async function main() {
   console.log(chalk.green(`Complete ${performance.now() - start}ms`));
 }
 main();
-async function updateSections(packages: Map < string, ControlJSONFile[] > ): Promise < void > {
-  const sections = Map < string,
-    Set < any >> ()
+async function updateSections(
+  packages: Map<string, ControlJSONFile[]>
+): Promise<void> {
+  const sections = new Map<string, Set<any>>();
 
   packages.forEach((controls, packageID) => {
-    const section = controls[0].control.Section || "unknown"
+    const section = controls[0].control.Section || "unknown";
 
     if (sections.has(section) === false) {
-      sections.set(section, new Set())
+      sections.set(section, new Set());
     }
 
-    sections.get(section) !.add({
+    sections.get(section)!.add({
       packageID: controls[0].control.Package,
       name: controls[0].control.Name,
       lastVersion: controls[0].control.Version,
       ...controls[0],
-      control: undefined
-    })
-  })
-
-
-  await Promise.all(Array.from(sections.keys()).map(async (sectionName) => {
-    const pkgs = sections.get(sectionName) !
-
-
-      const path = join(PATH_ROOT, "pages/section", sectionName)
-
-    fs.mkdirSync(path, {
-      recursive: true,
+      control: undefined,
     });
+  });
 
+  await Promise.all(
+    Array.from(sections.keys()).map(async (sectionName) => {
+      const pkgs = sections.get(sectionName)!;
 
-    await fs.promises.writeFile(join(path, `packages.json`), JSON.stringify(pkgs))
-  }))
+      const path = join(
+        PATH_ROOT,
+        "pages/section",
+        encodeURIComponent(sectionName).replace(/%20/g, "+")
+      );
+
+      await fs.promises.mkdir(path, {
+        recursive: true,
+      });
+
+      await Promise.all([
+        fixPageNotFound(path, `Description for section ${sectionName}`),
+        fs.promises.writeFile(
+          join(path, `control.json`),
+          JSON.stringify(
+            {
+              name: sectionName,
+              packages: JSON.stringify(Array.from(pkgs)),
+            },
+            (k, v) => v,
+            2
+          )
+        ),
+      ]);
+    })
+  );
+}
+async function fixPageNotFound(
+  path: string,
+  contentDefault: string
+): Promise<void> {
+  if (
+    !fs.existsSync(join(path, "index.md")) ||
+    !fs.existsSync(join(path, "    index.vue"))
+  ) {
+    fs.writeFileSync(join(path, "index.md"), contentDefault);
+  }
 }
 async function createDepictionPackages(
-  packages: Map < string, ControlJSONFile[] >
-): Promise < void > {
+  packages: Map<string, ControlJSONFile[]>
+): Promise<void> {
   await Promise.all(
     Array.from(packages.values()).map(async (versions) => {
       const pathToDirDepiction = join(
@@ -147,45 +183,55 @@ async function createDepictionPackages(
         recursive: true,
       });
 
-      if (
-        !fs.existsSync(join(pathToDirDepiction, "index.md")) ||
-        !fs.existsSync(join(pathToDirDepiction, "index.vue"))
-      ) {
-        fs.writeFileSync(
-          join(pathToDirDepiction, "index.md"),
+      await Promise.all([
+        fixPageNotFound(
+          pathToDirDepiction,
           versions[0].control.Description ||
-          `Description for package ${versions[0].control.Package}`
-        );
-      }
-      // write JSON to depiction
-      fs.writeFileSync(
-        join(pathToDirDepiction, "control.json"),
-        JSON.stringify(
-          await Promise.all(
-            versions.map(async (item) => {
-              const [{ size, birthtimeMs, uid }, MD5sum, SHA256sum, SHA512sum] =
-              await Promise.all([
+            `Description for package ${versions[0].control.Package}`
+        ),
+        // write JSON to depiction
+        fs.promises.writeFile(
+          join(pathToDirDepiction, "control.json"),
+          JSON.stringify(
+            await Promise.all(
+              versions.map(async (item) => {
+                const [
+                  { size, birthtimeMs, uid },
+                  MD5sum,
+                  SHA256sum,
+                  SHA512sum,
+                ] = await Promise.all([
                   fs.promises.lstat(item.filepath),
                   md5file(item.filepath),
                   sha256file(item.filepath),
                   sha512file(item.filepath),
                 ]);
 
-              return {
-                control: item.control,
-                MD5sum,
-                SHA256sum,
-                SHA512sum,
-                size,
-                birthtimeMs,
-                uid,
-              };
-            })
-          ),
-          (i, e) => e,
-          2
-        )
-      );
+                Object.assign(item, {
+                  MD5sum,
+                  SHA256sum,
+                  SHA512sum,
+                  size,
+                  birthtimeMs,
+                  uid,
+                });
+
+                return {
+                  control: item.control,
+                  MD5sum,
+                  SHA256sum,
+                  SHA512sum,
+                  size,
+                  birthtimeMs,
+                  uid,
+                };
+              })
+            ),
+            (i, e) => e,
+            2
+          )
+        ),
+      ]);
     })
   );
 }
@@ -200,9 +246,8 @@ function fixVersion(v: string): string {
 
 function uniqueListPackages(
   controls: ControlJSONFile[]
-): Map < string, ControlJSONFile[] > {
-  const packages = new Map < string,
-    ControlJSONFile[] > ();
+): Map<string, ControlJSONFile[]> {
+  const packages = new Map<string, ControlJSONFile[]>();
 
   controls.forEach((controlFile) => {
     if (packages.has(controlFile.control.Package) === false) {
@@ -211,16 +256,16 @@ function uniqueListPackages(
 
     const indexInsert =
       packages
-      .get(controlFile.control.Package) !
-      .findIndex(({ control: { Version } }) =>
-        semver.gt(
-          fixVersion(Version),
-          fixVersion(controlFile.control.Version)
-        )
-      ) || packages.get(controlFile.control.Package) !.length;
+        .get(controlFile.control.Package)!
+        .findIndex(({ control: { Version } }) =>
+          semver.gt(
+            fixVersion(Version),
+            fixVersion(controlFile.control.Version)
+          )
+        ) || packages.get(controlFile.control.Package)!.length;
 
     packages
-      .get(controlFile.control.Package) !
+      .get(controlFile.control.Package)!
       .splice(indexInsert, 0, controlFile);
   });
 
@@ -320,12 +365,12 @@ function packDebianFromTmp(filepath: string): void {
   child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
 }
 
-async function getListPackages(): Promise < string[] > {
+async function getListPackages(): Promise<string[]> {
   return await fg(`${PATH_DEBIAN}/*.deb`);
 }
 async function cleanDepictionPackageOld(
-  packages: Map < string, ControlJSONFile[] >
-): Promise < void > {
+  packages: Map<string, ControlJSONFile[]>
+): Promise<void> {
   const packagesID = Array.from(packages.keys());
 
   await Promise.all(
@@ -338,7 +383,7 @@ async function cleanDepictionPackageOld(
     })
   );
 }
-async function autoFixDebian(debian: string[]): Promise < ControlJSONFile[] > {
+async function autoFixDebian(debian: string[]): Promise<ControlJSONFile[]> {
   const controlJSONFiles = [];
 
   for (let i = 0, len = debian.length; i < len; i++) {

@@ -4,7 +4,7 @@
     "build": "cross-env NODE_ENV=production vite-ssg build",
     "dev": "vite",
     "preview": "vite preview",
-    "build:debian": "esno './scripts/build debian.ts'"
+    "build:control": "esno ./scripts/build-control.ts"
   },
   "dependencies": {
     "@vueuse/core": "^6.9.2",
