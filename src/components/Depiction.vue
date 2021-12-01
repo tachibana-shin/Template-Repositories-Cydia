@@ -1,7 +1,7 @@
 <template>
   <AddRepo package-id="com.example" v-if="!inCydia" />
 
-  <div class="tweak-header">
+  <div class="tweak-header" v-if="!inCydia">
     <img class="icon" :src="packageIcon" />
     <div class="info">
       <h1 class="name h6">{{ packageInfo.control.Name }}</h1>
@@ -21,6 +21,18 @@
         to: `mailto://${packageInfo.control.Author.match(/<([^>]+)>/y)?.[1]}`,
       },
     ]"
+    v-if="!inCydia"
+  />
+  
+  <ListItemGroup
+    :items="[
+      {
+        name: `Changelog`,
+        icon: `/src/assets/icons/changelog.png`,
+        to: `${route.path}/changelog`,
+      },
+    ]"
+    v-if="existsChangelog"
   />
 
   <SocialShare no-name />
@@ -79,12 +91,6 @@
     </ul>
   </div>
 
-  <!-- changelog -->
-  <div class="mt-3" v-if="changelog">
-    <h6 class="title">Changelog</h6>
-    <div v-html="changelog" />
-  </div>
-
   <!-- package info -->
   <div class="mt-3">
     <h6 class="title">Package info</h6>
@@ -95,6 +101,17 @@
       >
         <span class="propName">{{ propName }}</span>
         <span class="value">{{ value }}</span>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- old version -->
+  <div class="mt-3">
+    <h6 class="title">Old version</h6>
+    <ul class="bg-white">
+      <li v-for="pkg in route.meta.packageInfo" :key="pkg.control.Version">
+        <strong>{{ pkg.control.Version }}</strong>
+        <small class="text-secondary">{{ pkg.MD5sum }}</small>
       </li>
     </ul>
   </div>
@@ -120,7 +137,7 @@ const message = frontmatter.notification;
 const screenshots: string[] =
   frontmatter.screenshots || (route.meta.screenshots as string[]) || [];
 const sourceCode = frontmatter["source-code"];
-const changelog = route.meta.changelog;
+const existsChangelog = route.meta.existsChangelog;
 const packageInfo: any = (route.meta.packageInfo as any)[0];
 const propertiesShow = {
   Name: packageInfo.control.Name,
