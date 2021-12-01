@@ -31,6 +31,7 @@
 
 <script lang="ts" setup>
 import type { SectionControlFile } from "../../scripts/build-control";
+import inCydia from "../constants/inCydia";
 import { usePackageIcon } from "../uses/packageIcon";
 
 defineProps<{
@@ -45,6 +46,6 @@ const items = sectionInfo.packages.map((pkg) => ({
   name: pkg.name,
   icon: usePackageIcon(pkg.icon, sectionInfo.name),
   version: pkg.lastVersion,
-  to: `/package/${pkg.packageID}`,
+  to: inCydia ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}` : `/package/${pkg.packageID}`,
 }));
 </script>

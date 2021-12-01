@@ -131,12 +131,12 @@ import filesize from "filesize";
 import { format } from "timeago.js";
 import { usePackageIcon } from "../uses/packageIcon";
 import type { PackageControlFile } from "scripts/build-control";
+import inCydia from "../constants/inCydia";
 
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
 const route = useRoute();
 
-const inCydia = navigator.userAgent.includes("Cydia");
 const message = frontmatter.notification;
 const screenshots: string[] =
   frontmatter.screenshots || (route.meta.screenshots as string[]) || [];

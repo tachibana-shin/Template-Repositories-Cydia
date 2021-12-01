@@ -44,6 +44,7 @@ type PackageControlInSection = {
   packageID: string;
   name: string;
   lastVersion: string;
+  section: string;
   icon?: string;
 } & Omit<Required<PackageControlFile>, "filepath" | "control">;
 
@@ -142,9 +143,7 @@ async function createPagesControl(
 
   allPackages.sort((a, b) => b.birthtimeMs! - a.birthtimeMs!);
 
-  const pkgLastUpdate: (PackageControlInSection & {
-    birthtimeMs: number;
-  })[] = [];
+  const pkgLastUpdate: PackageControlInSection[] = [];
 
   allPackages.slice(0, 10).forEach((pkg) => {
     pkgLastUpdate.push({
@@ -152,6 +151,7 @@ async function createPagesControl(
       name: pkg.control.Name,
       lastVersion: pkg.control.Version,
       icon: pkg.control.Icon,
+      section: pkg.control.Section || "unknown",
       ...pkg,
       // @ts-ignore
       control: undefined,
@@ -185,6 +185,7 @@ async function updateSections(
       name: controls[0].control.Name,
       lastVersion: controls[0].control.Version,
       icon: controls[0].control.Icon,
+      section: controls[0].control.Section || "unknown",
       ...controls[0],
       // @ts-ignore
       control: undefined,

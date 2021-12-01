@@ -14,6 +14,7 @@
 
 <script lang="ts" setup>
 import { usePackageIcon } from "../uses/packageIcon";
+import inCydia from "../constants/inCydia";
 import listSections from "/pages/section-list-pkgs.json";
 
 const sections = listSections.slice(0, 7).map((section) => {
@@ -23,7 +24,7 @@ const sections = listSections.slice(0, 7).map((section) => {
       return {
         name: pkg.name,
         icon: usePackageIcon(pkg.icon, section.name),
-        to: `/package/${pkg.packageID}`,
+        to: inCydia ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}` : `/package/${pkg.packageID}`,
       };
     }),
   };

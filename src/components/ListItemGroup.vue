@@ -7,7 +7,7 @@
         :is="item.to ? (item.to.includes(`://`) ? `a` : `router-link`) : `span`"
         :to="!item.to?.includes(`://`) && item.to"
         :href="item.to"
-        :target="item.to?.includes(`://`) && `_blank`"
+        :target="item.to?.includes(`://`)) && `_blank`"
         class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
         @click="item.onclick"
       >

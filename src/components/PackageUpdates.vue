@@ -3,9 +3,18 @@
 </template>
 
 <script lang="ts" setup>
-const items = new Array(10).fill(0).map(() => ({
-  name: "Package Example",
-  icon: "/src/assets/icons/Addons.png",
-  to: "#",
+import { pkgLastUpdate } from "/pages/control.json";
+import inCydia from "../constants/inCydia";
+import { usePackageIcon } from "../uses/packageIcon";
+import { format } from "timeago.js";
+
+const items = pkgLastUpdate.map((pkg) => ({
+  name: pkg.name,
+  icon: usePackageIcon(pkg.icon, pkg.section),
+  version: pkg.lastVersion,
+  to: inCydia ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}` : `/package/${pkg.packageID}`,
+  after: format(pkg.birthtimeMs, "en_US", {
+    relative: Date.now(),
+  }),
 }));
 </script>
