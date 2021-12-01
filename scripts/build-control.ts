@@ -170,19 +170,27 @@ async function updateSections(
       ]);
     })
   );
-  
-  const list = Array.from(sections.keys()).map(sectionName => {
+
+  const list = Array.from(sections.keys()).map((sectionName) => {
     return {
       name: sectionName,
       to: `/section/${encodeURIComponent(sectionName).replace(/%20/g, "+")}`,
-      packages: Array.from(sections.get(sectionName) !.values()).slice(0, 5)
-    }
-  })
-  fs.writeFileSync(join(PATH_ROOT, "pages/section/list.json"), JSON.stringify(list.map(item => ({
-    name: item.name,
-    to: item.to
-  }))))
-  fs.writeFileSync(join(PATH_ROOT, "pages/section/list-pkgs.json"), JSON.stringify(list))
+      packages: Array.from(sections.get(sectionName)!.values()).slice(0, 5),
+    };
+  });
+  fs.writeFileSync(
+    join(PATH_ROOT, "pages/section/list.json"),
+    JSON.stringify(
+      list.map((item) => ({
+        name: item.name,
+        to: item.to,
+      }))
+    )
+  );
+  fs.writeFileSync(
+    join(PATH_ROOT, "pages/section/list-pkgs.json"),
+    JSON.stringify(list)
+  );
 }
 async function fixPageNotFound(
   path: string,
