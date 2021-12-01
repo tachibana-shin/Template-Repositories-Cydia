@@ -40,7 +40,6 @@ defineProps<{
 
 const route = useRoute();
 
-const inCydia = navigator.userAgent.includes("Cydia");
 const sectionInfo = route.meta.packageInfo as SectionControlFile;
 const items = sectionInfo.packages.map((pkg) => ({
   name: pkg.name,

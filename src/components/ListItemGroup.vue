@@ -5,9 +5,9 @@
     <li v-for="(item, index) in items" :key="index">
       <component
         :is="item.to ? (item.to.includes(`://`) ? `a` : `router-link`) : `span`"
-        :to="!item.to?.includes(`://`) && item.to"
-        :href="item.to"
-        :target="item.to?.includes(`://`) && `_blank`"
+        :to="(!item.to?.includes(`://`) || !item.to?.startsWith(`mailto:`)) && `${item.to}${item.to.startsWith('mailto:') ? '' : '/'}`"
+        :href="`${item.to}/`"
+        :target="(item.to?.includes(`://`) || item.to?.startsWith(`mailto:`)) && `_blank`"
         class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
         @click="item.onclick"
       >

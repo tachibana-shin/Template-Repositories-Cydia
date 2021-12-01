@@ -17,9 +17,9 @@
       {
         name: `Author`,
         icon: `/src/assets/icons/email.png`,
-        after: packageInfoLast.control.Author.replace(/<[^>]+>/y, ''),
-        to: `mailto://${
-          packageInfoLast.control.Author.match(/<([^>]+)>/y)?.[1]
+        after: packageInfoLast.control.Author.replace(/<[^>]+?>/, ''),
+        to: `mailto:${
+          packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]
         }`,
       },
     ]"

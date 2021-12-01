@@ -3,8 +3,7 @@ export function usePackageIcon(icon: string | void, section: string) {
   if (icon?.match(/https?:\/\//)) {
     packageIcon.value = icon;
   } else {
-    /* @vite-ignore */
-    import(`/src/assets/icons/${section}.png`).then((res) => {
+    /* @vite-ignore */import(`/src/assets/icons/${section}.png`).then((res) => {
       packageIcon.value = res.default;
     });
   }
