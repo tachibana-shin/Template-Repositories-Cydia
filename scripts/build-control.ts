@@ -133,9 +133,11 @@ async function createPagesControl(
   packages: Map<string, PackageControlFile[]>
 ): Promise<void> {
   const allPackages: PackageControlFile[] = [];
+  let countFileDebian = 0;
 
   packages.forEach((pkg) => {
     allPackages.push(pkg[0]);
+    countFileDebian += pkg.length;
   });
 
   allPackages.sort((a, b) => b.birthtimeMs! - a.birthtimeMs!);
@@ -150,7 +152,7 @@ async function createPagesControl(
       name: pkg.control.Name,
       lastVersion: pkg.control.Version,
       icon: pkg.control.Icon,
-      ...pkg.control,
+      ...pkg,
       // @ts-ignore
       control: undefined,
     });
@@ -162,7 +164,7 @@ async function createPagesControl(
       pkgLastUpdate,
       lastUpdateAt: pkgLastUpdate[0].birthtimeMs,
       countPackage: Array.from(packages.keys()).length,
-      countFileDebian: allPackages.length,
+      countFileDebian,
     })
   );
 }
