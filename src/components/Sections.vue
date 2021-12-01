@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-  import list from "pages/section/list.json"
+  import list from "/pages/section/list.json"
   import { usePackageIcon } from "../uses/packageIcon"
 
   const items = list.map(item => {
