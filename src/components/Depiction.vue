@@ -119,7 +119,7 @@
   </div>
 
   <PackageUpdates />
-  <SectionList />
+  <Sections />
   <SocialShare />
   <ThemeChange />
   <Copyright />
