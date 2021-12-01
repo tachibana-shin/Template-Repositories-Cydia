@@ -1,1 +1,203 @@
-[{"name":"Tweaks","to":"/section/Tweaks","packages":[{"packageID":"git.shin.complications","name":"Complications","lastVersion":"3.0","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.complications@3.0.deb","MD5sum":"81016f38739aa319ddcf4f84a83e00c3","SHA256sum":"115fcea76dcd54d5c11b4508f4a8312c57abfa41f462792e597a2a4ab18ceef2","SHA512sum":"2a0041fc4456e5190204b5df5f3b744bafc91dc790a7aa7396bfa8871426bca46fa6899eb8be8bb05caf42de20c5ba4dfd2db6da3d44edbda04a00ece5301436","size":475384,"birthtimeMs":1638273687404.417,"uid":11297},{"packageID":"git.shin.copiedlabel","name":"CopiedLabel","lastVersion":"1.0.1","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.copiedlabel@1.0.1.deb","MD5sum":"dc9ba6a1eea9d3b235402c23c8795152","SHA256sum":"3f9c8c8c018724852b1b545be690832802d73604e66cd6dcbde52d7c6cdaacee","SHA512sum":"fc18623fb4911e4176b2d6be567b30707b6cfab255bee75d09c0afaeb98fc3da2c61d18e298b1e6d7a315a8631820bbc944457d00255e8ea7fd39ee595a90b15","size":29660,"birthtimeMs":1638273687404.417,"uid":11297},{"packageID":"git.shin.cosmos13","name":"Cosmos13","lastVersion":"1.2-1","icon":"file:///Library/PreferenceBundles/Cosmos.bundle/Cosmos13Icon-BIG.png","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cosmos13@1.2-1.deb","MD5sum":"9b3a998e69e4dd8679a9b1051c0e3bbd","SHA256sum":"2155e8b572393228390ea8c18ccd60b5b97a9fd158bf1bc8196f8bf9c0171b42","SHA512sum":"8c2d1699ba2a5ca0c2ee97ea5eb0fecff851ae902b39a27302af3541addd0ff8787a43d73a01fa00b9c59c94ea240235ca91fd2ab62e32f52f7d17470a3986a3","size":2140684,"birthtimeMs":1638273688944.417,"uid":11297},{"packageID":"git.shin.cosmos","name":"Cosmos","lastVersion":"1.0.4-1","icon":"file:///Library/PreferenceBundles/Cosmos.bundle/CosmosIcon-BIG.png","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cosmos@1.0.4-1.deb","MD5sum":"c8f7aba02b1f77622aa934328138d8ba","SHA256sum":"61f257503a4195daabe360c801c01b858982b2e504befab7b5dab17ea942d90e","SHA512sum":"60e6ae2a3bdeceef4518bd80c03304b0a7b5579d4a1aa86204e8b49c41ec5f39fb46470d645b7a817777f5bde5b61e74ccd4c1da056c4a461ebfe274eb995c5e","size":719632,"birthtimeMs":1638273687464.417,"uid":11297},{"packageID":"git.shin.cozybadges","name":"CozyBadges","lastVersion":"1.1.0","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cozybadges@1.1.0.deb","MD5sum":"b73dafe7c81b23ad1c4029da240a56ac","SHA256sum":"4236b5f381f408f110903eaae61a8223e29391ca095dcae4db0b06808f4853b0","SHA512sum":"d409c1314492cffbe3884418790ad6343d16d9b8eaa1b75075ade554abca50549b299c3c2adad18d98a0c8e2788a3392bb73fe98b26becd20f4cbcfba78b207c","size":41908,"birthtimeMs":1638273687474.417,"uid":11297}]},{"name":"Utilities","to":"/section/Utilities","packages":[{"packageID":"git.shin.cracktool2","name":"CrackTool2","lastVersion":"2.3~beta9","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cracktool2@2.3~beta9.deb","MD5sum":"cf096d50a3890329068b64e7d76d0d47","SHA256sum":"c396f13211bc8615172077fa2adaf1b73e1d89c3013c2918b785cb5e33937380","SHA512sum":"cc02ef7530fd69d917b24b64b88f68f05339153af2e14506c6eabab16c215527528c017f8b0013d1e4a16092d4def95193051228bd9036f59eaaec71f72c38cf","size":356908,"birthtimeMs":1638273687474.417,"uid":11297},{"packageID":"git.shin.cracktool4","name":"CrackTool4","lastVersion":"4.0~beta9c","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cracktool4@4.0~beta9c.deb","MD5sum":"93298438ace27dd3389e2a19e9d51d7c","SHA256sum":"624b72720d6beec22e752a2272d80a4021fc0ff1e65792970193d8590854f46d","SHA512sum":"3d45585cdfef0d2ffbbbcdc946f321b08a480e80ecc5cbdbef5b9b7fd4fa48b6a887e5dd01d1ec6980e69848f137b8bc72d6f6ff05d5a9fb6ef98d8bd429c8d5","size":377788,"birthtimeMs":1638273687484.417,"uid":11297},{"packageID":"git.shin.cydiacoolstar","name":"Cydia for Chimera/Electra","lastVersion":"1.9.2","icon":"file:///Applications/Cydia.app/Icon-60.png","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiacoolstar@1.9.2.deb","MD5sum":"3a56368bf4f942ed99fc50ecbcd38ae9","SHA256sum":"5fdceb34c9b22d42d9647913c246652b48fdf152fac71ec8625eae8ac324ed92","SHA512sum":"6835a84f55c45e1b455f758e87ac1d3cde824f8f7be9551ae9962e91cb9d93bb3ad898b9b51ae68227ef26af391fa483332566e5aea89ac77e2bc47fdeba19b1","size":1592356,"birthtimeMs":1638273687544.417,"uid":11297},{"packageID":"git.shin.cydiainstall","name":"Cydia Failsafe","lastVersion":"2.1","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiainstall@2.1.deb","MD5sum":"d2bd6a714fc35b282e48f06b3c65f6ab","SHA256sum":"30a009680bac42320255304dfc39add0a73cd2de60ca9738cd26d82c09139c77","SHA512sum":"424841cc0ec43b516879fcb73b20e9be9e7a84b37408136ef7c1589429c28edb0ae5131014846f0087b470423e32d42521606ea5afacef065feb9e69770a6b0c","size":1785124,"birthtimeMs":1638273688854.417,"uid":11297},{"packageID":"git.shin.cydiatimeoutcmd","name":"Cydia Timeout Command","lastVersion":"0.1","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiatimeoutcmd@0.1.deb","MD5sum":"c05c915820e2c13507585c69b2a4bf27","SHA256sum":"2709a778ea0e610c92a8085843fb75dae0520c9f7d3686d1e161c62b35cf0f37","SHA512sum":"bf980c998f796627217349f0d7742b1d88c6de2e24a63f93de6e40cd038aa381d26cf539d4551013dd9f0de5136864e9e056d9bfeca854aa09e4d2158669e319","size":1224,"birthtimeMs":1638273687564.417,"uid":11297}]},{"name":"Networking","to":"/section/Networking","packages":[{"packageID":"git.shin.curl32","name":"cURL 32bit","lastVersion":"7.58.0-1","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.curl32@7.58.0-1.deb","MD5sum":"e6cad4c407a265c260c65afaa8ae432e","SHA256sum":"c0ff4961fb57c56474ec8fdbfcaaed6d4aae760cfb3dadba707b660a8d6d7d72","SHA512sum":"b8facd83bc585e3cbb545841fc8ef40ba96d2846f733212e93c586c164a617624084aee6296523bcdc146fabcc76a931feb8fe66e9f2e7d2617940cfcc3acc00","size":980536,"birthtimeMs":1638273687494.417,"uid":11297},{"packageID":"git.shin.curl","name":"cURL","lastVersion":"7.58.0-2","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.curl@7.58.0-2.deb","MD5sum":"08b443556ed46daf0a0e394d710c446c","SHA256sum":"48a452876c4b49a3c034f645afaf3ee37f827d95a56e3f586d28b91aebf14273","SHA512sum":"58292c2c12426115e00b3d53f4e7e58b6c318b354d82e6653df2f7db2aeb209c51257bf5b8eca53f83819e7b4143156c4b5d82b93adf5d3ba5bc17f48a12be40","size":521052,"birthtimeMs":1638273687504.417,"uid":11297}]},{"name":"Cydia Custom","to":"/section/Cydia+Custom","packages":[{"packageID":"git.shin.customdia","name":"CustomDia","lastVersion":"1.4","icon":"file:///Library/PreferenceBundles/customdia.bundle/customdia@2x.png","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.customdia@1.4.deb","MD5sum":"14c0e88312a592a9297db4c89d0df722","SHA256sum":"042c740170102d218c7f001f932cdd5de89c063fc841667d1ac8e547209e39f2","SHA512sum":"e631b0beab44e7a0a8b41513fdca10f6f9e3741fc41ef3527fe7f8334e61191bcad4351a3d75d21e13a9de5e150b06c088b15fba10a1fecba4ef285a3ab107da","size":38344,"birthtimeMs":1638273687504.417,"uid":11297},{"packageID":"git.shin.cyplay","name":"CyPlay","lastVersion":"1.0~b2","icon":"file:///Applications/Cydia.app/Logo.png","filepath":"/data/data/com.termux/files/home/web-repo/debian/git.shin.cyplay@1.0~b2.deb","MD5sum":"38cf684ecec91804fe401a635f462cbb","SHA256sum":"26213883531fe663bc4ef10d56a804b2007fdb65b2ea3eab07e3aeb932583cdc","SHA512sum":"1456ab975ab2206706ddb479da9ad2b849ee8a90e4acc43ab1891a62ce8ab2ae7d535d547f4d403c5e2705ecbc39d9ddd66e6f05355482f9996b29dde5d553b7","size":1762152,"birthtimeMs":1638273687594.417,"uid":11297}]}]
+[
+  {
+    "name": "Tweaks",
+    "to": "/section/Tweaks",
+    "packages": [
+      {
+        "packageID": "git.shin.complications",
+        "name": "Complications",
+        "lastVersion": "3.0",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.complications@3.0.deb",
+        "MD5sum": "81016f38739aa319ddcf4f84a83e00c3",
+        "SHA256sum": "115fcea76dcd54d5c11b4508f4a8312c57abfa41f462792e597a2a4ab18ceef2",
+        "SHA512sum": "2a0041fc4456e5190204b5df5f3b744bafc91dc790a7aa7396bfa8871426bca46fa6899eb8be8bb05caf42de20c5ba4dfd2db6da3d44edbda04a00ece5301436",
+        "size": 475384,
+        "birthtimeMs": 1638273687404.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.copiedlabel",
+        "name": "CopiedLabel",
+        "lastVersion": "1.0.1",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.copiedlabel@1.0.1.deb",
+        "MD5sum": "dc9ba6a1eea9d3b235402c23c8795152",
+        "SHA256sum": "3f9c8c8c018724852b1b545be690832802d73604e66cd6dcbde52d7c6cdaacee",
+        "SHA512sum": "fc18623fb4911e4176b2d6be567b30707b6cfab255bee75d09c0afaeb98fc3da2c61d18e298b1e6d7a315a8631820bbc944457d00255e8ea7fd39ee595a90b15",
+        "size": 29660,
+        "birthtimeMs": 1638273687404.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cosmos13",
+        "name": "Cosmos13",
+        "lastVersion": "1.2-1",
+        "icon": "file:///Library/PreferenceBundles/Cosmos.bundle/Cosmos13Icon-BIG.png",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cosmos13@1.2-1.deb",
+        "MD5sum": "9b3a998e69e4dd8679a9b1051c0e3bbd",
+        "SHA256sum": "2155e8b572393228390ea8c18ccd60b5b97a9fd158bf1bc8196f8bf9c0171b42",
+        "SHA512sum": "8c2d1699ba2a5ca0c2ee97ea5eb0fecff851ae902b39a27302af3541addd0ff8787a43d73a01fa00b9c59c94ea240235ca91fd2ab62e32f52f7d17470a3986a3",
+        "size": 2140684,
+        "birthtimeMs": 1638273688944.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cosmos",
+        "name": "Cosmos",
+        "lastVersion": "1.0.4-1",
+        "icon": "file:///Library/PreferenceBundles/Cosmos.bundle/CosmosIcon-BIG.png",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cosmos@1.0.4-1.deb",
+        "MD5sum": "c8f7aba02b1f77622aa934328138d8ba",
+        "SHA256sum": "61f257503a4195daabe360c801c01b858982b2e504befab7b5dab17ea942d90e",
+        "SHA512sum": "60e6ae2a3bdeceef4518bd80c03304b0a7b5579d4a1aa86204e8b49c41ec5f39fb46470d645b7a817777f5bde5b61e74ccd4c1da056c4a461ebfe274eb995c5e",
+        "size": 719632,
+        "birthtimeMs": 1638273687464.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cozybadges",
+        "name": "CozyBadges",
+        "lastVersion": "1.1.0",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cozybadges@1.1.0.deb",
+        "MD5sum": "b73dafe7c81b23ad1c4029da240a56ac",
+        "SHA256sum": "4236b5f381f408f110903eaae61a8223e29391ca095dcae4db0b06808f4853b0",
+        "SHA512sum": "d409c1314492cffbe3884418790ad6343d16d9b8eaa1b75075ade554abca50549b299c3c2adad18d98a0c8e2788a3392bb73fe98b26becd20f4cbcfba78b207c",
+        "size": 41908,
+        "birthtimeMs": 1638273687474.417,
+        "uid": 11297
+      }
+    ],
+    "countPackage": 11
+  },
+  {
+    "name": "Utilities",
+    "to": "/section/Utilities",
+    "packages": [
+      {
+        "packageID": "git.shin.cracktool2",
+        "name": "CrackTool2",
+        "lastVersion": "2.3~beta9",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cracktool2@2.3~beta9.deb",
+        "MD5sum": "cf096d50a3890329068b64e7d76d0d47",
+        "SHA256sum": "c396f13211bc8615172077fa2adaf1b73e1d89c3013c2918b785cb5e33937380",
+        "SHA512sum": "cc02ef7530fd69d917b24b64b88f68f05339153af2e14506c6eabab16c215527528c017f8b0013d1e4a16092d4def95193051228bd9036f59eaaec71f72c38cf",
+        "size": 356908,
+        "birthtimeMs": 1638273687474.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cracktool4",
+        "name": "CrackTool4",
+        "lastVersion": "4.0~beta9c",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cracktool4@4.0~beta9c.deb",
+        "MD5sum": "93298438ace27dd3389e2a19e9d51d7c",
+        "SHA256sum": "624b72720d6beec22e752a2272d80a4021fc0ff1e65792970193d8590854f46d",
+        "SHA512sum": "3d45585cdfef0d2ffbbbcdc946f321b08a480e80ecc5cbdbef5b9b7fd4fa48b6a887e5dd01d1ec6980e69848f137b8bc72d6f6ff05d5a9fb6ef98d8bd429c8d5",
+        "size": 377788,
+        "birthtimeMs": 1638273687484.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cydiacoolstar",
+        "name": "Cydia for Chimera/Electra",
+        "lastVersion": "1.9.2",
+        "icon": "file:///Applications/Cydia.app/Icon-60.png",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiacoolstar@1.9.2.deb",
+        "MD5sum": "3a56368bf4f942ed99fc50ecbcd38ae9",
+        "SHA256sum": "5fdceb34c9b22d42d9647913c246652b48fdf152fac71ec8625eae8ac324ed92",
+        "SHA512sum": "6835a84f55c45e1b455f758e87ac1d3cde824f8f7be9551ae9962e91cb9d93bb3ad898b9b51ae68227ef26af391fa483332566e5aea89ac77e2bc47fdeba19b1",
+        "size": 1592356,
+        "birthtimeMs": 1638273687544.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cydiainstall",
+        "name": "Cydia Failsafe",
+        "lastVersion": "2.1",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiainstall@2.1.deb",
+        "MD5sum": "d2bd6a714fc35b282e48f06b3c65f6ab",
+        "SHA256sum": "30a009680bac42320255304dfc39add0a73cd2de60ca9738cd26d82c09139c77",
+        "SHA512sum": "424841cc0ec43b516879fcb73b20e9be9e7a84b37408136ef7c1589429c28edb0ae5131014846f0087b470423e32d42521606ea5afacef065feb9e69770a6b0c",
+        "size": 1785124,
+        "birthtimeMs": 1638273688854.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cydiatimeoutcmd",
+        "name": "Cydia Timeout Command",
+        "lastVersion": "0.1",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cydiatimeoutcmd@0.1.deb",
+        "MD5sum": "c05c915820e2c13507585c69b2a4bf27",
+        "SHA256sum": "2709a778ea0e610c92a8085843fb75dae0520c9f7d3686d1e161c62b35cf0f37",
+        "SHA512sum": "bf980c998f796627217349f0d7742b1d88c6de2e24a63f93de6e40cd038aa381d26cf539d4551013dd9f0de5136864e9e056d9bfeca854aa09e4d2158669e319",
+        "size": 1224,
+        "birthtimeMs": 1638273687564.417,
+        "uid": 11297
+      }
+    ],
+    "countPackage": 7
+  },
+  {
+    "name": "Networking",
+    "to": "/section/Networking",
+    "packages": [
+      {
+        "packageID": "git.shin.curl32",
+        "name": "cURL 32bit",
+        "lastVersion": "7.58.0-1",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.curl32@7.58.0-1.deb",
+        "MD5sum": "e6cad4c407a265c260c65afaa8ae432e",
+        "SHA256sum": "c0ff4961fb57c56474ec8fdbfcaaed6d4aae760cfb3dadba707b660a8d6d7d72",
+        "SHA512sum": "b8facd83bc585e3cbb545841fc8ef40ba96d2846f733212e93c586c164a617624084aee6296523bcdc146fabcc76a931feb8fe66e9f2e7d2617940cfcc3acc00",
+        "size": 980536,
+        "birthtimeMs": 1638273687494.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.curl",
+        "name": "cURL",
+        "lastVersion": "7.58.0-2",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.curl@7.58.0-2.deb",
+        "MD5sum": "08b443556ed46daf0a0e394d710c446c",
+        "SHA256sum": "48a452876c4b49a3c034f645afaf3ee37f827d95a56e3f586d28b91aebf14273",
+        "SHA512sum": "58292c2c12426115e00b3d53f4e7e58b6c318b354d82e6653df2f7db2aeb209c51257bf5b8eca53f83819e7b4143156c4b5d82b93adf5d3ba5bc17f48a12be40",
+        "size": 521052,
+        "birthtimeMs": 1638273687504.417,
+        "uid": 11297
+      }
+    ],
+    "countPackage": 2
+  },
+  {
+    "name": "Cydia Custom",
+    "to": "/section/Cydia+Custom",
+    "packages": [
+      {
+        "packageID": "git.shin.customdia",
+        "name": "CustomDia",
+        "lastVersion": "1.4",
+        "icon": "file:///Library/PreferenceBundles/customdia.bundle/customdia@2x.png",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.customdia@1.4.deb",
+        "MD5sum": "14c0e88312a592a9297db4c89d0df722",
+        "SHA256sum": "042c740170102d218c7f001f932cdd5de89c063fc841667d1ac8e547209e39f2",
+        "SHA512sum": "e631b0beab44e7a0a8b41513fdca10f6f9e3741fc41ef3527fe7f8334e61191bcad4351a3d75d21e13a9de5e150b06c088b15fba10a1fecba4ef285a3ab107da",
+        "size": 38344,
+        "birthtimeMs": 1638273687504.417,
+        "uid": 11297
+      },
+      {
+        "packageID": "git.shin.cyplay",
+        "name": "CyPlay",
+        "lastVersion": "1.0~b2",
+        "icon": "file:///Applications/Cydia.app/Logo.png",
+        "filepath": "/data/data/com.termux/files/home/web-repo/debian/git.shin.cyplay@1.0~b2.deb",
+        "MD5sum": "38cf684ecec91804fe401a635f462cbb",
+        "SHA256sum": "26213883531fe663bc4ef10d56a804b2007fdb65b2ea3eab07e3aeb932583cdc",
+        "SHA512sum": "1456ab975ab2206706ddb479da9ad2b849ee8a90e4acc43ab1891a62ce8ab2ae7d535d547f4d403c5e2705ecbc39d9ddd66e6f05355482f9996b29dde5d553b7",
+        "size": 1762152,
+        "birthtimeMs": 1638273687594.417,
+        "uid": 11297
+      }
+    ],
+    "countPackage": 2
+  }
+]
