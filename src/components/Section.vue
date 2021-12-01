@@ -1,6 +1,4 @@
 <template>
-  <AddRepo package-id="com.example" v-if="!inCydia" />
-
   <ListItemGroup
     no-name
     :items="[
@@ -11,6 +9,8 @@
       },
     ]"
   />
+
+  <AddRepo package-id="com.example" v-if="!inCydia" />
 
   <h6 class="title">{{ sectionInfo.name }}</h6>
 
