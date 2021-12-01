@@ -14,7 +14,7 @@
         <div class="d-flex align-items-center">
           <span
             :style="{
-              'background-image': `url(${item.icon})`,
+              'background-image': `url(${(item.icon as any).value || item.icon})`,
             }"
             class="icon"
             v-if="item.icon"
@@ -33,11 +33,13 @@
 </template>
 
 <script lang="ts" setup>
+import { ComputedRef, Ref } from "vue";
+
 defineProps<{
   name?: string;
   items: {
     name: string;
-    icon?: string;
+    icon?: string | Ref<string> | ComputedRef<string>;
     to?: string;
     version?: string;
     after?: string;
@@ -124,7 +126,7 @@ defineProps<{
 
       .icon {
         @extend %logo-cydia;
-        background-image: url("src/assets/icons/unknown.png");
+        background-image: url("/src/assets/icons/unknown.png");
       }
 
       p {

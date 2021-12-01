@@ -37,7 +37,7 @@
     v-if="existsChangelog"
   />
 
-  <SocialShare no-name />
+  <SocialShare />
 
   <div id="google-translate" class="text-center" />
 
@@ -119,7 +119,7 @@
   </div>
 
   <PackageUpdates />
-  <Sections />
+  <AllSections />
   <SocialShare />
   <ThemeChange />
   <Copyright />

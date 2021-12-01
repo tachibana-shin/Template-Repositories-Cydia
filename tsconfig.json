@@ -13,7 +13,8 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["vite/client", "vite-plugin-pages/client"],
     "paths": {
-      "/~/*": ["src/*"]
+      "/~/*": ["src/*"],
+      "/pages/*": ["pages/*"]
     }
   },
   "exclude": ["dist", "node_modules"]

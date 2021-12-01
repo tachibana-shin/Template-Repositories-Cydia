@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  packageId: string;
+  packageId?: string;
 }>();
 
 const list = [

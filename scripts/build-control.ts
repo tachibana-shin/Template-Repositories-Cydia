@@ -14,7 +14,7 @@ const W_OK = 2;
 
 const PATH_ROOT = resolve(__dirname, "..");
 const PATH_DEBIAN = join(PATH_ROOT, "debian");
-const PATH_FILE_PACKAGES = join(PATH_ROOT, "Packages");
+const PATH_FILE_PACKAGES = join(PATH_ROOT, "public/Packages");
 const HOMEPAGE = "https://tachibana-shin.github.io/repo";
 const PATH_TMP_UNPACK_DEBIAN = join(PATH_ROOT, ".tmp");
 
@@ -52,10 +52,53 @@ export type SectionControlFile = {
   packages: PackageControlInSection[];
 };
 
-// load split file or chunks
+async function main() {
+  console.clear();
+  console.log(chalk.grey("starting build..."));
 
-console.clear();
-console.log(chalk.grey("starting build..."));
+  const start = performance.now();
+
+  if (
+    fs.existsSync(PATH_DEBIAN) === false ||
+    fs.lstatSync(PATH_DEBIAN).isDirectory() === false
+  ) {
+    throw new Error(`${PATH_DEBIAN} is not directory`);
+  }
+
+  // auto fix packages
+  const controlPackages = await autoFixDebian(await getListPackages());
+
+  const packagesUnique = uniqueListPackages(controlPackages);
+  // get list packages merged version
+  await createDepictionPackages(packagesUnique);
+
+  // save info package to sections
+  await updateSections(packagesUnique);
+
+  // create basic info
+  await createPagesControl(packagesUnique);
+
+  // clean depiction old
+  await cleanDepictionPackageOld(packagesUnique);
+
+  // remove .tmp unpack debian
+  await fs.promises
+    .rm(PATH_TMP_UNPACK_DEBIAN, {
+      recursive: true,
+    })
+    .catch(() => {});
+
+  // all package ready, create Packages, Packages.bz2
+  await createFilePackages();
+
+  // create Release
+  await createFileRelease();
+
+  console.log(chalk.green(`Complete ${performance.now() - start}ms`));
+}
+main();
+
+// load split file or chunks
 
 function parseControl(control: string): PackageControl {
   const obj = {} as any;
@@ -78,45 +121,51 @@ function stringifyControl(obj: PackageControl): string {
   }, "");
 }
 
-async function main() {
-  const start = performance.now();
-
-  if (
-    fs.existsSync(PATH_DEBIAN) === false ||
-    fs.lstatSync(PATH_DEBIAN).isDirectory() === false
-  ) {
-    throw new Error(`${PATH_DEBIAN} is not directory`);
+function stringify(obj: any): string {
+  if (process.env.NODE_ENV !== "production") {
+    return JSON.stringify(obj, (k, v) => v, 2);
   }
 
-  // auto fix packages
-  const controlPackages = await autoFixDebian(await getListPackages());
-
-  const packagesUnique = uniqueListPackages(controlPackages);
-  // get list packages merged version
-  await createDepictionPackages(packagesUnique);
-
-  // save info package to sections
-  await updateSections(packagesUnique);
-
-  // clean depiction old
-  await cleanDepictionPackageOld(packagesUnique);
-
-  // remove .tmp unpack debian
-  await fs.promises
-    .rm(PATH_TMP_UNPACK_DEBIAN, {
-      recursive: true,
-    })
-    .catch(() => {});
-
-  // all package ready, create Packages, Packages.bz2
-  createFilePackages();
-
-  // create Release
-  createFileRelease();
-
-  console.log(chalk.green(`Complete ${performance.now() - start}ms`));
+  return JSON.stringify(obj);
 }
-main();
+
+async function createPagesControl(
+  packages: Map<string, PackageControlFile[]>
+): Promise<void> {
+  const allPackages: PackageControlFile[] = [];
+
+  packages.forEach((pkg) => {
+    allPackages.push(pkg[0]);
+  });
+
+  allPackages.sort((a, b) => b.birthtimeMs! - a.birthtimeMs!);
+
+  const pkgLastUpdate: (PackageControlInSection & {
+    birthtimeMs: number;
+  })[] = [];
+
+  allPackages.slice(0, 10).forEach((pkg) => {
+    pkgLastUpdate.push({
+      packageID: pkg.control.Package,
+      name: pkg.control.Name,
+      lastVersion: pkg.control.Version,
+      icon: pkg.control.Icon,
+      ...pkg.control,
+      // @ts-ignore
+      control: undefined,
+    });
+  });
+
+  await fs.writeFileSync(
+    join(PATH_ROOT, "pages/control.json"),
+    stringify({
+      pkgLastUpdate,
+      lastUpdateAt: pkgLastUpdate[0].birthtimeMs,
+      countPackage: Array.from(packages.keys()).length,
+      countFileDebian: allPackages.length,
+    })
+  );
+}
 async function updateSections(
   packages: Map<string, PackageControlFile[]>
 ): Promise<void> {
@@ -158,14 +207,10 @@ async function updateSections(
         fixPageNotFound(path, `Description for section ${sectionName}`),
         fs.promises.writeFile(
           join(path, `control.json`),
-          JSON.stringify(
-            {
-              name: sectionName,
-              packages: Array.from(pkgs),
-            },
-            (k, v) => v,
-            2
-          )
+          stringify({
+            name: sectionName,
+            packages: Array.from(pkgs),
+          })
         ),
       ]);
     })
@@ -176,11 +221,12 @@ async function updateSections(
       name: sectionName,
       to: `/section/${encodeURIComponent(sectionName).replace(/%20/g, "+")}`,
       packages: Array.from(sections.get(sectionName)!.values()).slice(0, 5),
+      countPackage: Array.from(sections.get(sectionName)!.values()).length,
     };
   });
   fs.writeFileSync(
-    join(PATH_ROOT, "pages/section/list.json"),
-    JSON.stringify(
+    join(PATH_ROOT, "pages/section-list.json"),
+    stringify(
       list.map((item) => ({
         name: item.name,
         to: item.to,
@@ -188,8 +234,8 @@ async function updateSections(
     )
   );
   fs.writeFileSync(
-    join(PATH_ROOT, "pages/section/list-pkgs.json"),
-    JSON.stringify(list)
+    join(PATH_ROOT, "pages/section-list-pkgs.json"),
+    stringify(list)
   );
 }
 async function fixPageNotFound(
@@ -227,7 +273,7 @@ async function createDepictionPackages(
         // write JSON to depiction
         fs.promises.writeFile(
           join(pathToDirDepiction, "control.json"),
-          JSON.stringify(
+          stringify(
             await Promise.all(
               versions.map(async (item) => {
                 const [
@@ -261,9 +307,7 @@ async function createDepictionPackages(
                   uid,
                 };
               })
-            ),
-            (i, e) => e,
-            2
+            )
           )
         ),
       ]);
@@ -436,7 +480,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
 
     const control = parseControl(readFileControlFromTmp());
 
-    const uniqueControl = sha256(JSON.stringify(control));
+    const uniqueControl = sha256(stringify(control));
 
     if (control.Package.startsWith("git.shin") === false) {
       control.Package = `git.shin.${control.Package}`;
@@ -446,7 +490,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
 
-    if (uniqueControl !== sha256(JSON.stringify(control))) {
+    if (uniqueControl !== sha256(stringify(control))) {
       writeFileControlToTmp(control);
 
       if (isValidFilename(basename(srcDebian), control)) {
@@ -482,9 +526,9 @@ function createFilePackages(): void {
   child_process.execSync(`sh "${join(PATH_ROOT, "ftparchive-build.sh")}"`);
 }
 
-function createFileRelease(): void {
+async function createFileRelease(): Promise<void> {
   fs.writeFileSync(
-    "Release",
+    join(PATH_ROOT, "public/Release"),
     `Origin: Tachibana Shin (たちばなしん)
 Label: Tachibana Shin (たちばなしん)
 Suite: stable
@@ -499,6 +543,29 @@ MD5Sum:
     } Packages
  ${md5file.sync(`${PATH_FILE_PACKAGES}.bz2`)} ${
       fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
-    } Packages.bz2`
+    } Packages.bz2
+ ${md5file.sync(`${PATH_FILE_PACKAGES}.gz`)} ${
+         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+       } Packages.gz
+SHA256Sum:
+ ${sha256file(PATH_FILE_PACKAGES)} ${
+      fs.statSync(PATH_FILE_PACKAGES).size
+    } Packages
+ ${sha256file(`${PATH_FILE_PACKAGES}.bz2`)} ${
+      fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
+    } Packages.bz2
+ ${sha256file(`${PATH_FILE_PACKAGES}.gz`)} ${
+         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+       } Packages.gz
+SHA512Sum:
+ ${await sha512file(PATH_FILE_PACKAGES)} ${
+      fs.statSync(PATH_FILE_PACKAGES).size
+    } Packages
+ ${await sha512file(`${PATH_FILE_PACKAGES}.bz2`)} ${
+      fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
+    } Packages.bz2
+ ${await sha512file(`${PATH_FILE_PACKAGES}.gz`)} ${
+         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+       } Packages.gz`
   );
 }
