@@ -1,12 +1,12 @@
 <template>
-  <AddRepo package-id="com.example" v-if="!inCydia" />
+  <AddRepo :package-id="packageInfoLast.control.Package" v-if="!inCydia" />
 
   <div class="tweak-header" v-if="!inCydia">
     <img class="icon" :src="packageIcon" />
     <div class="info">
-      <h1 class="name h6">{{ packageInfo.control.Name }}</h1>
+      <h1 class="name h6">{{ packageInfoLast.control.Name }}</h1>
       <div class="d-flex justify-content-between w-100">
-        <h6 class="text-secondary">{{ packageInfo.control.Version }}</h6>
+        <h6 class="text-secondary">{{ packageInfoLast.control.Version }}</h6>
         <h6 class="text-secondary">{{ propertiesShow.Size }}</h6>
       </div>
     </div>
@@ -17,13 +17,15 @@
       {
         name: `Author`,
         icon: `/src/assets/icons/email.png`,
-        after: packageInfo.control.Author.replace(/<[^>]+>/y, ''),
-        to: `mailto://${packageInfo.control.Author.match(/<([^>]+)>/y)?.[1]}`,
+        after: packageInfoLast.control.Author.replace(/<[^>]+>/y, ''),
+        to: `mailto://${
+          packageInfoLast.control.Author.match(/<([^>]+)>/y)?.[1]
+        }`,
       },
     ]"
     v-if="!inCydia"
   />
-  
+
   <ListItemGroup
     :items="[
       {
@@ -104,12 +106,12 @@
       </li>
     </ul>
   </div>
-  
+
   <!-- old version -->
   <div class="mt-3">
     <h6 class="title">Old version</h6>
     <ul class="bg-white">
-      <li v-for="pkg in route.meta.packageInfo" :key="pkg.control.Version">
+      <li v-for="pkg in packageInfo" :key="pkg.control.Version">
         <strong>{{ pkg.control.Version }}</strong>
         <small class="text-secondary">{{ pkg.MD5sum }}</small>
       </li>
@@ -127,6 +129,8 @@
 import iOSVersion from "../computed/iOSVersion";
 import filesize from "filesize";
 import { format } from "timeago.js";
+import { usePackageIcon } from "../uses/packageIcon";
+import type { PackageControlFile } from "scripts/build-control";
 
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
@@ -138,27 +142,28 @@ const screenshots: string[] =
   frontmatter.screenshots || (route.meta.screenshots as string[]) || [];
 const sourceCode = frontmatter["source-code"];
 const existsChangelog = route.meta.existsChangelog;
-const packageInfo: any = (route.meta.packageInfo as any)[0];
+const packageInfo = route.meta.packageInfo as Required<PackageControlFile>[];
+const packageInfoLast = packageInfo[0];
 const propertiesShow = {
-  Name: packageInfo.control.Name,
-  Package: packageInfo.control.Package,
-  Author: packageInfo.control.Author,
-  Version: packageInfo.control.Version,
-  Section: packageInfo.control.Section,
-  Depends: packageInfo.control.Depends,
+  Name: packageInfoLast.control.Name,
+  Package: packageInfoLast.control.Package,
+  Author: packageInfoLast.control.Author,
+  Version: packageInfoLast.control.Version,
+  Section: packageInfoLast.control.Section,
+  Depends: packageInfoLast.control.Depends,
   // Description: packageInfo.control.Description,
-  Conflicts: packageInfo.control.Conflicts,
-  Architecture: packageInfo.control.Architecture,
-  MD5sum: packageInfo.MD5sum,
-  SHA256sum: packageInfo.SHA256sum,
-  SHA512sum: packageInfo.SHA512sum,
-  Size: filesize(packageInfo.size),
-  "Last Update": format(packageInfo.birthtimeMs, "en_US", {
+  Conflicts: packageInfoLast.control.Conflicts,
+  Architecture: packageInfoLast.control.Architecture,
+  MD5sum: packageInfoLast.MD5sum,
+  SHA256sum: packageInfoLast.SHA256sum,
+  SHA512sum: packageInfoLast.SHA512sum,
+  Size: filesize(packageInfoLast.size),
+  "Last Update": format(packageInfoLast.birthtimeMs, "en_US", {
     relativeDate: Date.now(),
   }),
-  uid: packageInfo.uid,
-  tag: packageInfo.tag,
-  dev: packageInfo.dev,
+  uid: packageInfoLast.uid,
+  tag: packageInfoLast.control.tag,
+  dev: packageInfoLast.control.dev,
 };
 
 for (const key in propertiesShow) {
@@ -167,14 +172,10 @@ for (const key in propertiesShow) {
   }
 }
 
-const packageIcon = ref<string>("/src/assets/icons/unknown.png");
-if (packageInfo.control.Icon?.match(/https?:\/\//)) {
-  packageIcon.value = packageInfo.control.Icon;
-} else {
-  import(`/src/assets/icons/${packageInfo.control.Section}.png`).then((res) => {
-    packageIcon.value = res.default;
-  });
-}
+const packageIcon = usePackageIcon(
+  packageInfoLast.control.Icon,
+  packageInfoLast.control.Section || "unknown"
+);
 </script>
 
 <style lang="scss" scoped>

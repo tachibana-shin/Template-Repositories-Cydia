@@ -39,7 +39,8 @@ const config: UserConfig = {
         const path = resolve(__dirname, route.component.slice(1));
 
         if (
-          route.component.startsWith("/pages/package/") &&
+          (route.component.startsWith("/pages/package/") ||
+            route.component.startsWith("/pages/section/")) &&
           !route.component.endsWith("/package/index.md")
         ) {
           const dir = dirname(path);

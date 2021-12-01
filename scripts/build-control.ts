@@ -18,7 +18,7 @@ const PATH_FILE_PACKAGES = join(PATH_ROOT, "Packages");
 const HOMEPAGE = "https://tachibana-shin.github.io/repo";
 const PATH_TMP_UNPACK_DEBIAN = join(PATH_ROOT, ".tmp");
 
-type ControlJSON = {
+type PackageControl = {
   [key: string]: string;
 } & {
   Package: string;
@@ -29,9 +29,9 @@ type ControlJSON = {
   Sponsor?: string;
   Depiction?: string;
 };
-type ControlJSONFile = {
+export type PackageControlFile = {
   filepath: string;
-  control: ControlJSON;
+  control: PackageControl;
   MD5sum?: string;
   SHA256sum?: string;
   SHA512sum?: string;
@@ -40,12 +40,24 @@ type ControlJSONFile = {
   uid?: number;
 };
 
+type PackageControlInSection = {
+  packageID: string;
+  name: string;
+  lastVersion: string;
+  icon?: string;
+} & Omit<Required<PackageControlFile>, "filepath" | "control">;
+
+export type SectionControlFile = {
+  name: string;
+  packages: PackageControlInSection[];
+};
+
 // load split file or chunks
 
 console.clear();
 console.log(chalk.grey("starting build..."));
 
-function parseControl(control: string): ControlJSON {
+function parseControl(control: string): PackageControl {
   const obj = {} as any;
 
   control
@@ -60,7 +72,7 @@ function parseControl(control: string): ControlJSON {
   return obj;
 }
 
-function stringifyControl(obj: ControlJSON): string {
+function stringifyControl(obj: PackageControl): string {
   return Object.entries(obj).reduce((prev, [key, val]) => {
     return `${prev}${key.trim()}: ${val.trim()}\n`;
   }, "");
@@ -106,11 +118,11 @@ async function main() {
 }
 main();
 async function updateSections(
-  packages: Map<string, ControlJSONFile[]>
+  packages: Map<string, PackageControlFile[]>
 ): Promise<void> {
-  const sections = new Map<string, Set<any>>();
+  const sections = new Map<string, Set<PackageControlInSection>>();
 
-  packages.forEach((controls, packageID) => {
+  packages.forEach((controls) => {
     const section = controls[0].control.Section || "unknown";
 
     if (sections.has(section) === false) {
@@ -121,7 +133,9 @@ async function updateSections(
       packageID: controls[0].control.Package,
       name: controls[0].control.Name,
       lastVersion: controls[0].control.Version,
+      icon: controls[0].control.Icon,
       ...controls[0],
+      // @ts-ignore
       control: undefined,
     });
   });
@@ -147,7 +161,7 @@ async function updateSections(
           JSON.stringify(
             {
               name: sectionName,
-              packages: JSON.stringify(Array.from(pkgs)),
+              packages: Array.from(pkgs),
             },
             (k, v) => v,
             2
@@ -169,7 +183,7 @@ async function fixPageNotFound(
   }
 }
 async function createDepictionPackages(
-  packages: Map<string, ControlJSONFile[]>
+  packages: Map<string, PackageControlFile[]>
 ): Promise<void> {
   await Promise.all(
     Array.from(packages.values()).map(async (versions) => {
@@ -245,9 +259,9 @@ function fixVersion(v: string): string {
 }
 
 function uniqueListPackages(
-  controls: ControlJSONFile[]
-): Map<string, ControlJSONFile[]> {
-  const packages = new Map<string, ControlJSONFile[]>();
+  controls: PackageControlFile[]
+): Map<string, PackageControlFile[]> {
+  const packages = new Map<string, PackageControlFile[]>();
 
   controls.forEach((controlFile) => {
     if (packages.has(controlFile.control.Package) === false) {
@@ -294,7 +308,7 @@ function readFileControlFromTmp(): string {
   return fs.readFileSync(filepath, "utf8");
 }
 
-function writeFileControlToTmp(control: ControlJSON): void {
+function writeFileControlToTmp(control: PackageControl): void {
   const filepath = join(PATH_TMP_UNPACK_DEBIAN, "DEBIAN/control");
 
   try {
@@ -369,7 +383,7 @@ async function getListPackages(): Promise<string[]> {
   return await fg(`${PATH_DEBIAN}/*.deb`);
 }
 async function cleanDepictionPackageOld(
-  packages: Map<string, ControlJSONFile[]>
+  packages: Map<string, PackageControlFile[]>
 ): Promise<void> {
   const packagesID = Array.from(packages.keys());
 
@@ -383,7 +397,7 @@ async function cleanDepictionPackageOld(
     })
   );
 }
-async function autoFixDebian(debian: string[]): Promise<ControlJSONFile[]> {
+async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
   const controlJSONFiles = [];
 
   for (let i = 0, len = debian.length; i < len; i++) {
@@ -439,7 +453,7 @@ async function autoFixDebian(debian: string[]): Promise<ControlJSONFile[]> {
   return controlJSONFiles;
 }
 
-function isValidFilename(filepath: string, control: ControlJSON): boolean {
+function isValidFilename(filepath: string, control: PackageControl): boolean {
   return basename(filepath) !== `${control.Package}@${control.Version}.deb`;
 }
 

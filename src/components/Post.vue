@@ -1,17 +1,19 @@
 <template>
-  <component :is="component" :frontmatter="frontmatter" />
+  <Depiction
+    v-if="route.path.startsWith(`/package/`)"
+    :frontmatter="frontmatter"
+  />
+  <Section
+    v-else-if="route.path.startsWith(`/section/`)"
+    :frontmatter="frontmatter"
+  />
+  <Unknown v-else :frontmatter="frontmatter" />
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  frontmatter: any
-}>()
+  frontmatter: any;
+}>();
 
-let component = "Unknown"
-
-if (route.path.startsWith("/package/")) {
-  component = "Depiction"
-} else if (route.path.startsWith("/section/")) {
-  component = "Section"
-}
+const route = useRoute();
 </script>
