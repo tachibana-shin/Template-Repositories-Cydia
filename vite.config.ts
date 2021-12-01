@@ -63,7 +63,7 @@ const config: UserConfig = {
     }),
 
     Markdown({
-      wrapperComponent: "depiction",
+      wrapperComponent: "post",
       wrapperClasses: "prose m-auto",
       headEnabled: true,
       markdownItOptions: {
