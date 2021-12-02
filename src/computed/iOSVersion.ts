@@ -2,7 +2,7 @@ import { computed } from "vue";
 import { valid, coerce } from "semver";
 
 export default computed<string | null>(() => {
-  const ver = typeof navigator !== "undefiled" ? navigator.appVersion
+  const ver = typeof navigator !== "undefined" ? navigator.appVersion
     .split("OS ")?.[1]
     ?.split(" ")[0]
     .replace("_", ".") : "";
