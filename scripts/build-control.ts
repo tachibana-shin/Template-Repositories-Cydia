@@ -79,6 +79,9 @@ async function main() {
   // create basic info
   await createPagesControl(packagesUnique);
 
+  // scan compatible
+  await scanCompatible(packagesUnique);
+
   // clean depiction old
   await cleanDepictionPackageOld(packagesUnique);
 
@@ -99,6 +102,32 @@ async function main() {
 }
 main();
 
+async function scanCompatible(
+  packages: Map<string, PackageControlFile[]>
+): Promise<void> {
+  for await (const pkg of packages.keys()) {
+    // scan
+    const pathYml = join(PATH_ROOT, "pages/package", pkg, "compatible.yml");
+    if (fs.existsSync(pathYml) === false) {
+      openEditor(pathYml);
+    }
+  }
+}
+function openEditorWith(src: string, program: string): boolean {
+  if (child_process.execSync(`command -v ${program}`)) {
+    child_process.execSync(`${program} ${src}`);
+    return true;
+  }
+
+  return false;
+}
+function openEditor(src: string): void {
+  openEditorWith(src, "notepad++") ||
+    openEditorWith(src, "vim") ||
+    openEditorWith("nano") ||
+    openEditorWith("notepad") ||
+    openEditorWith("gedit");
+}
 // load split file or chunks
 
 function parseControl(control: string): PackageControl {
