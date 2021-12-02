@@ -1,6 +1,8 @@
 <template>
   <ListItemGroup name="Tachibana Shin (たちばなしん) Repo" :items="list" />
-  <p class="small text-center text-secondary">Repo: https://tachibana-shin.github.io/repo</p>
+  <p class="small text-center text-secondary">
+    Repo: https://tachibana-shin.github.io/repo
+  </p>
 </template>
 
 <script lang="ts" setup>

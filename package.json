@@ -1,10 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production vite-ssg build",
+    "build:web": "cross-env NODE_ENV=production vite-ssg build",
+    "build:control": "esno ./scripts/build-control.ts",
+    "build:debian": "cp -r ./debian public/",
     "dev": "vite",
-    "preview": "vite preview",
-    "build:control": "esno ./scripts/build-control.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vueuse/core": "^6.9.2",
