@@ -4,7 +4,7 @@
       :name="section.name"
       :items="section.packages.concat([{
           name: 'More...',
-          icon: '/src/assets/icons/moreinfo.png' as any,
+          icon: useAssetsIcon('moreinfo.png') as any,
           to: section.to,
         },
     ])"
@@ -16,6 +16,7 @@
 import { usePackageIcon } from "../uses/packageIcon";
 import inCydia from "../constants/inCydia";
 import listSections from "/pages/section-list-pkgs.json";
+import useAssetsIcon from "../uses/useAssetsIcon";
 
 const sections = listSections.slice(0, 7).map((section) => {
   return {

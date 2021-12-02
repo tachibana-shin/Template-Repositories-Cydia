@@ -465,6 +465,15 @@ async function cleanDepictionPackageOld(
     })
   );
 }
+function fixPackageId(id: string): string {
+  const split = id.split(".");
+
+  if (split.length < 3) {
+    return id;
+  }
+
+  return `git.shin.${split.slice(2).join(".")}`;
+}
 async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
   const controlJSONFiles = [];
 
@@ -485,9 +494,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
 
     const uniqueControl = sha256(stringify(control));
 
-    if (control.Package.startsWith("git.shin") === false) {
-      control.Package = `git.shin.${control.Package}`;
-    }
+    control.Package = fixPackageId(control.Package);
     control.Homepage = HOMEPAGE;
     control.Maintainer = "tachibana-shin<tachib.shin@gmail.com>";
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
@@ -548,8 +555,8 @@ MD5Sum:
       fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
     } Packages.bz2
  ${md5file.sync(`${PATH_FILE_PACKAGES}.gz`)} ${
-         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
-       } Packages.gz
+      fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+    } Packages.gz
 SHA256Sum:
  ${sha256file(PATH_FILE_PACKAGES)} ${
       fs.statSync(PATH_FILE_PACKAGES).size
@@ -558,8 +565,8 @@ SHA256Sum:
       fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
     } Packages.bz2
  ${sha256file(`${PATH_FILE_PACKAGES}.gz`)} ${
-         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
-       } Packages.gz
+      fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+    } Packages.gz
 SHA512Sum:
  ${await sha512file(PATH_FILE_PACKAGES)} ${
       fs.statSync(PATH_FILE_PACKAGES).size
@@ -568,7 +575,7 @@ SHA512Sum:
       fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
     } Packages.bz2
  ${await sha512file(`${PATH_FILE_PACKAGES}.gz`)} ${
-         fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
-       } Packages.gz`
+      fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
+    } Packages.gz`
   );
 }

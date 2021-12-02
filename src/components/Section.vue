@@ -3,7 +3,7 @@
     :items="[
       {
         name: 'Back',
-        icon: '/src/assets/icons/back.png',
+        icon: useAssetsIcon('back.png'),
         onclick: () => $router.back(),
       },
     ]"
@@ -33,6 +33,7 @@
 import type { SectionControlFile } from "../../scripts/build-control";
 import inCydia from "../constants/inCydia";
 import { usePackageIcon } from "../uses/packageIcon";
+import useAssetsIcon from "../uses/useAssetsIcon";
 
 defineProps<{
   frontmatter: any;

@@ -4,17 +4,38 @@
   <ul class="list-item bg-white border-custom">
     <li v-for="(item, index) in items" :key="index">
       <component
-        :is="item.to ? (item.to.includes('://') || item.to.startsWith('mailto:')) ? `a` : `router-link` : `span`"
-        :to="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === false ? (item.to + (item.to.startsWith('mailto:') ? '' : '/')) : undefined"
-        :href="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === true ? (item.to + (item.to.startsWith('mailto:') ? '' : '/')) : undefined"
-        :target="item.to && (item.to.includes('://') || item.to.startsWith('mailto:')) === true ? `_blank` : undefined"
+        :is="
+          item.to
+            ? item.to.includes('://') || item.to.startsWith('mailto:')
+              ? `a`
+              : `router-link`
+            : `span`
+        "
+        :to="
+          item.to &&
+          (item.to.includes('://') || item.to.startsWith('mailto:')) === false
+            ? item.to + (item.to.startsWith('mailto:') ? '' : '/')
+            : undefined
+        "
+        :href="
+          item.to &&
+          (item.to.includes('://') || item.to.startsWith('mailto:')) === true
+            ? item.to + (item.to.startsWith('mailto:') ? '' : '/')
+            : undefined
+        "
+        :target="
+          item.to &&
+          (item.to.includes('://') || item.to.startsWith('mailto:')) === true
+            ? `_blank`
+            : undefined
+        "
         class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
         @click="item.onclick"
       >
         <div class="d-flex align-items-center">
           <span
             :style="{
-              'background-image': `url(${(item.icon as any).value || item.icon})`,
+              'background-image': `url('${item.icon}')`,
             }"
             class="icon"
             v-if="item.icon"
@@ -33,13 +54,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ComputedRef, Ref } from "vue";
-
 defineProps<{
   name?: string;
   items: {
     name: string;
-    icon?: string | Ref<string> | ComputedRef<string>;
+    icon?: string;
     to?: string;
     version?: string;
     after?: string;
@@ -126,7 +145,7 @@ defineProps<{
 
       .icon {
         @extend %logo-cydia;
-        background-image: url("/src/assets/icons/unknown.png");
+        background-image: url("assets/icons/unknown.png");
       }
 
       p {

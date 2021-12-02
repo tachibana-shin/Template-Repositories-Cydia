@@ -1,13 +1,18 @@
+import useAssetsIcon from "./useAssetsIcon";
+
+const assets = import.meta.globEager("/src/assets/icons/*.png");
+
 export function usePackageIcon(icon: string | void, section: string) {
-  const packageIcon = ref<string>("../assets/icons/unknown.png");
+  const packageIcon = useAssetsIcon("unknown.png");
+
   if (icon?.match(/https?:\/\//)) {
-    packageIcon.value = icon;
+    return icon;
   } else {
-    import(/* @vite-ignore */ `../assets/icons/${section}.png`)
-      .then((res) => {
-        packageIcon.value = res.default;
-      })
-      .catch(() => {});
+    for (const key in assets) {
+      if (key.endsWith(`/${section}.png`)) {
+        return assets[key].default as unknown as string;
+      }
+    }
   }
 
   return packageIcon;

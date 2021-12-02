@@ -16,7 +16,7 @@
     :items="[
       {
         name: `Author`,
-        icon: `/src/assets/icons/email.png`,
+        icon: useAssetsIcon(`email.png`),
         after: packageInfoLast.control.Author.replace(/<[^>]+?>/, ''),
         to: `mailto:${packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]}`,
       },
@@ -28,7 +28,7 @@
     :items="[
       {
         name: `Changelog`,
-        icon: `/src/assets/icons/changelog.png`,
+        icon: useAssetsIcon(`changelog.png`),
         to: `${route.path}/changelog`.replace(/\/{2,}/g, '/'),
       },
     ]"
@@ -51,7 +51,7 @@
   <div>
     <h6 class="title">Package Example</h6>
     <div class="alert alert-success text-center mb-0" v-if="true">
-      Compatible with 11, 12
+      Compatible with {{ compatible || "unknown" }}
     </div>
     <div class="alert alert-danger text-center mb-0" v-else>
       Not compatible with {{ iOSVersion }}
@@ -131,6 +131,7 @@ import { format } from "timeago.js";
 import { usePackageIcon } from "../uses/packageIcon";
 import type { PackageControlFile } from "scripts/build-control";
 import inCydia from "../constants/inCydia";
+import useAssetsIcon from "../uses/useAssetsIcon";
 
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
@@ -141,6 +142,7 @@ const screenshots: string[] =
   frontmatter.screenshots || (route.meta.screenshots as string[]) || [];
 const sourceCode = frontmatter["source-code"];
 const existsChangelog = route.meta.existsChangelog;
+const compatible = route.meta.compatible;
 const packageInfo = route.meta.packageInfo as Required<PackageControlFile>[];
 const packageInfoLast = packageInfo[0];
 const propertiesShow = {

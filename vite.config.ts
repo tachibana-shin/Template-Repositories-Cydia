@@ -13,10 +13,13 @@ import markdownAttr from "markdown-it-link-attributes";
 // @ts-expect-error
 import TOC from "markdown-it-table-of-contents";
 import { slugify } from "./scripts/slugify";
+import yaml from "yamljs";
 
 const config: UserConfig = {
   resolve: {
-    alias: [{ find: "/~/", replacement: `${resolve(__dirname, "src")}/` }],
+    alias: {
+      assets: join(__dirname, "src/assets"),
+    },
   },
   optimizeDeps: {
     include: [
@@ -50,6 +53,11 @@ const config: UserConfig = {
             screenshots: fs.existsSync(join(dir, "screenshots"))
               ? fs.readdirSync(join(dir, "screenshots"))
               : [],
+            compatible:
+              fs.existsSync(join(dir, "compatible.yml")) &&
+              yaml.parse(
+                fs.readFileSync(join(dir, "compatible.yml"), "utf8")
+              ),
             existsChangelog: fs.existsSync(join(dir, "changelog.md")),
             packageInfo: JSON.parse(
               fs.readFileSync(join(dir, "control.json"), "utf8")

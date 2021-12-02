@@ -6,13 +6,15 @@
 </template>
 
 <script lang="ts" setup>
+import useAssetsIcon from "../uses/useAssetsIcon";
+
 const props = defineProps<{
   packageId?: string;
 }>();
 
 const list = [
   {
-    icon: "/src/assets/icons/cydia7.png",
+    icon: useAssetsIcon("cydia7.png"),
     name: "Open Cydia",
     to: props.packageId
       ? `cydia://url/https://cydia.saurik.com/api/share#?source=https://tachibana-shin.github.io/repo&package=${props.packageId}`

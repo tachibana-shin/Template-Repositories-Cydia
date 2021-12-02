@@ -3,7 +3,7 @@
     :items="[
       {
         name: 'Back',
-        icon: '/src/assets/icons/back.png',
+        icon: useAssetsIcon('back.png'),
         onclick: () => $router.back(),
       },
     ]"
@@ -18,6 +18,7 @@
 
 <script lang="ts" setup>
 import inCydia from "../constants/inCydia";
+import useAssetsIcon from "../uses/useAssetsIcon";
 
 defineProps<{
   frontmatter: any;
