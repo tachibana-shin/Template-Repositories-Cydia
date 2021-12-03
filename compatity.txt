@@ -479,7 +479,6 @@ git.shin.tritium 11, 12, 13
 git.shin.watusi2 8+
 com.pulandres.watools 8+
 git.shin.yobunpro 12, 13
-git.shin. 
 git.shin.replayer all
 git.shin.ccmusicartwork 13
 git.shin.copiedlabel 10, 11, 12, 13
