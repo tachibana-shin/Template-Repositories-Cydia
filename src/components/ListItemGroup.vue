@@ -35,7 +35,7 @@
         <div class="d-flex align-items-center">
           <span
             :style="{
-              'background-image': `url('${item.icon?.value || item.icon}')`,
+              'background-image': `url('${item.icon}')`,
             }"
             class="icon"
             v-if="item.icon"
@@ -54,13 +54,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { ComputedRef } from "vue";
-
 defineProps<{
   name?: string;
   items: {
     name: string;
-    icon?: string | ComputedRef<string>;
+    icon?: string;
     to?: string;
     version?: string;
     after?: string;

@@ -8,17 +8,19 @@ import useAssetsIcon from "../uses/useAssetsIcon";
 
 const localStorage = useLocalStorage();
 
-const items = [
+const items = reactive([
   {
     name: "Change Theme",
-    icon: computed<string>(() => {
-      return localStorage.darkmode ? useAssetsIcon("darkmode-light.png") : useAssetsIcon("darkmode-dark.png"),
-    }),
+    icon: useAssetsIcon("darkmode-dark.png"),
     onclick() {
       const oldVal = localStorage.darkmode || false;
 
       localStorage.darkmode = !oldVal;
     },
   },
-];
+]);
+
+watch(() => localStorage.darkmode, (v) => {
+  items[0].icon = useAssetsIcon("darkmode-light.png") : useAssetsIcon("darkmode-dark.png");
+})
 </script>
