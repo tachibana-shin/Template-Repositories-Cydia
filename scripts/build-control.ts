@@ -503,6 +503,8 @@ function fixPackageId(id: string): string {
 
   return `git.shin.${split.slice(2).join(".")}`;
 }
+
+const SectionsReady = fs.readdirSync(join(PATH_ROOT, "src/assets/icons/Sections"));
 async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
   const controlJSONFiles = [];
 
@@ -527,6 +529,9 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
     control.Homepage = HOMEPAGE;
     control.Maintainer = "tachibana-shin<tachib.shin@gmail.com>";
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
+    if (SectionsReady.includes(`${control.Section?.trim()}.png`) === false && SectionsReady.includes(`${control.Section?.trim().replace(/\s/g, "_")}.png`) === false) {
+      console.log(chalk.yellow(`Warning ${control.Package} of section (${control.Section} no icon.`))
+    }
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
 
     if (uniqueControl !== sha256(stringify(control))) {
