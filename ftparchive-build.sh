@@ -6,7 +6,7 @@ then
 fi
 
 checkCommand() {
-  if ! command -v "$1"  &> /dev/null
+  if ! command -v "$1" &> /dev/null
   then
     echo "The program $1 is not installed. Install it by executing:
  pkg install $1"
