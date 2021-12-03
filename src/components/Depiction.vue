@@ -177,6 +177,51 @@ const packageIcon = usePackageIcon(
   packageInfoLast.control.Icon,
   packageInfoLast.control.Section
 );
+
+useHead({
+  title: frontmatter.title || packageInfoLast.control.Name,
+  meta: [
+    {
+      charset: "utf-8"
+    },
+    {
+      name: "description",
+      hid: "description",
+      content: packageInfoLast.control.Description
+    },
+    {
+      property: "og:title",
+      hid: "og:title",
+      content: frontmatter.title || packageInfoLast.control.Name,
+    },
+    {
+      property: "og:description",
+      hid: "og:description",
+      content: packageInfoLast.control.Description
+    },
+    {
+      property: "og:image",
+      hid: "og:image",
+      content: packageIcon,
+    },
+    // twitter
+    {
+      name: "twitter:title",
+      hid: "twitter:title",
+      content: frontmatter.title || packageInfoLast.control.Name,
+    },
+    {
+      name: "twitter:description",
+      hid: "twitter:description",
+      content: packageInfoLast.control.Description
+    },
+    {
+      name: "twitter:image",
+      hid: "twitter:image",
+      content: packageIcon,
+    },
+  ]
+})
 </script>
 
 <style lang="scss" scoped>

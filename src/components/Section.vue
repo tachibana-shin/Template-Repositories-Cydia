@@ -35,7 +35,7 @@ import inCydia from "../constants/inCydia";
 import { usePackageIcon } from "../uses/packageIcon";
 import useAssetsIcon from "../uses/useAssetsIcon";
 
-defineProps<{
+const { frontmatter } = defineProps<{
   frontmatter: any;
 }>();
 
@@ -50,4 +50,49 @@ const items = sectionInfo.packages.map((pkg) => ({
     ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}`
     : `/package/${pkg.packageID}`,
 }));
+
+useHead({
+  title: frontmatter.title || sectionInfo.name,
+  meta: [
+    {
+      charset: "utf-8"
+    },
+    {
+      name: "description",
+      hid: "description",
+      content: `Packages in section ${sectionInfo.name}`
+    },
+    {
+      property: "og:title",
+      hid: "og:title",
+      content: frontmatter.title || sectionInfo.name
+    },
+    {
+      property: "og:description",
+      hid: "og:description",
+      content: `Packages in section ${sectionInfo.name}`
+    },
+    {
+      property: "og:image",
+      hid: "og:image",
+      content: usePackageIcon(pkg.icon, sectionInfo.name),
+    },
+    // twitter
+    {
+      name: "twitter:title",
+      hid: "twitter:title",
+      content: frontmatter.title || sectionInfo.name
+    },
+    {
+      name: "twitter:description",
+      hid: "twitter:description",
+      content: `Packages in section ${sectionInfo.name}`
+    },
+    {
+      name: "twitter:image",
+      hid: "twitter:image",
+      content: usePackageIcon(pkg.icon, sectionInfo.name),
+    },
+  ]
+})
 </script>

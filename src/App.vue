@@ -4,6 +4,69 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+useHead({
+  title: "Tachibana Shin (たちばなしん) Repo",
+  meta: [
+    {
+      charset: "utf-8"
+    },
+    {
+      name: "description",
+      hid: "description",
+      content: "This is the official repo of Tachibana Shin (たちばなしん)"
+    },
+    {
+      property: "og:title",
+      hid: "og:title",
+      content: "Tachibana Shin (たちばなしん) Repo",
+    },
+    {
+      property: "og:description",
+      hid: "og:description",
+      content: "This is the official repo of Tachibana Shin (たちばなしん)"
+    },
+    {
+      property: "og:image",
+      hid: "og:image",
+      content: "https://tachibana-shin.github.io/avatar-flat.jpg",
+    },
+    {
+      property: "og:site_name",
+      content: "Tachibana Shin (たちばなしん) Repo",
+    }
+    // twitter
+    {
+      name: "twitter:title",
+      hid: "twitter:title",
+      content: "Tachibana Shin (たちばなしん) Repo",
+    },
+    {
+      name: "twitter:description",
+      hid: "twitter:description",
+      content: "This is the official repo of Tachibana Shin (たちばなしん)"
+    },
+    {
+      name: "twitter:image",
+      hid: "twitter:image",
+      content: "https://tachibana-shin.github.io/avatar-flat.jpg",
+    },
+    {
+      name: "twitter:card",
+      content: "summary"
+    },
+    {
+      name: "twitter:creator",
+      content: "@tachib_shin"
+    },
+    {
+      name: "twitter:card",
+      content: "summary_large_image"
+    }
+  ]
+})
+</script>
+
 <style lang="scss">
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
