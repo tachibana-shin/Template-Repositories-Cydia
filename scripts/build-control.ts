@@ -109,7 +109,8 @@ function scanCompatible(
     // scan
     const pathYml = join(PATH_ROOT, "pages/package", pkg, "compatible.yml");
     if (fs.existsSync(pathYml) === false) {
-      console.info(chalk.yellow(`${pkg} required compatible`), chalk.yellow(`\tPlease enter to file \n\t\tpages/package/${pkg}/compatible.yml`));
+      console.log(chalk.yellow(`${pkg} required compatible`));
+      console.log(chalk.yellow(`  Please enter to file pages/package/${pkg}/compatible.yml`));
     }
   }
 }
