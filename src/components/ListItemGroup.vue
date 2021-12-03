@@ -145,7 +145,7 @@ defineProps<{
 
       .icon {
         @extend %logo-cydia;
-        background-image: url("assets/icons/unknown.png");
+        background-image: url("assets/icons/Unknown.png");
       }
 
       p {
