@@ -166,7 +166,7 @@ async function createPagesControl(
       name: pkg.control.Name,
       lastVersion: pkg.control.Version,
       icon: pkg.control.Icon,
-      section: pkg.control.Section || "unknown",
+      section: pkg.control.Section || "Unknown",
       ...pkg,
       // @ts-ignore
       control: undefined,
@@ -189,7 +189,7 @@ async function updateSections(
   const sections = new Map<string, Set<PackageControlInSection>>();
 
   packages.forEach((controls) => {
-    const section = controls[0].control.Section || "unknown";
+    const section = controls[0].control.Section || "Unknown";
 
     if (sections.has(section) === false) {
       sections.set(section, new Set());
@@ -200,7 +200,7 @@ async function updateSections(
       name: controls[0].control.Name,
       lastVersion: controls[0].control.Version,
       icon: controls[0].control.Icon,
-      section: controls[0].control.Section || "unknown",
+      section: controls[0].control.Section || "Unknown",
       ...controls[0],
       // @ts-ignore
       control: undefined,

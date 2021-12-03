@@ -175,7 +175,7 @@ for (const key in propertiesShow) {
 
 const packageIcon = usePackageIcon(
   packageInfoLast.control.Icon,
-  packageInfoLast.control.Section || "unknown"
+  packageInfoLast.control.Section
 );
 </script>
 

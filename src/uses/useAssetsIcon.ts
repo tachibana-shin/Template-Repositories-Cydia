@@ -1,4 +1,4 @@
-const assets = import.meta.globEager("/src/assets/icons/*.png");
+const assets = import.meta.globEager("/src/assets/icons/**/*.png");
 
 export default function useAssetsIcon(src: string): string {
   for (const key in assets) {
