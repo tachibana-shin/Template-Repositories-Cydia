@@ -114,12 +114,13 @@ async function scanCompatible(
   }
 }
 function openEditorWith(src: string, program: string): boolean {
-  if (child_process.execSync(`command -v ${program}`)) {
+  try {
+    child_process.execSync(`command -v ${program}`);
     child_process.execSync(`${program} ${src}`);
     return true;
+  } catch {
+    return false;
   }
-
-  return false;
 }
 function openEditor(src: string): void {
   openEditorWith(src, "notepad++") ||
