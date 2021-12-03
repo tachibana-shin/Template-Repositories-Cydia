@@ -11,7 +11,7 @@ const localStorage = useLocalStorage();
 const items = reactive([
   {
     name: "Change Theme",
-    icon: useAssetsIcon("darkmode-dark.png"),
+    icon: useAssetsIcon("darkmode-light.png"),
     onclick() {
       const oldVal = localStorage.darkmode || false;
 
@@ -21,6 +21,6 @@ const items = reactive([
 ]);
 
 watch(() => localStorage.darkmode, (v) => {
-  items[0].icon = useAssetsIcon("darkmode-light.png") : useAssetsIcon("darkmode-dark.png");
+  items[0].icon = v ? useAssetsIcon("darkmode-dark.png") : useAssetsIcon("darkmode-light.png");
 })
 </script>
