@@ -34,7 +34,7 @@ useHead({
     {
       property: "og:site_name",
       content: "Tachibana Shin (たちばなしん) Repo",
-    }
+    },
     // twitter
     {
       name: "twitter:title",

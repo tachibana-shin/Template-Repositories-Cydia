@@ -75,7 +75,7 @@ useHead({
     {
       property: "og:image",
       hid: "og:image",
-      content: usePackageIcon(pkg.icon, sectionInfo.name),
+      content: usePackageIcon(undefined, sectionInfo.name),
     },
     // twitter
     {
@@ -91,7 +91,7 @@ useHead({
     {
       name: "twitter:image",
       hid: "twitter:image",
-      content: usePackageIcon(pkg.icon, sectionInfo.name),
+      content: usePackageIcon(undefined, sectionInfo.name),
     },
   ]
 })
