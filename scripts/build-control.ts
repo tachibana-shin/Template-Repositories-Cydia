@@ -102,32 +102,16 @@ async function main() {
 }
 main();
 
-async function scanCompatible(
+function scanCompatible(
   packages: Map<string, PackageControlFile[]>
-): Promise<void> {
-  for await (const pkg of packages.keys()) {
+): void {
+  for (const pkg of Array.from(packages.keys())) {
     // scan
     const pathYml = join(PATH_ROOT, "pages/package", pkg, "compatible.yml");
     if (fs.existsSync(pathYml) === false) {
-      openEditor(pathYml);
+      console.info(chalk.blue(`${pkg} required compatible. Please enter to file pages/package/${pkg}/compatible.yml`));
     }
   }
-}
-function openEditorWith(src: string, program: string): boolean {
-  try {
-    child_process.execSync(`command -v ${program}`);
-    child_process.execSync(`${program} ${src}`);
-    return true;
-  } catch {
-    return false;
-  }
-}
-function openEditor(src: string): void {
-  openEditorWith(src, "notepad++") ||
-    openEditorWith(src, "vim") ||
-    openEditorWith("nano") ||
-    openEditorWith("notepad") ||
-    openEditorWith("gedit");
 }
 // load split file or chunks
 
