@@ -16,6 +16,7 @@ import { slugify } from "./scripts/slugify";
 import yaml from "yamljs";
 
 const config: UserConfig = {
+  base: "./",
   resolve: {
     alias: {
       assets: join(__dirname, "src/assets"),
