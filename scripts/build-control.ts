@@ -93,10 +93,10 @@ async function main() {
     .catch(() => {});
 
   // all package ready, create Packages, Packages.bz2
-  await createFilePackages();
+  createFilePackages();
 
   // create Release
-  await createFileRelease();
+  createFileRelease();
 
   console.log(chalk.green(`Complete ${performance.now() - start}ms`));
 }
