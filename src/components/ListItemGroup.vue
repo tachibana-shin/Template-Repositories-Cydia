@@ -84,19 +84,6 @@ defineProps<{
 <style lang="scss" scoped>
 @use "sass:math";
 
-%logo-cydia {
-  width: 2em;
-  height: 2em;
-  border-radius: 20%;
-  display: inline-block;
-
-  background: {
-    repeat: no-repeat;
-    position: center;
-    size: 100%;
-  }
-}
-
 .list-item {
   padding: 0;
   list-style: none;
@@ -161,7 +148,8 @@ defineProps<{
       }
 
       .icon {
-        @extend %logo-cydia;
+        width: 2em;
+	height: 2em;
         // background-image: url("assets/icons/Sections/Unknown.png");
       }
     }
