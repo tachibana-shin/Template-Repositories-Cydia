@@ -6,7 +6,7 @@
           name: 'More...',
           icon: useAssetsIcon('moreinfo.png') as any,
           to: section.to,
-        },
+        } as any,
     ])"
     />
   </template>
@@ -17,6 +17,7 @@ import { usePackageIcon } from "../uses/packageIcon";
 import inCydia from "../constants/inCydia";
 import listSections from "/pages/section-list-pkgs.json";
 import useAssetsIcon from "../uses/assetsIcon";
+import { format } from "timeago.js";
 
 const sections = listSections.slice(0, 7).map((section) => {
   return {

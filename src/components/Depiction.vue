@@ -27,6 +27,18 @@
   <ListItemGroup
     :items="[
       {
+        name: `Debian`,
+        icon: useAssetsIcon(`packages.png`),
+        after: propertiesShow.Size,
+        to: `//debian/${propertiesShow.Package}@${propertiesShow.Version}.deb`,
+      },
+    ]"
+    v-if="!inCydia"
+  />
+
+  <ListItemGroup
+    :items="[
+      {
         name: `Changelog`,
         icon: useAssetsIcon(`changelog.png`),
         to: `${route.path}/changelog`.replace(/\/{2,}/g, '/'),
@@ -148,6 +160,8 @@ import { satisfies } from "semver";
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
 const route = useRoute();
+
+const url = import.meta.url;
 
 const message = frontmatter.notification;
 const screenshots: string[] =

@@ -6,26 +6,34 @@
       <component
         :is="
           item.to
-            ? item.to.includes('://') || item.to.startsWith('mailto:')
+            ? item.to.includes('://') ||
+              item.to.startsWith('//') ||
+              item.to.startsWith('mailto:')
               ? `a`
               : `router-link`
             : `span`
         "
         :to="
           item.to &&
-          (item.to.includes('://') || item.to.startsWith('mailto:')) === false
+          (item.to.includes('://') ||
+            item.to.startsWith('//') ||
+            item.to.startsWith('mailto:')) === false
             ? item.to
             : undefined
         "
         :href="
           item.to &&
-          (item.to.includes('://') || item.to.startsWith('mailto:')) === true
-            ? item.to
+          (item.to.includes('://') ||
+            item.to.startsWith('//') ||
+            item.to.startsWith('mailto:')) === true
+            ? item.to.replace(/^\/{2}/, `${BASE_URL}`)
             : undefined
         "
         :target="
           item.to &&
-          (item.to.includes('://') || item.to.startsWith('mailto:')) === true
+          (item.to.includes('://') ||
+            item.to.startsWith('//') ||
+            item.to.startsWith('mailto:')) === true
             ? `_blank`
             : undefined
         "
@@ -37,10 +45,15 @@
       >
         <div class="d-flex align-items-center">
           <img :src="item.icon" class="icon" v-if="item.icon" />
-          <p>
-            {{ item.name }}
-            <small v-if="item.version">{{ item.version }}</small>
-          </p>
+          <div class="pl-2">
+            <p class="text-truncate mb-0">{{ item.name }}</p>
+            <small class="d-block" v-if="item.version"
+              >{{ item.version }}
+              <span class="text-secondary ml-1" v-if="item.subversion">{{
+                item.subversion
+              }}</span></small
+            >
+          </div>
         </div>
         <span class="text-secondary mr-4" v-if="item.after">{{
           item.after
@@ -51,6 +64,8 @@
 </template>
 
 <script lang="ts" setup>
+import { BASE_URL } from "../../config.global.json";
+
 defineProps<{
   name?: string;
   items: {
@@ -58,6 +73,7 @@ defineProps<{
     icon?: string;
     to?: string;
     version?: string;
+    subversion?: string;
     noChevron?: boolean;
     after?: string;
     onclick?: () => void;
@@ -147,20 +163,6 @@ defineProps<{
       .icon {
         @extend %logo-cydia;
         // background-image: url("assets/icons/Sections/Unknown.png");
-      }
-
-      p {
-        white-space: nowrap;
-        margin: 0 0 0 15px;
-        padding: 0;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-
-        small {
-          display: block;
-        }
       }
     }
 

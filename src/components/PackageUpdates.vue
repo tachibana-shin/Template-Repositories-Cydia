@@ -15,7 +15,7 @@ const items = pkgLastUpdate.map((pkg) => ({
   to: inCydia
     ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}`
     : `/package/${pkg.packageID}`,
-  after: format(pkg.birthtimeMs, "en_US", {
+  subversion: format(pkg.birthtimeMs, "en_US", {
     relativeDate: Date.now(),
   }),
 }));

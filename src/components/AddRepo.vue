@@ -24,5 +24,12 @@ const list = [
       ? `cydia://url/https://cydia.saurik.com/api/share#?source=https://tachibana-shin.github.io/repo&package=${props.packageId}`
       : `cydia://url/https://cydia.saurik.com/api/share#?source=https://tachibana-shin.github.io/repo`,
   },
+  {
+    icon: useAssetsIcon("zebra.png"),
+    name: "Open Zebra",
+    to: props.packageId
+      ? `zbra://sources/add/https://tachibana-shin.github.io/repo&package=${props.packageId}`
+      : `zbra://sources/add/https://tachibana-shin.github.io/repo`,
+  },
 ];
 </script>
