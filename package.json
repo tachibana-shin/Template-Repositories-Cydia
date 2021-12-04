@@ -3,7 +3,8 @@
   "scripts": {
     "build:web": "cross-env NODE_ENV=production vite-ssg build",
     "build:control": "esno ./scripts/build-control.ts",
-    "build:debian": "cp -r ./debian public/",
+    "build:debian": "rm -rf public/debian && cp -rf ./debian public/debian",
+    "build": "yarn build:control && yarn build:debian && yarn build:web",
     "dev": "vite",
     "preview": "vite preview"
   },
