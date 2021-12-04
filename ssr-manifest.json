@@ -6468,198 +6468,198 @@
     "/web-repo/assets/vendor.fe7f9515.js"
   ],
   "pages/sections.vue": [
-    "/web-repo/assets/sections.054e83ed.js"
+    "/web-repo/assets/sections.9242663a.js"
   ],
   "pages/section/Utilities/index.md": [
-    "/web-repo/assets/index.399a3fac.js"
+    "/web-repo/assets/index.cf8805d0.js"
   ],
   "src/components/Unknown.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/Section.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/Changelog.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "pages/section-list.json": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/AllSections.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "\u0000/home/runner/work/web-repo/web-repo/node_modules/semver/semver.js?commonjs-module": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "node_modules/semver/semver.js": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/computed/iOSVersion.ts": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "node_modules/filesize/lib/filesize.esm.js": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/Depiction.vue?vue&type=style&index=0&scoped=true&lang.scss": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/Depiction.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "src/components/Post.vue": [
-    "/web-repo/assets/Post.39f3eb15.js",
+    "/web-repo/assets/Post.b09921fa.js",
     "/web-repo/assets/Post.a6da4ef9.css"
   ],
   "pages/section/Tweaks/index.md": [
-    "/web-repo/assets/index.61e6b389.js"
+    "/web-repo/assets/index.a57166fc.js"
   ],
   "pages/section/Networking/index.md": [
-    "/web-repo/assets/index.4341f648.js"
+    "/web-repo/assets/index.4535491d.js"
   ],
   "pages/section/Cydia+Custom/index.md": [
-    "/web-repo/assets/index.6faf9ad8.js"
+    "/web-repo/assets/index.82961581.js"
   ],
   "pages/package/git.shin.impactor10/index.md": [
-    "/web-repo/assets/index.971374c3.js"
+    "/web-repo/assets/index.cd1b5755.js"
   ],
   "pages/package/git.shin.impactor/index.md": [
-    "/web-repo/assets/index.1136c2c5.js"
+    "/web-repo/assets/index.9ae6d798.js"
   ],
   "pages/package/git.shin.cyplay/index.md": [
-    "/web-repo/assets/index.5b487a9f.js"
+    "/web-repo/assets/index.e2c4ff80.js"
   ],
   "pages/package/git.shin.cylinder/index.md": [
-    "/web-repo/assets/index.9318bf68.js"
+    "/web-repo/assets/index.dc953cdf.js"
   ],
   "pages/package/git.shin.cydiatimeoutcmd/index.md": [
-    "/web-repo/assets/index.ea4474d0.js"
+    "/web-repo/assets/index.57e992b8.js"
   ],
   "pages/package/git.shin.cydiainstall/index.md": [
-    "/web-repo/assets/index.9b6d8929.js"
+    "/web-repo/assets/index.a3f54b94.js"
   ],
   "pages/package/git.shin.cydiacoolstar/index.md": [
-    "/web-repo/assets/index.5ff3bdfb.js"
+    "/web-repo/assets/index.4bc8228a.js"
   ],
   "pages/package/git.shin.cyanea/index.md": [
-    "/web-repo/assets/index.dec833ac.js"
+    "/web-repo/assets/index.4ae3c428.js"
   ],
   "pages/package/git.shin.customsw/index.md": [
-    "/web-repo/assets/index.439fa587.js"
+    "/web-repo/assets/index.7e48ae2b.js"
   ],
   "pages/package/git.shin.custompods/index.md": [
-    "/web-repo/assets/index.2b462831.js"
+    "/web-repo/assets/index.f705b126.js"
   ],
   "pages/package/git.shin.customloadingtext/index.md": [
-    "/web-repo/assets/index.d19d784d.js"
+    "/web-repo/assets/index.846a009d.js"
   ],
   "pages/package/git.shin.customdia/index.md": [
-    "/web-repo/assets/index.8e52248e.js"
+    "/web-repo/assets/index.63fba371.js"
   ],
   "pages/package/git.shin.curl32/index.md": [
-    "/web-repo/assets/index.ce4a6da6.js"
+    "/web-repo/assets/index.eca2d515.js"
   ],
   "pages/package/git.shin.curl/index.md": [
-    "/web-repo/assets/index.fcc74e71.js"
+    "/web-repo/assets/index.2173cd7c.js"
   ],
   "pages/package/git.shin.cukey/index.md": [
-    "/web-repo/assets/index.846bad7c.js"
+    "/web-repo/assets/index.615b7f43.js"
   ],
   "pages/package/git.shin.cracktool4/index.md": [
-    "/web-repo/assets/index.1d725cc2.js"
+    "/web-repo/assets/index.de04b712.js"
   ],
   "pages/package/git.shin.cracktool2/index.md": [
-    "/web-repo/assets/index.25551b9b.js"
+    "/web-repo/assets/index.c6bc779e.js"
   ],
   "pages/package/git.shin.cozybadges/index.md": [
-    "/web-repo/assets/index.2b7fabd5.js"
+    "/web-repo/assets/index.d43ac6c2.js"
   ],
   "pages/package/git.shin.cosmos13/index.md": [
-    "/web-repo/assets/index.b4093a05.js"
+    "/web-repo/assets/index.48abf1d3.js"
   ],
   "pages/package/git.shin.cosmos/index.md": [
-    "/web-repo/assets/index.5846f0c5.js"
+    "/web-repo/assets/index.11773cbf.js"
   ],
   "pages/package/git.shin.copiedlabel/index.md": [
-    "/web-repo/assets/index.173fcdf6.js"
+    "/web-repo/assets/index.19e399e7.js"
   ],
   "pages/package/git.shin.complications/index.md": [
-    "/web-repo/assets/index.60168b3f.js"
+    "/web-repo/assets/index.0f2bae74.js"
   ],
   "pages/package/git.shin.complications/control.json": [
-    "/web-repo/assets/control.ec4ce024.js"
+    "/web-repo/assets/control.9043b3ba.js"
   ],
   "pages/package/git.shin.copiedlabel/control.json": [
-    "/web-repo/assets/control.2b84ca50.js"
+    "/web-repo/assets/control.c13b18cc.js"
   ],
   "pages/package/git.shin.cosmos/control.json": [
-    "/web-repo/assets/control.cb4f5a0d.js"
+    "/web-repo/assets/control.3ea0f118.js"
   ],
   "pages/package/git.shin.cosmos13/control.json": [
-    "/web-repo/assets/control.0b325003.js"
+    "/web-repo/assets/control.cb03d6c6.js"
   ],
   "pages/package/git.shin.cozybadges/control.json": [
-    "/web-repo/assets/control.670e88b2.js"
+    "/web-repo/assets/control.529867ae.js"
   ],
   "pages/package/git.shin.cracktool2/control.json": [
-    "/web-repo/assets/control.67a6b6e5.js"
+    "/web-repo/assets/control.07ff7bf9.js"
   ],
   "pages/package/git.shin.cracktool4/control.json": [
-    "/web-repo/assets/control.82161eef.js"
+    "/web-repo/assets/control.4df302a1.js"
   ],
   "pages/package/git.shin.cukey/control.json": [
-    "/web-repo/assets/control.c06bcf49.js"
+    "/web-repo/assets/control.6d342ba4.js"
   ],
   "pages/package/git.shin.curl/control.json": [
-    "/web-repo/assets/control.77a27282.js"
+    "/web-repo/assets/control.f01f9f33.js"
   ],
   "pages/package/git.shin.curl32/control.json": [
-    "/web-repo/assets/control.ed675617.js"
+    "/web-repo/assets/control.0750f329.js"
   ],
   "pages/package/git.shin.customdia/control.json": [
-    "/web-repo/assets/control.d9ba614c.js"
+    "/web-repo/assets/control.8db43519.js"
   ],
   "pages/package/git.shin.customloadingtext/control.json": [
-    "/web-repo/assets/control.db0e5551.js"
+    "/web-repo/assets/control.aa8f1dc8.js"
   ],
   "pages/package/git.shin.custompods/control.json": [
-    "/web-repo/assets/control.1aa81220.js"
+    "/web-repo/assets/control.f75a5518.js"
   ],
   "pages/package/git.shin.customsw/control.json": [
-    "/web-repo/assets/control.83935ee5.js"
+    "/web-repo/assets/control.44909342.js"
   ],
   "pages/package/git.shin.cyanea/control.json": [
-    "/web-repo/assets/control.297ce051.js"
+    "/web-repo/assets/control.4ecd390e.js"
   ],
   "pages/package/git.shin.cydiacoolstar/control.json": [
-    "/web-repo/assets/control.92b1a769.js"
+    "/web-repo/assets/control.8e9b5f3d.js"
   ],
   "pages/package/git.shin.cydiainstall/control.json": [
-    "/web-repo/assets/control.98cfecd7.js"
+    "/web-repo/assets/control.c8151acb.js"
   ],
   "pages/package/git.shin.cydiatimeoutcmd/control.json": [
-    "/web-repo/assets/control.dcf05cb5.js"
+    "/web-repo/assets/control.ddc6129e.js"
   ],
   "pages/package/git.shin.cylinder/control.json": [
-    "/web-repo/assets/control.66c3a563.js"
+    "/web-repo/assets/control.62400d8c.js"
   ],
   "pages/package/git.shin.cyplay/control.json": [
-    "/web-repo/assets/control.f30d22db.js"
+    "/web-repo/assets/control.3681f0bc.js"
   ],
   "pages/package/git.shin.impactor/control.json": [
-    "/web-repo/assets/control.e85dc76b.js"
+    "/web-repo/assets/control.c8bf2a01.js"
   ],
   "pages/package/git.shin.impactor10/control.json": [
-    "/web-repo/assets/control.8b62f6e3.js"
+    "/web-repo/assets/control.bba8e0c3.js"
   ]
 }
