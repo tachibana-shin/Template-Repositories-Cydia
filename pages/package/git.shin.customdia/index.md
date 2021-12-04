@@ -1,1 +1,0 @@
-usability tweaks for Cydia app.

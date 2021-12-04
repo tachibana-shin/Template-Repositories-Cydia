@@ -1,1 +1,0 @@
-watchOS widgets on your lock screen

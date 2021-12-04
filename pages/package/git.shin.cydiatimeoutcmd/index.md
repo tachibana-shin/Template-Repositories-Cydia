@@ -1,1 +1,0 @@
-Shorten Cydia's refresh time.

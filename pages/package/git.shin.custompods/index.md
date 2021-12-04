@@ -1,1 +1,0 @@
-Airpods animation and sound

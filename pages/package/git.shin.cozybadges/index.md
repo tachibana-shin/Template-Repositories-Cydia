@@ -1,1 +1,0 @@
-A cozy place for your badges
