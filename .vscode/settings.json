@@ -20,6 +20,7 @@
       "vscode-extension",
       ".git/objects",
       ".vscode",
-      ".vscode-insiders"
+      ".vscode-insiders",
+      "compatity.txt"
    ]
 }
