@@ -5,7 +5,11 @@ import "./styles/markdown.scss";
 import autoRoutes from "pages-generated";
 import NProgress from "nprogress";
 import { ViteSSG } from "vite-ssg";
-import { RouterScrollBehavior, createWebHistory, createMemoryHistory } from "vue-router";
+import {
+  RouterScrollBehavior,
+  createWebHistory,
+  createMemoryHistory,
+} from "vue-router";
 import { isClient } from "@vueuse/core";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
@@ -29,7 +33,9 @@ const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
   if (savedPosition) return savedPosition;
   else return { top: 0 };
 };
-const history = isClient ? createWebHistory(BASE_URL) : createMemoryHistory(BASE_URL);
+const history = isClient
+  ? createWebHistory(BASE_URL)
+  : createMemoryHistory(BASE_URL);
 
 export const createApp = ViteSSG(
   App,
