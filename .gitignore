@@ -13,4 +13,5 @@ dist-ssr
 /public/Packages
 /public/Packages.*
 /public/Release
+/public/debian
 
