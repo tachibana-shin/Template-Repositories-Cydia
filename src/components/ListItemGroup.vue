@@ -14,13 +14,13 @@
         :to="
           item.to &&
           (item.to.includes('://') || item.to.startsWith('mailto:')) === false
-            ? item.to + (item.to.startsWith('mailto:') ? '' : '/')
+            ? item.to
             : undefined
         "
         :href="
           item.to &&
           (item.to.includes('://') || item.to.startsWith('mailto:')) === true
-            ? item.to + (item.to.startsWith('mailto:') ? '' : '/')
+            ? item.to
             : undefined
         "
         :target="

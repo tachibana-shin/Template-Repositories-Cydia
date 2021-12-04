@@ -175,19 +175,19 @@ for (const key in propertiesShow) {
 
 const packageIcon = usePackageIcon(
   packageInfoLast.control.Icon,
-  packageInfoLast.control.Section
+  packageInfoLast.control.Section || "Unknown"
 );
 
 useHead({
   title: frontmatter.title || packageInfoLast.control.Name,
   meta: [
     {
-      charset: "utf-8"
+      charset: "utf-8",
     },
     {
       name: "description",
       hid: "description",
-      content: packageInfoLast.control.Description
+      content: packageInfoLast.control.Description,
     },
     {
       property: "og:title",
@@ -197,7 +197,7 @@ useHead({
     {
       property: "og:description",
       hid: "og:description",
-      content: packageInfoLast.control.Description
+      content: packageInfoLast.control.Description,
     },
     {
       property: "og:image",
@@ -213,15 +213,15 @@ useHead({
     {
       name: "twitter:description",
       hid: "twitter:description",
-      content: packageInfoLast.control.Description
+      content: packageInfoLast.control.Description,
     },
     {
       name: "twitter:image",
       hid: "twitter:image",
       content: packageIcon,
     },
-  ]
-})
+  ],
+});
 </script>
 
 <style lang="scss" scoped>
