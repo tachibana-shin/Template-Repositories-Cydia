@@ -9,7 +9,8 @@ dist-ssr
 /auto-imports.d.ts
 /components.d.ts
 
-# /pages/**/*.json
-# /public/Packages
-# /public/Packages.*
-# /public/Release
+/pages/**/*.json
+/public/Packages
+/public/Packages.*
+/public/Release
+
