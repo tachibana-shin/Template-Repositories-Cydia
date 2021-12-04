@@ -33,7 +33,7 @@
 import type { SectionControlFile } from "../../scripts/build-control";
 import inCydia from "../constants/inCydia";
 import { usePackageIcon } from "../uses/packageIcon";
-import useAssetsIcon from "../uses/useAssetsIcon";
+import useAssetsIcon from "../uses/assetsIcon";
 
 const { frontmatter } = defineProps<{
   frontmatter: any;

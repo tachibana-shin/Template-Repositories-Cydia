@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import useAssetsIcon from "../uses/useAssetsIcon";
+import useAssetsIcon from "../uses/assetsIcon";
 
 defineProps<{
   noName?: boolean;

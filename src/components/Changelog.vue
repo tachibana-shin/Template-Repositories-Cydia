@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import inCydia from "../constants/inCydia";
-import useAssetsIcon from "../uses/useAssetsIcon";
+import useAssetsIcon from "../uses/assetsIcon";
 
 defineProps<{
   frontmatter: any;

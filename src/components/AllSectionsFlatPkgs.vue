@@ -16,7 +16,7 @@
 import { usePackageIcon } from "../uses/packageIcon";
 import inCydia from "../constants/inCydia";
 import listSections from "/pages/section-list-pkgs.json";
-import useAssetsIcon from "../uses/useAssetsIcon";
+import useAssetsIcon from "../uses/assetsIcon";
 
 const sections = listSections.slice(0, 7).map((section) => {
   return {

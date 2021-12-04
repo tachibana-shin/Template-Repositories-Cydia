@@ -50,11 +50,16 @@
   <!-- check support -->
   <div>
     <h6 class="title">Package Example</h6>
-    <div class="alert alert-success text-center mb-0" v-if="true">
-      Compatible with {{ compatible || "unknown" }}
+    <div class="alert alert-success text-center mb-0" v-if="isSupport">
+      Supported iOS version
+      {{
+        compatible?.latest ||
+        compatible?.[packageInfoLast.control.Version] ||
+        "unknown"
+      }}
     </div>
     <div class="alert alert-danger text-center mb-0" v-else>
-      Not compatible with {{ iOSVersion }}
+      Only support iOS versions {{ iOSVersion }}
     </div>
     <p class="small text-secondary text-center mt-1">
       Current iOS {{ iOSVersion }}
@@ -131,7 +136,8 @@ import { format } from "timeago.js";
 import { usePackageIcon } from "../uses/packageIcon";
 import type { PackageControlFile } from "scripts/build-control";
 import inCydia from "../constants/inCydia";
-import useAssetsIcon from "../uses/useAssetsIcon";
+import useAssetsIcon from "../uses/assetsIcon";
+import satisfies from "semver/functions/satisfies";
 
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
@@ -142,9 +148,17 @@ const screenshots: string[] =
   frontmatter.screenshots || (route.meta.screenshots as string[]) || [];
 const sourceCode = frontmatter["source-code"];
 const existsChangelog = route.meta.existsChangelog;
-const compatible = route.meta.compatible;
+const compatible = route.meta.compatible as Record<string, string> | undefined;
 const packageInfo = route.meta.packageInfo as Required<PackageControlFile>[];
 const packageInfoLast = packageInfo[0];
+const isSupport: boolean | null =
+  iOSVersion.value &&
+  (compatible?.latest || compatible?.[packageInfoLast.control.Version])
+    ? satisfies(
+        iOSVersion.value,
+        compatible.latest || compatible[packageInfoLast.control.Version]
+      )
+    : null;
 const propertiesShow = {
   Name: packageInfoLast.control.Name,
   Package: packageInfoLast.control.Package,

@@ -1,4 +1,4 @@
-import useAssetsIcon from "./useAssetsIcon";
+import useAssetsIcon from "./assetsIcon";
 
 const assets = import.meta.globEager("/src/assets/icons/Sections/*.png");
 

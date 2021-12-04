@@ -3,24 +3,29 @@
 </template>
 
 <script lang="ts" setup>
-import { useLocalStorage } from "../uses/localStorage";
-import useAssetsIcon from "../uses/useAssetsIcon";
-
-const localStorage = useLocalStorage();
+import { isClient } from "@vueuse/core";
+import cookie from "js-cookie";
+import useAssetsIcon from "../uses/assetsIcon";
 
 const items = reactive([
   {
     name: "Change Theme",
-    icon: useAssetsIcon("darkmode-light.png"),
+    icon:
+      isClient && cookie.get("enabled-dark-mode") === "yes"
+        ? useAssetsIcon("darkmode-dark.png")
+        : useAssetsIcon("darkmode-light.png"),
     onclick() {
-      const oldVal = localStorage.darkmode || false;
-
-      localStorage.darkmode = !oldVal;
+      if (cookie.get("enabled-dark-mode") === "yes") {
+        items[0].icon = useAssetsIcon("darkmode-light.png");
+        cookie.remove("enabled-dark-mode");
+      } else {
+        items[0].icon = useAssetsIcon("darkmode-dark.png");
+        cookie.set("enabled-dark-mode", "yes", {
+          path: "/",
+          expires: 365,
+        });
+      }
     },
   },
 ]);
-
-watch(() => localStorage.darkmode, (v) => {
-  items[0].icon = v ? useAssetsIcon("darkmode-dark.png") : useAssetsIcon("darkmode-light.png");
-})
 </script>
