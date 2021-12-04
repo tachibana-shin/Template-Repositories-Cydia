@@ -1,7 +1,7 @@
 <template>
   <h6 class="title" v-if="name">{{ name }}</h6>
 
-  <ul class="list-item bg-white border-custom">
+  <ul class="list-item bg-white border-custom" v-bind="$attrs">
     <li v-for="(item, index) in items" :key="index">
       <component
         :is="
@@ -30,16 +30,13 @@
             : undefined
         "
         class="item__child d-flex justify-content-between align-items-center hover__bg-grey before__bg-secondary"
+        :class="{
+          'no-chevron': item.noChevron,
+        }"
         @click="item.onclick"
       >
         <div class="d-flex align-items-center">
-          <span
-            :style="{
-              'background-image': `url('${item.icon}')`,
-            }"
-            class="icon"
-            v-if="item.icon"
-          />
+          <img :src="item.icon" class="icon" v-if="item.icon" />
           <p>
             {{ item.name }}
             <small v-if="item.version">{{ item.version }}</small>
@@ -61,6 +58,7 @@ defineProps<{
     icon?: string;
     to?: string;
     version?: string;
+    noChevron?: boolean;
     after?: string;
     onclick?: () => void;
   }[];
@@ -90,6 +88,9 @@ defineProps<{
   li {
     margin: 0;
     padding: 0;
+    & > .no-chevron:after {
+      background-image: none;
+    }
 
     & > .item__child {
       text-decoration: none;
@@ -145,7 +146,7 @@ defineProps<{
 
       .icon {
         @extend %logo-cydia;
-        background-image: url("assets/icons/Sections/Unknown.png");
+        // background-image: url("assets/icons/Sections/Unknown.png");
       }
 
       p {

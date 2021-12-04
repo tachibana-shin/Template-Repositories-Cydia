@@ -5,6 +5,7 @@
         name: 'Back',
         icon: useAssetsIcon('back.png'),
         onclick: () => $router.back(),
+        noChevron: true,
       },
     ]"
   />

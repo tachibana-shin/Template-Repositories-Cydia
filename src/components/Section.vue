@@ -5,6 +5,7 @@
         name: 'Back',
         icon: useAssetsIcon('back.png'),
         onclick: () => $router.back(),
+        noChevron: true,
       },
     ]"
   />
@@ -55,22 +56,22 @@ useHead({
   title: frontmatter.title || sectionInfo.name,
   meta: [
     {
-      charset: "utf-8"
+      charset: "utf-8",
     },
     {
       name: "description",
       hid: "description",
-      content: `Packages in section ${sectionInfo.name}`
+      content: `Packages in section ${sectionInfo.name}`,
     },
     {
       property: "og:title",
       hid: "og:title",
-      content: frontmatter.title || sectionInfo.name
+      content: frontmatter.title || sectionInfo.name,
     },
     {
       property: "og:description",
       hid: "og:description",
-      content: `Packages in section ${sectionInfo.name}`
+      content: `Packages in section ${sectionInfo.name}`,
     },
     {
       property: "og:image",
@@ -81,18 +82,18 @@ useHead({
     {
       name: "twitter:title",
       hid: "twitter:title",
-      content: frontmatter.title || sectionInfo.name
+      content: frontmatter.title || sectionInfo.name,
     },
     {
       name: "twitter:description",
       hid: "twitter:description",
-      content: `Packages in section ${sectionInfo.name}`
+      content: `Packages in section ${sectionInfo.name}`,
     },
     {
       name: "twitter:image",
       hid: "twitter:image",
       content: usePackageIcon(undefined, sectionInfo.name),
     },
-  ]
-})
+  ],
+});
 </script>

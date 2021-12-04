@@ -59,10 +59,15 @@
       }}
     </div>
     <div class="alert alert-danger text-center mb-0" v-else>
-      Only support iOS versions {{ iOSVersion }}
+      Only support iOS versions
+      {{
+        compatible?.latest ||
+        compatible?.[packageInfoLast.control.Version] ||
+        "unknown"
+      }}
     </div>
     <p class="small text-secondary text-center mt-1">
-      Current iOS {{ iOSVersion }}
+      Current iOS {{ iOSVersion || "unknown" }}
     </p>
   </div>
 
@@ -101,6 +106,7 @@
     <h6 class="title">Package info</h6>
     <ul class="properties bg-white border-custom">
       <li
+        class="before__bg-secondary"
         v-for="[propName, value] in Object.entries(propertiesShow)"
         :key="propName"
       >
@@ -124,7 +130,7 @@
 
   <PackageUpdates />
   <AllSections />
-  <SocialShare />
+  <!-- <SocialShare /> -->
   <ThemeChange />
   <Copyright />
 </template>
@@ -137,7 +143,7 @@ import { usePackageIcon } from "../uses/packageIcon";
 import type { PackageControlFile } from "scripts/build-control";
 import inCydia from "../constants/inCydia";
 import useAssetsIcon from "../uses/assetsIcon";
-import satisfies from "semver/functions/satisfies";
+import { satisfies } from "semver";
 
 const { frontmatter } = defineProps<{ frontmatter: any }>();
 
@@ -170,8 +176,8 @@ const propertiesShow = {
   Conflicts: packageInfoLast.control.Conflicts,
   Architecture: packageInfoLast.control.Architecture,
   MD5sum: packageInfoLast.MD5sum,
-  SHA256sum: packageInfoLast.SHA256sum,
-  SHA512sum: packageInfoLast.SHA512sum,
+  // SHA256sum: packageInfoLast.SHA256sum,
+  // SHA512sum: packageInfoLast.SHA512sum,
   Size: filesize(packageInfoLast.size),
   "Last Update": format(packageInfoLast.birthtimeMs, "en_US", {
     relativeDate: Date.now(),
@@ -279,6 +285,21 @@ useHead({
   > li {
     display: flex;
     padding: 0.5rem 0;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+    }
+
+    &:last-child {
+      &:before {
+        display: none;
+      }
+    }
 
     .propName {
       width: 45%;
