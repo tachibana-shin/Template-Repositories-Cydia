@@ -14,9 +14,10 @@ import markdownAttr from "markdown-it-link-attributes";
 import TOC from "markdown-it-table-of-contents";
 import { slugify } from "./scripts/slugify";
 import yaml from "yamljs";
+import { BASE_URL } from "./config.global.json";
 
 const config: UserConfig = {
-  base: "/web-repo/",
+  base: BASE_URL,
   resolve: {
     alias: {
       assets: join(__dirname, "src/assets"),
