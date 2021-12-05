@@ -53,6 +53,16 @@ export type SectionControlFile = {
   packages: PackageControlInSection[];
 };
 
+const PATH_FILE_CONTROL_CACHE = join(PATH_ROOT, "__CONTROL_CACHE__");
+const controlCache = new Map</* Package ID */ string, {
+  control: PackageControl;
+  SHA512sum: string;
+}>(fs.existsSync(PATH_FILE_CONTROL_CACHE) ? JSON.parse(fs.readFileSync(PATH_FILE_CONTROL_CACHE, "utf8")) : undefined);
+
+async function updateFileControlCache(): Promise<void> {
+  await fs.promies.writeFile(PATH_FILE_CONTROL_CACHE, JSON.stringify(Array.from(controlCache.entries())));
+}
+
 async function main() {
   console.clear();
   console.log(chalk.grey("starting build..."));
@@ -503,6 +513,16 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
 
   for (let i = 0, len = debian.length; i < len; i++) {
     const srcDebian = debian[i];
+    const filename = basename(srcDebian);
+    const hash = await sha512file(srcDebian);
+	  
+    if (controlCache.get(filename)?.SHA512sum === hash) {
+      // skip fix
+      controlJSONFiles.push({
+        filepath: srcDebian,
+        control: controlCache.get(filename)!.control,
+      });
+    }
 
     console.log(
       chalk.grey(
@@ -559,6 +579,11 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
       filepath: srcDebian,
       control,
     });
+    cacheControl.set(filename, {
+      control,
+      SHA512sum: hash,
+    });
+    await updateFileControlCache();
   }
 
   return controlJSONFiles;
