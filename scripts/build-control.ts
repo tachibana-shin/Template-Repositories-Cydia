@@ -516,7 +516,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
     const filename = basename(srcDebian);
     const hash = await sha512file(srcDebian);
 	  
-    if (controlCache.get(filename)?.SHA512sum === hash) {
+    if (isValidFilename(filename, control) && controlCache.get(filename)?.SHA512sum === hash) {
       // skip fix
       controlJSONFiles.push({
         filepath: srcDebian,
@@ -558,28 +558,27 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
 
     if (uniqueControl !== sha256(stringify(control))) {
       writeFileControlToTmp(control);
+	    
+      packDebianFromTmp(
+        join(PATH_DEBIAN, `${control.Package}@${control.Version}.deb`)
+      );
+      console.log(chalk.green(`pack ${control.Package}`));
 
-      if (isValidFilename(basename(srcDebian), control)) {
-        packDebianFromTmp(
-          join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`)
-        );
-        console.log(chalk.green(`pack ${control.Package}`));
-
+      if (isValidFilename(filename, control) === false) {
         fs.unlinkSync(srcDebian);
-      } else {
-        fs.renameSync(
-          join(dirname(srcDebian), `${control.Package}@${control.Version}.deb`),
-          srcDebian
-        );
         console.log(chalk.green(`fix name ${control.Package}`));
+      }
+    } else {
+      if (isValidFilename(filename, control) === false) {
+	fs.renameSync(srcDebian, join(PATH_DEBIAN, `${control.Package}@${control.Version}.deb`));      
       }
     }
 
     controlJSONFiles.push({
-      filepath: srcDebian,
+      filepath: join(PATH_DEBIAN, `${control.Package}@${control.Version}.deb`),
       control,
     });
-    controlCache.set(filename, {
+    controlCache.set(`${control.Package}@${control.Version}.deb`, {
       control,
       SHA512sum: hash,
     });
@@ -590,7 +589,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
 }
 
 function isValidFilename(filepath: string, control: PackageControl): boolean {
-  return basename(filepath) !== `${control.Package}@${control.Version}.deb`;
+  return basename(filepath) === `${control.Package}@${control.Version}.deb`;
 }
 
 function createFilePackages(): void {
