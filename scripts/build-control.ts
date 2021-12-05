@@ -29,6 +29,7 @@ type PackageControl = {
   Sponsor?: string;
   Depiction?: string;
   Author?: string;
+  Name?: string;
 };
 export type PackageControlFile = {
   filepath: string;

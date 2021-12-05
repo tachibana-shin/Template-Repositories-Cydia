@@ -17,8 +17,8 @@
       {
         name: `Author`,
         icon: useAssetsIcon(`email.png`),
-        after: packageInfoLast.control.Author?.replace(/<[^>]+?>/, ''),
-        to: `mailto:${packageInfoLast.control.Author?.match(/<([^>]+?)>/)?.[1]}`,
+        after: packageInfoLast.control.Author.replace(/<[^>]+?>/, ''),
+        to: `mailto:${packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]}`,
       },
     ]"
     v-if="!inCydia"
