@@ -119,13 +119,18 @@ function scanCompatible(
 function parseControl(control: string): PackageControl {
   const obj = {} as any;
 
+  let propLast;
   control
     .split("\n")
     .filter((item) => !!item.replace(/\s/g, ""))
     .forEach((line) => {
+      if (propLast && line.match(/^\s/)) {
+		    obj[propLast] += `\n${line}`;
+		    return;
+	    }
       const split = line.split(": ");
 
-      obj[split[0].trim()] = split.slice(1).join(": ").trim();
+      obj[propLast = split[0].trim()] = split.slice(1).join(": ").trim();
     });
 
   return obj;
@@ -459,7 +464,7 @@ function packDebianFromTmp(filepath: string): void {
     }
   });
 
-  child_process.execSync(`dpkg -bR "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
+  child_process.execSync(`dpkg-deb --build --root-owner-group "${PATH_TMP_UNPACK_DEBIAN}" "${filepath}"`);
 }
 
 async function getListPackages(): Promise<string[]> {
