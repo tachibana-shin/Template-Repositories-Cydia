@@ -1,1 +1,1 @@
-Custom loading text
+Custom%20loading%20text

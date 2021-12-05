@@ -1,1 +1,1 @@
-Description for package git.shin.cydiacoolstar
+Description%20for%20package%20git.shin.cydiacoolstar

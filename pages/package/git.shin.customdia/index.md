@@ -1,1 +1,1 @@
-usability tweaks for Cydia app.
+usability%20tweaks%20for%20Cydia%20app.

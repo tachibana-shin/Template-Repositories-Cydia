@@ -1,1 +1,1 @@
-Shorten Cydia's refresh time.
+Shorten%20Cydia's%20refresh%20time.

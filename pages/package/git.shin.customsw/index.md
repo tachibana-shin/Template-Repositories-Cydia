@@ -1,1 +1,1 @@
-An awesome MobileSubstrate tweak!
+An%20awesome%20MobileSubstrate%20tweak!
