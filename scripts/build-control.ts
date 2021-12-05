@@ -119,8 +119,7 @@ function scanCompatible(
     // scan
     const pathYml = join(PATH_ROOT, "pages/package", pkg, "compatible.yml");
     if (fs.existsSync(pathYml) === false) {
-      console.log(chalk.yellow(`${pkg} required compatible`));
-      console.log(chalk.yellow(`  Please enter to file pages/package/${pkg}/compatible.yml`));
+      console.log(chalk.yellow(`${pkg} required compatible at: pages/package/${pkg}/compatible.yml`));
     }
   }
 }
@@ -277,9 +276,9 @@ async function fixPageNotFound(
 ): Promise<void> {
   if (
     !fs.existsSync(join(path, "index.md")) ||
-    !fs.existsSync(join(path, "    index.vue"))
+    !fs.existsSync(join(path, "index.vue"))
   ) {
-    fs.writeFileSync(join(path, "index.md"), contentDefault);
+    fs.writeFileSync(join(path, "index.md"), encodeURIComponent(contentDefault));
   }
 }
 async function createDepictionPackages(
