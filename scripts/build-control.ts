@@ -60,7 +60,7 @@ const controlCache = new Map</* Package ID */ string, {
 }>(fs.existsSync(PATH_FILE_CONTROL_CACHE) ? JSON.parse(fs.readFileSync(PATH_FILE_CONTROL_CACHE, "utf8")) : undefined);
 
 async function updateFileControlCache(): Promise<void> {
-  await fs.promies.writeFile(PATH_FILE_CONTROL_CACHE, JSON.stringify(Array.from(controlCache.entries())));
+  await fs.promises.writeFile(PATH_FILE_CONTROL_CACHE, JSON.stringify(Array.from(controlCache.entries())));
 }
 
 async function main() {
