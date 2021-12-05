@@ -77,7 +77,8 @@ async function main() {
   }
 
   // auto fix packages
-  const controlPackages = await autoFixDebian(await getListPackages());
+  const controlPackages = await 
+  Debian(await getListPackages());
 
   const packagesUnique = uniqueListPackages(controlPackages);
   // get list packages merged version
@@ -521,6 +522,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
         filepath: srcDebian,
         control: controlCache.get(filename)!.control,
       });
+      continue;
     }
 
     console.log(
