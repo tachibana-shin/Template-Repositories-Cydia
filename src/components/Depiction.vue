@@ -4,9 +4,9 @@
   <div class="tweak-header" v-if="!inCydia">
     <img class="icon" :src="packageIcon" />
     <div class="info">
-      <h1 class="name h6">{{ packageInfoLast.control.Name }}</h1>
+      <h1 class="name h6">{{ propertiesShow.Name }}</h1>
       <div class="d-flex justify-content-between w-100">
-        <h6 class="text-secondary">{{ packageInfoLast.control.Version }}</h6>
+        <h6 class="text-secondary">{{ propertiesShow.Version }}</h6>
         <h6 class="text-secondary">{{ propertiesShow.Size }}</h6>
       </div>
     </div>
@@ -17,8 +17,8 @@
       {
         name: `Author`,
         icon: useAssetsIcon(`email.png`),
-        after: packageInfoLast.control.Author.replace(/<[^>]+?>/, ''),
-        to: `mailto:${packageInfoLast.control.Author.match(/<([^>]+?)>/)?.[1]}`,
+        after: packageInfoLast.control.Author?.replace(/<[^>]+?>/, ''),
+        to: `mailto:${packageInfoLast.control.Author?.match(/<([^>]+?)>/)?.[1]}`,
       },
     ]"
     v-if="!inCydia"
@@ -180,7 +180,7 @@ const isSupport: boolean | null =
       )
     : null;
 const propertiesShow = {
-  Name: packageInfoLast.control.Name,
+  Name: packageInfoLast.control.Name || packageInfoLast.control.Package,
   Package: packageInfoLast.control.Package,
   Author: packageInfoLast.control.Author,
   Version: packageInfoLast.control.Version,
@@ -213,7 +213,7 @@ const packageIcon = usePackageIcon(
 );
 
 useHead({
-  title: frontmatter.title || packageInfoLast.control.Name,
+  title: frontmatter.title || propertiesShow.Name,
   meta: [
     {
       charset: "utf-8",
@@ -226,7 +226,7 @@ useHead({
     {
       property: "og:title",
       hid: "og:title",
-      content: frontmatter.title || packageInfoLast.control.Name,
+      content: frontmatter.title || propertiesShow.Name,
     },
     {
       property: "og:description",
@@ -242,7 +242,7 @@ useHead({
     {
       name: "twitter:title",
       hid: "twitter:title",
-      content: frontmatter.title || packageInfoLast.control.Name,
+      content: frontmatter.title || propertiesShow.Name,
     },
     {
       name: "twitter:description",

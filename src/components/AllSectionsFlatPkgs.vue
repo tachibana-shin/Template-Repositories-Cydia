@@ -19,12 +19,12 @@ import listSections from "/pages/section-list-pkgs.json";
 import useAssetsIcon from "../uses/assetsIcon";
 import { format } from "timeago.js";
 
-const sections = listSections.slice(0, 7).map((section) => {
+const sections = listSections.map((section) => {
   return {
     ...section,
     packages: section.packages.map((pkg) => {
       return {
-        name: pkg.name,
+        name: pkg.name || pkg.packageID,
         icon: usePackageIcon(pkg.icon, section.name),
         to: inCydia
           ? `https://tachibana-shin.github.io/repo/package/${pkg.packageID}`
