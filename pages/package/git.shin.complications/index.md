@@ -1,1 +1,1 @@
-watchOS%20widgets%20on%20your%20lock%20screen
+watchOS widgets on your lock screen

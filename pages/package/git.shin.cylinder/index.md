@@ -1,1 +1,1 @@
-Make%20your%20icons%20dance
+Make your icons dance

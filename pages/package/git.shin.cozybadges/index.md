@@ -1,1 +1,1 @@
-A%20cozy%20place%20for%20your%20badges
+A cozy place for your badges

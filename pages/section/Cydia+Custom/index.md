@@ -1,1 +1,1 @@
-Description%20for%20section%20Cydia%20Custom
+Description for section Cydia Custom

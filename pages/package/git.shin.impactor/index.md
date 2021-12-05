@@ -1,1 +1,1 @@
-specific%20utility%20to%20unjailbreak%20most%20devices
+specific utility to unjailbreak most devices

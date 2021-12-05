@@ -1,1 +1,1 @@
-Crack%20Tweaks%20on%20one%20click%0DMaintainer%3A%20nguyenthanh
+Crack Tweaks on one clickMaintainer: nguyenthanh

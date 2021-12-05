@@ -1,1 +1,1 @@
-Re-Install%20Cydia%20if%20Cydia%20Error.
+Re-Install Cydia if Cydia Error.
