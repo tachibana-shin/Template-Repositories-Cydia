@@ -1,1 +1,1 @@
-CyPlay get theme CH Play in your Cydia and most popular themes are updated, both free and paid. Compatity DarkModeCydia!
+CyPlay get theme CH Play in your Cydia and most popular themes are updated, both free and paid.
