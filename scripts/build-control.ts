@@ -516,7 +516,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
     const filename = basename(srcDebian);
     const hash = await sha512file(srcDebian);
 	  
-    if (isValidFilename(filename, control) && controlCache.get(filename)?.SHA512sum === hash) {
+    if (controlCache.get(filename)?.SHA512sum === hash) {
       // skip fix
       controlJSONFiles.push({
         filepath: srcDebian,
