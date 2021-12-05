@@ -579,7 +579,7 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
       filepath: srcDebian,
       control,
     });
-    cacheControl.set(filename, {
+    controlCache.set(filename, {
       control,
       SHA512sum: hash,
     });
