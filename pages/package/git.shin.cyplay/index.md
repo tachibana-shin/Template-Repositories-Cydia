@@ -1,1 +1,1 @@
-CyPlay%20get%20theme%20CH%20Play%20in%20your%20Cydia%20and%20most%20popular%20themes%20are%20updated%2C%20both%20free%20and%20paid.
+CyPlay%20get%20theme%20CH%20Play%20in%20your%20Cydia%20and%20most%20popular%20themes%20are%20updated%2C%20both%20free%20and%20paid.%20Compatity%20DarkModeCydia!
