@@ -11,6 +11,11 @@ jobs:
         run: |
           yarn
           yarn build
+      
+      - name: Git Auto Commit Debian Fixed
+        uses: stefanzweifel/git-auto-commit-action@v4.12.0
+        with:
+          commit_message: (actions) fix debian
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
