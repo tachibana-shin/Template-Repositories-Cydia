@@ -278,7 +278,7 @@ async function fixPageNotFound(
     !fs.existsSync(join(path, "index.md")) ||
     !fs.existsSync(join(path, "index.vue"))
   ) {
-    fs.writeFileSync(join(path, "index.md"), encodeURIComponent(contentDefault));
+    fs.writeFileSync(join(path, "index.md"), contentDefault?.replace(/</g, "&gt;").replace(/>/g, "&lt;") || "");
   }
 }
 async function createDepictionPackages(
