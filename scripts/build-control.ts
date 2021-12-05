@@ -28,6 +28,7 @@ type PackageControl = {
   Maintainer?: string;
   Sponsor?: string;
   Depiction?: string;
+  Author?: string;
 };
 export type PackageControlFile = {
   filepath: string;
