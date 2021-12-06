@@ -622,31 +622,27 @@ MD5Sum:
  ${md5file.sync(PATH_FILE_PACKAGES)} ${
       fs.statSync(PATH_FILE_PACKAGES).size
     } Packages
- ${md5file.sync(`${PATH_FILE_PACKAGES}.bz2`)} ${
-      fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
-    } Packages.bz2
+ ${md5file.sync(`${PATH_FILE_PACKAGES}.xz`)} ${
+      fs.statSync(`${PATH_FILE_PACKAGES}.xz`).size
+    } Packages.xz
  ${md5file.sync(`${PATH_FILE_PACKAGES}.gz`)} ${
       fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
     } Packages.gz
-SHA256Sum:
+ ${md5file.sync(`${PATH_FILE_PACKAGES}.bz2`)} ${
+      fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
+    } Packages.bz2
+SHA256:
  ${sha256file(PATH_FILE_PACKAGES)} ${
       fs.statSync(PATH_FILE_PACKAGES).size
     } Packages
- ${sha256file(`${PATH_FILE_PACKAGES}.bz2`)} ${
-      fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
-    } Packages.bz2
+ ${sha256file(`${PATH_FILE_PACKAGES}.xz`)} ${
+      fs.statSync(`${PATH_FILE_PACKAGES}.xz`).size
+    } Packages.xz
  ${sha256file(`${PATH_FILE_PACKAGES}.gz`)} ${
       fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
     } Packages.gz
-SHA512Sum:
- ${await sha512file(PATH_FILE_PACKAGES)} ${
-      fs.statSync(PATH_FILE_PACKAGES).size
-    } Packages
- ${await sha512file(`${PATH_FILE_PACKAGES}.bz2`)} ${
+ ${sha256file(`${PATH_FILE_PACKAGES}.bz2`)} ${
       fs.statSync(`${PATH_FILE_PACKAGES}.bz2`).size
-    } Packages.bz2
- ${await sha512file(`${PATH_FILE_PACKAGES}.gz`)} ${
-      fs.statSync(`${PATH_FILE_PACKAGES}.gz`).size
-    } Packages.gz`
+    } Packages.bz2`
   );
 }
