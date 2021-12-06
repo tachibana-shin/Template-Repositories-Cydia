@@ -541,6 +541,9 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
     const uniqueControl = sha256(stringify(control));
 
 //     control.Package = fixPackageId(control.Package);
+    if (control.Package !== fixPackageId(control.Package)) {
+      console.info(chalk.blue(`${control.Package} is not my package.`));
+    }
     control.Homepage = HOMEPAGE;
     control.Maintainer = "tachibana-shin<tachib.shin@gmail.com>";
     control.Sponsor = "tachibana-shin<https://tachibana-shin.github.io>";
