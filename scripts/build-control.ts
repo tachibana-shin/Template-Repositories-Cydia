@@ -557,6 +557,12 @@ async function autoFixDebian(debian: string[]): Promise<PackageControlFile[]> {
       );
     }
     control.Depiction = `${HOMEPAGE}/package/${control.Package}`; // no report old versions package
+    
+    for (const prop in control) {
+      if (!control[prop].replace(/^\s|\s$/g, "") {
+        delete control[prop];
+      }
+    }
 
     if (uniqueControl !== sha256(stringify(control))) {
       writeFileControlToTmp(control);
