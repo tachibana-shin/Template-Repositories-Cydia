@@ -51,7 +51,7 @@ git.shin.liberty *
 git.shin.libspring *
 git.shin.localiapstoreios9 7 - 13
 git.shin.lowpowermode >= 9
-git.shin.maize10 10.3.x (32-bit)
+git.shin.maize10 10.3.x
 git.shin.modernc *
 git.shin.mterminal *
 git.shin.myinst *
@@ -516,3 +516,8 @@ git.shin.youtuben 8 - 10
 zip *
 curl32 *
 git32 *
+git.shin.alkaline >= 8
+git.shin.appsyncunified >= 4
+git.shin.creature-survice *
+git.shin.libsparkapplis *
+git.shin.uasharedtools.stash <= 10
