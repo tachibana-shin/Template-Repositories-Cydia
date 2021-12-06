@@ -40,9 +40,7 @@ const { frontmatter } = defineProps<{
   frontmatter: any;
 }>();
 
-const route = useRoute();
-
-const sectionInfo = route.meta.packageInfo as SectionControlFile;
+const sectionInfo = frontmatter.control as SectionControlFile;
 const items = sectionInfo.packages.map((pkg) => ({
   name: pkg.name,
   icon: usePackageIcon(pkg.icon, sectionInfo.name),
