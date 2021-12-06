@@ -16223,312 +16223,312 @@
     "/template-repositories-cydia/assets/vendor.29c80c8d.js"
   ],
   "pages/sections.vue": [
-    "/template-repositories-cydia/assets/sections.052ea3ac.js"
+    "/template-repositories-cydia/assets/sections.6e98c599.js"
   ],
   "pages/section/Utilities/index.md": [
-    "/template-repositories-cydia/assets/index.45255c54.js"
+    "/template-repositories-cydia/assets/index.87089448.js"
   ],
   "src/components/Unknown.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/Section.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/Changelog.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "pages/section-list.json": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/AllSections.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "\u0000/home/runner/work/Template-Repositories-Cydia/Template-Repositories-Cydia/node_modules/semver/internal/re.js?commonjs-module": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/internal/constants.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/internal/debug.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/internal/re.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/internal/parse-options.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/internal/identifiers.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/classes/semver.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/parse.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/valid.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/clean.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/inc.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/compare.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/eq.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/diff.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/major.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/minor.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/patch.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/prerelease.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/rcompare.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/compare-loose.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/compare-build.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/sort.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/rsort.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/gt.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/lt.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/neq.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/gte.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/lte.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/cmp.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/coerce.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/yallist/yallist.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/lru-cache/index.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/classes/range.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/classes/comparator.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/functions/satisfies.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/to-comparators.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/max-satisfying.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/min-satisfying.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/min-version.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/valid.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/outside.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/gtr.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/ltr.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/intersects.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/simplify.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/ranges/subset.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/semver/index.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/computed/iOSVersion.ts": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "node_modules/filesize/lib/filesize.esm.js": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/Depiction.vue?vue&type=style&index=0&scoped=true&lang.scss": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/Depiction.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "src/components/Post.vue": [
-    "/template-repositories-cydia/assets/Post.3ba71535.js",
+    "/template-repositories-cydia/assets/Post.e5403127.js",
     "/template-repositories-cydia/assets/Post.a49585d8.css"
   ],
   "pages/section/Tweaks/index.md": [
-    "/template-repositories-cydia/assets/index.cfe6f3b0.js"
+    "/template-repositories-cydia/assets/index.6787587e.js"
   ],
   "pages/section/Networking/index.md": [
-    "/template-repositories-cydia/assets/index.f4d783ba.js"
+    "/template-repositories-cydia/assets/index.dc936529.js"
   ],
   "pages/section/Cydia+Custom/index.md": [
-    "/template-repositories-cydia/assets/index.f14a20b1.js"
+    "/template-repositories-cydia/assets/index.90fe7933.js"
   ],
   "pages/package/git.shin.impactor10/index.md": [
-    "/template-repositories-cydia/assets/index.4c9c1b74.js"
+    "/template-repositories-cydia/assets/index.4a3db1de.js"
   ],
   "pages/package/git.shin.impactor/index.md": [
-    "/template-repositories-cydia/assets/index.275eee0c.js"
+    "/template-repositories-cydia/assets/index.58e2d839.js"
   ],
   "pages/package/git.shin.cyplay/index.md": [
-    "/template-repositories-cydia/assets/index.0e1ccf13.js"
+    "/template-repositories-cydia/assets/index.2150d995.js"
   ],
   "pages/package/git.shin.cylinder/index.md": [
-    "/template-repositories-cydia/assets/index.f42f854f.js"
+    "/template-repositories-cydia/assets/index.e35ff7f4.js"
   ],
   "pages/package/git.shin.cydiatimeoutcmd/index.md": [
-    "/template-repositories-cydia/assets/index.1c2e3c50.js"
+    "/template-repositories-cydia/assets/index.d2b74e90.js"
   ],
   "pages/package/git.shin.cydiainstall/index.md": [
-    "/template-repositories-cydia/assets/index.22939b7a.js"
+    "/template-repositories-cydia/assets/index.95298255.js"
   ],
   "pages/package/git.shin.cydiacoolstar/index.md": [
-    "/template-repositories-cydia/assets/index.25e7f8e8.js"
+    "/template-repositories-cydia/assets/index.6ca6e202.js"
   ],
   "pages/package/git.shin.cyanea/index.md": [
-    "/template-repositories-cydia/assets/index.d8293a26.js"
+    "/template-repositories-cydia/assets/index.0b76e75e.js"
   ],
   "pages/package/git.shin.customsw/index.md": [
-    "/template-repositories-cydia/assets/index.ee56cf11.js"
+    "/template-repositories-cydia/assets/index.34a4022c.js"
   ],
   "pages/package/git.shin.custompods/index.md": [
-    "/template-repositories-cydia/assets/index.8ebe9fe2.js"
+    "/template-repositories-cydia/assets/index.4b6eae0d.js"
   ],
   "pages/package/git.shin.customloadingtext/index.md": [
-    "/template-repositories-cydia/assets/index.5f7d40c9.js"
+    "/template-repositories-cydia/assets/index.9f2d1247.js"
   ],
   "pages/package/git.shin.customdia/index.md": [
-    "/template-repositories-cydia/assets/index.5be07fce.js"
+    "/template-repositories-cydia/assets/index.8e100d3b.js"
   ],
   "pages/package/git.shin.curl32/index.md": [
-    "/template-repositories-cydia/assets/index.d821190c.js"
+    "/template-repositories-cydia/assets/index.35a49cce.js"
   ],
   "pages/package/git.shin.curl/index.md": [
-    "/template-repositories-cydia/assets/index.3957d06c.js"
+    "/template-repositories-cydia/assets/index.bbe2cad3.js"
   ],
   "pages/package/git.shin.cukey/index.md": [
-    "/template-repositories-cydia/assets/index.3d900428.js"
+    "/template-repositories-cydia/assets/index.ccf8cf47.js"
   ],
   "pages/package/git.shin.cracktool4/index.md": [
-    "/template-repositories-cydia/assets/index.09eabd59.js"
+    "/template-repositories-cydia/assets/index.7a16b24e.js"
   ],
   "pages/package/git.shin.cracktool2/index.md": [
-    "/template-repositories-cydia/assets/index.e9b94555.js"
+    "/template-repositories-cydia/assets/index.7b910b5a.js"
   ],
   "pages/package/git.shin.cozybadges/index.md": [
-    "/template-repositories-cydia/assets/index.db8ede79.js"
+    "/template-repositories-cydia/assets/index.8c59e09d.js"
   ],
   "pages/package/git.shin.cosmos13/index.md": [
-    "/template-repositories-cydia/assets/index.09047a02.js"
+    "/template-repositories-cydia/assets/index.0295afbf.js"
   ],
   "pages/package/git.shin.cosmos/index.md": [
-    "/template-repositories-cydia/assets/index.2479e5f3.js"
+    "/template-repositories-cydia/assets/index.4e790768.js"
   ],
   "pages/package/git.shin.copiedlabel/index.md": [
-    "/template-repositories-cydia/assets/index.0eb28f0a.js"
+    "/template-repositories-cydia/assets/index.865eede9.js"
   ],
   "pages/package/git.shin.complications/index.md": [
-    "/template-repositories-cydia/assets/index.843dbfe3.js"
+    "/template-repositories-cydia/assets/index.3c3c2cf5.js"
   ]
 }
